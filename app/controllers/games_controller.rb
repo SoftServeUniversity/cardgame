@@ -47,17 +47,17 @@ before_action :set_game, only: [:show, :join, :put_card, :edit, :update, :destro
   end
 
   def put_card
-    puts "____________________________PUT_CARD"
     card = self.current_user.player.put_card(params[:card][:rang], params[:card][:suite])
     puts "____________________________--"
     puts card.rang
     puts card.suite
     @game.get_card_from_player card, self.current_user.player.id
-    self.current_user.player.save
+    @game.players[0].save
+    @game.players[1].save
     @game.table.save
     @game.save
 
-    # redirect_to game_path
+    redirect_to game_path
   end
 
   def destroy

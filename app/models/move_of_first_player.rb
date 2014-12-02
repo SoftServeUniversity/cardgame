@@ -3,19 +3,27 @@ require "game_state"
 
 class MoveOfFirstPlayer < GameState
 
-	def initialize _game
-		super _game
-	end
-	def get_card_from_player _card, _player_id
-		if @game.attacker == _player_id
+ def initialize _game
+  super _game
+ end
 
-			@game.set_game_state(MoveOfSecondPlayer.new @game)
-			@game.do_get_card_from_player _card
+ def get_card_from_player _card, _player_id
+  puts"MoveOfFirstPlayer.get_card_from_player __________________________________"
+  puts @game.mover
+  puts _player_id
+  if @game.mover.to_s == _player_id.to_s
+    puts "HELLLLLLLLLLLLOOOOOOOOOOO OUTSIDE"
 
-			@game.attacker = @game.defender
-			@game.defender = _player_id
-		else
-			@game.players[1].add_card _card
-		end
-	end
+   if @game.do_get_card_from_player _card, _player_id 
+    puts "HELLLLLLLLLLLLOOOOOOOOOOO INSIDE"
+
+    @game.players[0].delete_card _card
+    @game.set_game_state(MoveOfSecondPlayer.new @game)
+    @game.mover = @game.players[1].id
+   end
+  else
+   puts "Fatal ERROR"
+  end
+ end
+
 end
