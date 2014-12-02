@@ -19,12 +19,64 @@
 			<tr>
 				<td> <%= card.suite %> </td>
 				<td> <%= card.rang %> </td>
+				<td> <%= link_to 'put', {:controller => "games", :action => "put_card", method: :post, :suite => card.suite, :rang => card.rang} %></td>
 			</tr>
 		<% end %>	
 	</tbody>
 </table>
 <h1><%= current_user.email %></h1>
-<
+<h1><%= current_user.player.id %></h1>
 
+
+<h1>----------Table----------</h1>
+<table>
+	<thead>
+	  <tr>
+	    <th> Suite</th>
+	    <th> Rang </th>
+	  </tr>
+	</thead>
+<% if current_user.player.game.table != nil %>
+	<% current_user.player.game.table.table_cards.each do |card| %>
+		<tr>
+			<td> <%= card.suite %> </td>
+			<td> <%= card.rang %> </td>
+		</tr>
+	<% end %>	
+<%end%>
+	</tbody>
+</table>
+
+<h1>----------Deck----------</h1>
+<table>
+	<thead>
+	  <tr>
+	    <th> Suite</th>
+	    <th> Rang </th>
+	  </tr>
+	</thead>
+<% if current_user.player.game.deck != nil %>
+	<% current_user.player.game.deck.deck_cards.each do |card| %>
+		<tr>
+			<td> <%= card.suite %> </td>
+			<td> <%= card.rang %> </td>
+		</tr>
+	<% end %>	
+<%end%>
+	</tbody>
+</table>
+<%=form_for :card, url: url_for( :controller => :games, :action => :put_card ) do |f| %>
+    <div class="field">
+      <%= f.text_field :suite %>
+    </div> 
+    <div class="field">
+      <%= f.text_field :rang %>
+    </div> 
+  <div class="actions">
+    <%= f.submit %>
+    <% end %>
+
+<%= link_to "Put", {:controller => "games", :action => "put_card"} %>
 <%= link_to 'Edit', edit_game_path(@game) , :class => "btn btn-info" %> |
 <%= link_to 'Back', games_path , :class => "btn btn-danger" %>
+<%= debug params %>

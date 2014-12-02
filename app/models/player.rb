@@ -1,18 +1,24 @@
 class Player < ActiveRecord::Base
 
-	serialize :player_cards, Array
+  serialize :player_cards, Array
 
-	belongs_to :game
-	belongs_to :user
+  belongs_to :game
+  belongs_to :user
 
- def put_card _card_id
-  if self.cards_count > 0 
-    card = self.player_cards.delete_at _card_id
+ def put_card _rang, _suite
+  card = self.player_cards[0]
+
+  if self.cards_count > 0
+    self.player_cards.each do |elem|
+      if elem.rang.to_f == _rang.to_f && elem.suite.to_s == _suite.to_s
+        card = self.player_cards.delete(elem)
+      end
+    end
     self.cards_count -= 1 
-    card
   else
    puts 'Empty'
   end
+  card
  end
 
  def init

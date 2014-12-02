@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  post 'games/:id', :controller => 'games', :action => 'put_card'
+
   resources :games
 
   root 'games#index'
