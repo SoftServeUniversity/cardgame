@@ -1,0 +1,17 @@
+<table>
+	<thead>
+	  <tr>
+	    <th> Suite</th>
+	    <th> Rang </th>
+	  </tr>
+	</thead>
+<% if current_user.player.game.table != nil %>
+	<% current_user.player.game.table.table_cards.each do |card| %>
+		<tr>
+			<td> <%= card.suite %> </td>
+			<td> <%= card.rang %> </td>
+		</tr>
+	<% end %>	
+<%end%>
+	</tbody>
+</table>
