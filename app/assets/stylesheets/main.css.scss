@@ -1,0 +1,40 @@
+body {
+	padding-top: 60px;
+}
+
+.maincontent {
+	min-height: 500px;
+}
+
+.tablewood {
+	height: 540px;
+	background-image: image-url("table.jpg");
+	background-size: cover;
+}
+
+
+.logo {
+	float: left;
+	color: white;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 35px;
+	vertical-align: middle;
+}
+
+a.btn{
+	color: black;
+}
+a.btn:hover {
+	color: #5cb85c !important;
+}
+
+.fblinks {
+	/*float: left;*/
+	margin: 0 50px 0 0;
+	display: inline-block;
+}
+
+.centertext {
+	text-align: center;
+}
