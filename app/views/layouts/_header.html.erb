@@ -1,8 +1,10 @@
 <div class="navbar navbar-fixed-top navbar-inverse">
 	<div class="container">
-		<div class="logo">
-			<%= image_tag "logo.gif",:width => 45 %> <span class="">DOORACK</span>
-		</div>
+		<%= link_to root_path do %>
+			<div class="logo">
+				<%= image_tag("logo.gif",:width => 45) %> <span class="">Dooraque</span>
+			</div>
+		<% end %>
 		<div class="nav navbar-nav pull-right">
 			<% if user_signed_in? %>
 				<div class="navbar-form navbar-right">
