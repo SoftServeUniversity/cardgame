@@ -19,6 +19,7 @@
 			<tr>
 				<td> <%= card.suite %> </td>
 				<td> <%= card.rang %> </td>
+				<td> <%= link_to 'put', put_card_url(:suite => card.suite, :rang => card.rang), :method => :post %></td>
 			</tr>
 		<% end %>	
 	</tbody>
@@ -28,3 +29,33 @@
 
 <%= link_to 'Edit', edit_game_path(@game) , :class => "btn btn-info" %> |
 <%= link_to 'Back', games_path , :class => "btn btn-danger" %>
+<h1><%= @game.mover %></h1>
+<h1><%= current_user.player.id %></h1>
+<h1><%= current_user.player.game.state_name %></h1>
+<h1>Trump</h1>
+<h1><%= current_user.player.game.deck.deck_cards[35].suite %></h1>
+
+
+<h1>----------Table----------</h1>
+<table>
+	<thead>
+	  <tr>
+	    <th> Suite</th>
+	    <th> Rang </th>
+	  </tr>
+	</thead>
+<% if current_user.player.game.table != nil %>
+	<% current_user.player.game.table.table_cards.each do |card| %>
+		<tr>
+			<td> <%= card.suite %> </td>
+			<td> <%= card.rang %> </td>
+		</tr>
+	<% end %>	
+<%end%>
+	</tbody>
+</table>
+
+<%= link_to "Put", {:controller => "games", :action => "put_card"} %>
+<%= link_to 'Edit', edit_game_path(@game) , :class => "btn btn-info" %> |
+<%= link_to 'Back', games_path , :class => "btn btn-danger" %>
+<%= debug params %>

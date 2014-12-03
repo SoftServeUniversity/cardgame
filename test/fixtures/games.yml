@@ -1,8 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
 one:
   state_name: MyString
   attacker: 1
   defender: 1
+  mover: 1
   name: MyString
   description: MyText
 
@@ -10,5 +12,6 @@ two:
   state_name: MyString
   attacker: 1
   defender: 1
+  mover: 1
   name: MyString
   description: MyText

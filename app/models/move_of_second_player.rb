@@ -3,19 +3,19 @@ require "move_of_first_player"
 
 class MoveOfSecondPlayer < GameState
 
-	def initialize _game
-		super _game
-	end
-	def get_card_from_player _card, _player_id
-		if @game.attacker == _player_id
+ def initialize _game
+  super _game
+ end
+ def get_card_from_player _card, _player_id
+  if @game.mover == _player_id
 
-			@game.set_game_state(MoveOfFirstPlayer.new @game)
-			@game.do_get_card_from_player _card
-
-			@game.attacker = @game.defender
-			@game.defender = _player_id
-		else
-			@game.players[0].add_card _card
-		end
-	end
+   if(@game.do_get_card_from_player(_card, _player_id))
+    @game.players[1].delete_card _card
+    @game.set_game_state(MoveOfFirstPlayer.new @game)
+       @game.mover = @game.players[0].id
+   end
+  else
+    puts "Fatal ERROR"
+  end
+ end
 end
