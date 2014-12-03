@@ -24,11 +24,17 @@
 		<% end %>	
 	</tbody>
 </table>
-<h1><%= @game.mover %></h1>
 <h1><%= current_user.player.id %></h1>
-<h1><%= current_user.player.game.state_name %></h1>
-<h1>Trump</h1>
-<h1><%= current_user.player.game.deck.deck_cards[35].suite %></h1>
+
+<% if @game.deck%>
+	<h1>Trump</h1>
+	<h1><%= @game.deck.trump %></h1>
+<%end%>
+
+<h1>attacker:</h1>
+<h1><%= current_user.player.game.attacker %></h1>
+<h1>defender:</h1>
+<h1><%= current_user.player.game.defender %></h1>
 
 
 <h1>----------Table----------</h1>

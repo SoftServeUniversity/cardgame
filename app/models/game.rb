@@ -49,28 +49,77 @@ class Game < ActiveRecord::Base
  def do_init_first_player _user
   puts "Doing init first player..."
   player = Player.create({:game => self, :user => _user})
-  self.attacker = player.id
  end
 
  def do_init_second_player _user
   puts "Doing init second player..."
   player = Player.create({:game => self, :user => _user})
-  self.defender = player.id
  end
 
  def do_preparation_for_game
   puts "Doing preparation for game..."
   table = Table.create({:game => self, :cards_count => 0})
   deck = Deck.create({:game => self})
+
   deck.init_cards
-  6.times do
-   self.players[0].add_card (deck.get_one)
-   self.players[1].add_card (deck.get_one)
-  end
+
+  set_attacker
  end
 
  def do_get_card_from_player _card, _player_id
   self.table.add_card(_card, _player_id)
+ end
+
+ def set_attacker
+  init_players_cards
+
+  first_min = nil
+  self.players[0].player_cards.each do |card|
+   if card.suite.to_s == self.deck.trump.to_s
+    if first_min
+     if (card.rang < first_min.rang)
+       first_min = card
+     end
+    else
+      first_min = card
+    end
+   end
+  end
+
+  second_min = nil
+  self.players[1].player_cards.each do |card|
+   if card.suite.to_s == self.deck.trump.to_s
+    if second_min
+     if (card.rang < second_min.rang)
+       second_min = card
+     end
+    else
+      second_min = card
+    end
+   end
+  end
+
+  if(!first_min && !second_min)
+    self.deck.shuffle_deck
+    set_attacker
+  else
+    if (!first_min)
+      self.attacker = self.players[1].id
+    elsif (!second_min)
+      self.attacker = self.players[0].id
+    elsif first_min.rang < second_min.rang
+      self.attacker = self.players[0].id
+    else
+      self.attacker = self.players[1].id
+    end
+  end
+ end
+
+ def init_players_cards
+  6.times do
+    self.players[0].add_card (deck.get_one)
+    self.players[1].add_card (deck.get_one)
+  end
  end
 
  def self.search(search)
