@@ -1,17 +1,9 @@
-<table>
-	<thead>
-	  <tr>
-	    <th> Suite</th>
-	    <th> Rang </th>
-	  </tr>
-	</thead>
-<% if current_user.player.game.table != nil %>
-	<% current_user.player.game.table.table_cards.each do |card| %>
-		<tr>
-			<td> <%= card.suite %> </td>
-			<td> <%= card.rang %> </td>
-		</tr>
-	<% end %>	
-<%end%>
-	</tbody>
-</table>
+<ul class="tableCardsList">
+	<% if current_user.player.game.table != nil %>
+		<li>
+			<% current_user.player.game.table.table_cards.each do |card| %>
+				<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
+			<% end %>	
+		</li>
+	<%end%>
+</ul>

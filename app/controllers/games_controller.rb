@@ -53,7 +53,6 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :edit, :update
     end
   end
 
-
   def put_card
     card = self.current_user.player.put_card(params[:rang], params[:suite])
     puts "____________________________--"
@@ -65,10 +64,8 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :edit, :update
     @game.table.save
     @game.save
     @mover = Player.find(@game.mover)
-    respond_to do |format|
-      format.html { redirect_to game_path }
-      format.js
-    end
+
+    redirect_to game_path
   end
 
   def destroy
