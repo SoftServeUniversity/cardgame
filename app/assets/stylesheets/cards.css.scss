@@ -1,0 +1,25 @@
+.playerCards, .tableCards {
+	width: 100px;
+}
+
+.playerCardsList, .tableCardsList {
+	list-style-type: none;
+	padding: 0 0 0 0;
+}
+
+.playerCardsList li {
+	display: inline-block;
+}
+
+.tableCardsList li {
+	display: inline-block;
+}
+
+/*.tableCardList li:nth-child(2n) {
+	display: block;
+}*/
+
+#table_cards {
+	height: 290px;
+	background-image: url("table.jpg");
+}

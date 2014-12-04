@@ -11,6 +11,11 @@ class Table < ActiveRecord::Base
     cards
   end
 
+  def clear
+    self.table_cards = []
+    self.cards_count = 0
+  end
+
   def get_latest_card
     self.table_cards[self.cards_count-1]
   end

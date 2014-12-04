@@ -47,6 +47,9 @@ class Player < ActiveRecord::Base
   end
 
   def add_card new_card
+    puts "??????????????????? add_card"
+    puts new_card.rang
+    puts new_card.suite
     init
     self.player_cards.push new_card
     self.cards_count  += 1
