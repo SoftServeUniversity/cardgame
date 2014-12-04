@@ -1,9 +1,9 @@
 <ul class="tableCardsList">
 	<% if current_user.player.game.table != nil %>
-		<li>
-			<% current_user.player.game.table.table_cards.each do |card| %>
+		<% current_user.player.game.table.table_cards.each do |card| %>
+			<li>
 				<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
-			<% end %>	
-		</li>
+			</li>
+		<% end %>	
 	<%end%>
 </ul>
