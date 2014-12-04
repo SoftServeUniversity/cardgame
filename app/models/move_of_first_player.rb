@@ -8,9 +8,15 @@ class MoveOfFirstPlayer < GameState
   end
   def get_card_from_player _card, _player_id
     if @game.mover.to_i == _player_id.to_i
+      
+      if @game.players[0].id.to_i == _player_id.to_i
+        current_player = @game.players[0]
+      else
+        current_player = @game.players[1]
+      end
 
       if @game.do_get_card_from_player _card, _player_id
-        @game.players[0].delete_card _card
+        current_player.delete_card _card
         @game.set_game_state(MoveOfSecondPlayer.new @game)
         @game.mover = @game.players[1].id
       end

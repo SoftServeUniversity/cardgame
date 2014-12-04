@@ -1,65 +1,26 @@
-<p id = "notice"><%= notice %></p>
-
-<p><strong>Name:</strong>
-  <%= @game.name %>
-</p>
-
-<p><strong>Description:</strong>
-  <%= @game.description %>
-</p>
-<table>
-	<thead>
-	  <tr>
-	    <th> Suite</th>
-	    <th> Rang </th>
-	  </tr>
-	</thead>
-	<tbody>
-		<% current_user.player.player_cards.each do |card| %>
-			<tr>
-				<td> <%= card.suite %> </td>
-				<td> <%= card.rang %> </td>
-				<td> <%= link_to 'put', put_card_url(:suite => card.suite, :rang => card.rang), :method => :post %></td>
-			</tr>
-		<% end %>	
-	</tbody>
-</table>
-<h1>ID</h1>
-<h1><%= current_user.player.id %></h1>
-<h1>Mover</h1>
-<h1><%= current_user.player.game.mover %></h1>
-
-<% if @game.deck%>
-	<h1>Trump</h1>
-	<h1><%= @game.deck.trump %></h1>
-<%end%>
-
-<h1>attacker:</h1>
-<h1><%= current_user.player.game.attacker %></h1>
-<h1>defender:</h1>
-<h1><%= current_user.player.game.defender %></h1>
 
 
 <h1>----------Table----------</h1>
-<table>
-	<thead>
-	  <tr>
-	    <th> Suite</th>
-	    <th> Rang </th>
-	  </tr>
-	</thead>
-<% if current_user.player.game.table != nil %>
-	<% current_user.player.game.table.table_cards.each do |card| %>
-		<tr>
-			<td> <%= card.suite %> </td>
-			<td> <%= card.rang %> </td>
-		</tr>
-	<% end %>	
-<%end%>
-	</tbody>
-</table>
+<div id = "table_cards" class="row">
+	<%= render partial: 'tables/table' %>
+</div>
 
-<%= link_to "EndTurn", end_turn_url , :method => :post %>
+<div id = "table_player_cards" class="row">
+	<%= render partial: 'tables/table_player_cards'%>
+</div>
+
+<%= link_to 'reload', url: url_for( :controller => :games, :action => :show ) , remote: true, :method => :get %><br/>
+
+<%= link_to "End Turn", end_turn_url, :method => :post %>
 <%= link_to 'Edit', edit_game_path(@game) , :class => "btn btn-info" %> |
 <%= link_to 'Back', games_path , :class => "btn btn-danger" %>
-<%= debug params %>
+
+	<p>Cards count: <%= current_user.player.cards_count %>
+	<p>Mover: <%= @game.mover %></p>
+	<p>Player ID: <%= current_user.player.id %></p>
+	<p>Player Game state: <%= current_user.player.game.state_name %></p>
+	<p>Attacker: <%= @game.attacker %></p>
+	<p>Defender: <%= @game.defender %></p>
+	<% if @game.deck %>
+		<p>Trump: <%= @game.deck.trump %></p>
+	<% end %>

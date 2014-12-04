@@ -93,6 +93,7 @@ class Game < ActiveRecord::Base
     self.attacker = self.defender
     self.defender = att
 
+    puts "///////////////////////////init new turn"
     init_new_turn
   end
 
@@ -183,11 +184,13 @@ class Game < ActiveRecord::Base
   end
 
   def init_new_turn
-    for i in self.players[0].cards_count .. 6
+    for i in self.players[0].cards_count ... 6
+      puts"//////////////////////////// get one card to player 0"
       self.players[0].add_card self.deck.get_one
     end
 
-    for i in self.players[1].cards_count .. 6
+    for i in self.players[1].cards_count ... 6
+      puts"//////////////////////////// get one card to player 1"
       self.players[1].add_card self.deck.get_one
     end
   end
