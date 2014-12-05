@@ -9,19 +9,25 @@
 
 
 	<body>
+		
+		<%= render 'layouts/header' %>
+		
 
-		<%= render 'layouts/header' %> 
-
-		<div class='container maincontent'>
-			<div class='col-md-8 yieldcontent'>
-				<%= yield %>
-			</div>
-			<div class='col-md-4 yieldcontent'>
-				<%= yield :information %>
+		<div class='container-fluid'>
+			<div class='row maincontent'>
+				<div class='col-sm-10 yieldcontent'>
+					<%= yield %>
+				</div>
+				<div class='col-sm-2 yieldcontent'>
+					<%= yield :tableDeck %>
+					<%= yield :information %>
+				</div>
 			</div>
 		</div>
 
+		
 		<%= render 'layouts/footer' %>
+		
 	</body>
 
 </html>
