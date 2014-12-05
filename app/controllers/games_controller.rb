@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 before_filter :authenticate_user!, except: [:show, :index]
-before_action :set_game, only: [:show, :join, :put_card, :reload, :edit, :update, :destroy]  
+before_action :set_game, only: [:show, :join, :put_card, :refresh_show , :reload, :edit, :update, :destroy]  
   def index
     @games = Game.all
   end
@@ -66,7 +66,13 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :edit, :update
     @game.save
     @mover = Player.find(@game.mover)
     respond_to do |format|
-      format.html { redirect_to game_path }
+      format.html { redirect_to @game}
+      format.js
+    end
+  end
+
+  def refresh_show
+    respond_to do |format|
       format.js
     end
   end

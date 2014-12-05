@@ -1,0 +1,11 @@
+$(document).ready(function () {
+    // will call refreshPartial every 3 seconds
+    setInterval(refreshPartial, 10000)
+
+});
+
+function refreshPartial() {
+  $.ajax({
+    url: "<%= @game %>"
+ })
+}

@@ -1,4 +1,4 @@
-<p id = "notice"><%= notice %></p>
+<div id = "refresher"><p id = "notice"><%= notice %></p>
 
 <div id = "table_player_cards"><%= render partial: 'tables/table_player_cards'%></div>
 
@@ -16,3 +16,4 @@
 <%= link_to 'Edit', edit_game_path(@game) , :class => "btn btn-info" %> |
 <%= link_to 'Back', games_path , :class => "btn btn-danger" %>
 <%= debug params %>
+</div>

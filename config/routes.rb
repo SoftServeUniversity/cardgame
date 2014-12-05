@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :games
 
+  get 'games/:id', :controller => 'games', :action => 'refresh_show', :as => 'refresh_show'
+
   root 'games#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
