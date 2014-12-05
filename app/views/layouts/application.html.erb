@@ -6,14 +6,27 @@
   		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   		<%= csrf_meta_tags %>
 	</head>
+
 	<body>
+		
+		<%= render 'layouts/header' %>
+		
 
-		<%= render 'layouts/header' %> 
-
-		<div class='container maincontent'>
-			<%= yield %>
+		<div class='container-fluid'>
+			<div class='row maincontent'>
+				<div class='col-md-10 yieldcontent'>
+					<%= yield %>
+				</div>
+				<div class='col-md-2 yieldcontent'>
+					<%= yield :tableDeck %>
+					<%= yield :information %>
+				</div>
+			</div>
 		</div>
 
+		
 		<%= render 'layouts/footer' %>
+		
 	</body>
+
 </html>
