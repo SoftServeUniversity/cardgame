@@ -55,8 +55,12 @@ before_action :set_game, only: [:show, :join, :put_card, :end_turn, :edit, :upda
     @game.players[0].save
     @game.players[1].save
     @game.table.save
-    @mover = Player.find(@game.mover)
     @game.save
+    if @game.game_ended?
+      @game.set_game_state(EndOfGame.new @game)
+      @game.show_results
+      @game.save
+    end
 
     redirect_to game_path
   end

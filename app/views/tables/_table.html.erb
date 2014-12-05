@@ -1,11 +1,11 @@
-<% if current_user.player.game.table != nil %>
+<% if @game.table != nil %>
 	<% defenceCards = [] %>
-	<% current_user.player.game.table.table_cards.each_index do |index| %>
+	<% @game.table.table_cards.each_index do |index| %>
 		<% if (index+1) % 2 == 0 %>
-		<% defenceCards << current_user.player.game.table.table_cards[index] %>
+		<% defenceCards << @game.table.table_cards[index] %>
 		<% end %>
 	<% end %>
-	<% hitCards = current_user.player.game.table.table_cards - defenceCards %>
+	<% hitCards = @game.table.table_cards - defenceCards %>
 
 	<ul class="tableCardsList hitCards">
 		<% hitCards.each do |card| %>

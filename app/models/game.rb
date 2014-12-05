@@ -4,6 +4,9 @@ require "card"
 
 class Game < ActiveRecord::Base
 
+  serialize :winner, Player
+  serialize :loser, Player
+
   has_many :players, dependent: :destroy
   has_one :deck, dependent: :destroy
   has_one :table, dependent: :destroy
@@ -20,6 +23,8 @@ class Game < ActiveRecord::Base
       @state = MoveOfFirstPlayer.new self
     when 'MoveOfSecondPlayer'
       @state = MoveOfSecondPlayer.new self
+    when 'EndOfGame'
+      @state = EndOfGame.new self
     end
     @state
   end
@@ -45,9 +50,14 @@ class Game < ActiveRecord::Base
     @state.get_card_from_player _card, _player_id
   end
 
+
   def end_turn _player_id
     puts "///////////////////////////////////////////END TURN GAME"
     @state.end_turn _player_id
+  end
+
+  def show_results
+    @state.show_results
   end
 
   def do_init_first_player _user
@@ -186,13 +196,25 @@ class Game < ActiveRecord::Base
   def init_new_turn
     for i in self.players[0].cards_count ... 6
       puts"//////////////////////////// get one card to player 0"
-      self.players[0].add_card self.deck.get_one
+      if (self.deck.cursor < 36)
+        self.players[0].add_card self.deck.get_one
+      end
     end
 
     for i in self.players[1].cards_count ... 6
       puts"//////////////////////////// get one card to player 1"
-      self.players[1].add_card self.deck.get_one
+      if (self.deck.cursor < 36)
+        self.players[1].add_card self.deck.get_one
+      end
     end
+  end
+
+  def game_ended?
+    game_end = false
+    if (self.deck.cursor == 36 && (self.players[0].cards_count == 0 || self.players[1].cards_count == 0))
+      game_end = true
+    end
+    game_end
   end
 
   def self.search(search)
