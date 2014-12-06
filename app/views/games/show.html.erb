@@ -25,13 +25,13 @@
 		<%= render partial: 'tables/table' %>
 	</div>
 
-  <% if @game.winner && @game.loser %>
+  	<%# if @game.winner && @game.loser %>
 		<div>
-			<h1>WINNER: <%= @game.winner %></h1>
-			<h1>LOSER: <%= @game.loser %></h1>
-			<%= link_to 'Destroy', @game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+		<!--	<h1>WINNER: <%#= @game.winner %></h1>
+			<h1>LOSER: <%#= @game.loser %></h1> -->
+			<%#= link_to 'Destroy', @game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
 		</div>
-	<% end %>
+	<%# end %>
 	
 	<div id = "table_player_cards">
 		<%= render partial: 'tables/table_player_cards'%>

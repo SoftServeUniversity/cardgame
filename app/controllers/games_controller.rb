@@ -47,13 +47,8 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :ed
     @game.prepare_game_to_start
     save_game @game
     respond_to do |format|
-      if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Card game was successfully updated.' }
+        format.html { redirect_to @game }
         format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
     end
   end
 

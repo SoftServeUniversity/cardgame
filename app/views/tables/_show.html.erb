@@ -1,18 +1,45 @@
 <p id = "notice"><%= notice %></p>
+<% content_for :tableDeck do %>
+	<div id = "table_deck">
+		<%= render partial: 'tables/table_deck' %>
+	</div>
+<% end %>
 
-<div id = "table_player_cards"><%= render partial: 'tables/table_player_cards'%></div>
+<% if current_user.player %>
+<% content_for :information do %>
+	<p>Cards count: <%= current_user.player.cards_count %>	
+	<p>Mover: <%= @game.mover %></p>
+	<p>Player ID: <%= current_user.player.id %></p>
+	<p>Player Game state: <%= current_user.player.game.state_name %></p>
+	<p>Attacker: <%= @game.attacker %></p>
+	<p>Defender: <%= @game.defender %></p>
+	<% if @game.deck %>
+		<p>Trump: <%= @game.deck.trump %></p>
+		<p>Deck cards count : <%= 36 - @game.deck.cursor %></p>
+	<% end %>
+<% end %>
+<% end %>
 
-<h1><%= @game.mover %></h1>
-<h1><%= current_user.player.id %></h1>
-<h1><%= current_user.player.game.state_name %></h1>
-<h1>Trump</h1>
+<div class="row wood">
+	<div id = "table_cards">
+		<%= render partial: 'tables/table' %>
+	</div>
 
+  <%# if @game.winner && @game.loser %> 		<div>
+		<!--	<h1>WINNER: <%#= @game.winner %></h1>
+			<h1>LOSER: <%#= @game.loser %></h1>-->
+			<%#= link_to 'Destroy', @game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+		</div>
+  <%# end %>
+	
+	<div id = "table_player_cards">
+		<%= render partial: 'tables/table_player_cards'%>
+	</div>
+</div>
 
-<h1>----------Table----------</h1>
-<div id = "table_cards"><%= render partial: 'tables/table' %></div>
 <%= link_to 'reload', url: url_for( :controller => :games, :action => :show ) , remote: true, :method => :get %><br/>
 
-<%= link_to "Put", {:controller => "games", :action => "put_card"} %>
+
+<%= link_to "End Turn", end_turn_url, remote: true, :method => :post %>
 <%= link_to 'Edit', edit_game_path(@game) , :class => "btn btn-info" %> |
 <%= link_to 'Back', games_path , :class => "btn btn-danger" %>
-<%= debug params %>
