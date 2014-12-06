@@ -15,7 +15,6 @@ class Player < ActiveRecord::Base
           card = elem
         end
       end
-      self.cards_count -= 1
     else
       puts 'Empty'
     end
@@ -34,6 +33,7 @@ class Player < ActiveRecord::Base
       if ((self.player_cards[i].rang.to_i == _card.rang.to_i) && (self.player_cards[i].suite.to_s == _card.suite.to_s))
 
         puts self.player_cards.delete_at(i)
+        self.cards_count -= 1
         puts "____________________________DELETED"
         break
       end
@@ -47,6 +47,9 @@ class Player < ActiveRecord::Base
   end
 
   def add_card new_card
+    puts "??????????????????? add_card"
+    puts new_card.rang
+    puts new_card.suite
     init
     self.player_cards.push new_card
     self.cards_count  += 1

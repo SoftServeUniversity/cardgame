@@ -11,6 +11,11 @@ class Table < ActiveRecord::Base
     cards
   end
 
+  def clear
+    self.table_cards = []
+    self.cards_count = 0
+  end
+
   def get_latest_card
     self.table_cards[self.cards_count-1]
   end
@@ -69,15 +74,15 @@ class Table < ActiveRecord::Base
 
     def add_card _card, _player_id
       puts "table add_card************************"
+      allow = false
       if attack?(_player_id) && allow_attack?(_card)
         do_push_card _card
-        true
+        allow = true
       elsif defend?(_player_id) && allow_defend?(_card)
         do_push_card _card
-        true
-      else
-        false
+        allow = true
       end
+      allow
     end
 
     def do_push_card _card

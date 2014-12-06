@@ -1,17 +1,25 @@
-<table>
-	<thead>
-	  <tr>
-	    <th> Suite</th>
-	    <th> Rang </th>
-	  </tr>
-	</thead>
-<% if current_user.player.game.table != nil %>
-	<% current_user.player.game.table.table_cards.each do |card| %>
-		<tr>
-			<td> <%= card.suite %> </td>
-			<td> <%= card.rang %> </td>
-		</tr>
-	<% end %>	
+<% if @game.table != nil %>
+	<% defenceCards = [] %>
+	<% @game.table.table_cards.each_index do |index| %>
+		<% if (index+1) % 2 == 0 %>
+		<% defenceCards << @game.table.table_cards[index] %>
+		<% end %>
+	<% end %>
+	<% hitCards = @game.table.table_cards - defenceCards %>
+
+	<ul class="tableCardsList hitCards">
+		<% hitCards.each do |card| %>
+			<li>
+				<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
+			</li>
+		<% end %>
+	</ul>
+
+	<ul class="tableCardsList defenceCards">
+		<% defenceCards.each do |card| %>
+			<li>
+				<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
+			</li>
+		<% end %>
+	</ul>
 <%end%>
-	</tbody>
-</table>

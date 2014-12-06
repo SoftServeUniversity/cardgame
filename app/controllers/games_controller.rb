@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 before_filter :authenticate_user!, except: [:show, :index]
-before_action :set_game, only: [:show, :join, :put_card, :refresh_show , :reload, :edit, :update, :destroy]  
+before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :edit, :update, :destroy]  
   def index
     @games = Game.all
     respond_to do |format|
@@ -57,7 +57,6 @@ before_action :set_game, only: [:show, :join, :put_card, :refresh_show , :reload
     end
   end
 
-
   def put_card
     card = self.current_user.player.put_card(params[:rang], params[:suite])
     puts "____________________________--"
@@ -68,17 +67,26 @@ before_action :set_game, only: [:show, :join, :put_card, :refresh_show , :reload
     @game.players[1].save
     @game.table.save
     @game.save
-    @mover = Player.find(@game.mover)
-    respond_to do |format|
-      format.html { redirect_to @game}
-      format.js
+    if @game.game_ended?
+      @game.set_game_state(EndOfGame.new @game)
+      @game.show_results
+      @game.save
     end
+
+    redirect_to game_path
+  end
+
+  def end_turn
+    puts "Controller End Turn"
+    @game.end_turn self.current_user.player.id
+    save_game @game
+    redirect_to game_path
   end
 
   def destroy
     @game.destroy
  
-  redirect_to games_path
+    redirect_to games_path
   end
 
   private
@@ -95,5 +103,6 @@ before_action :set_game, only: [:show, :join, :put_card, :refresh_show , :reload
       game.players[1].save
       game.table.save
       game.deck.save
+      game.save
     end
 end
