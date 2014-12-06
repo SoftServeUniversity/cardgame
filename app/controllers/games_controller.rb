@@ -3,12 +3,16 @@ before_filter :authenticate_user!, except: [:show, :index]
 before_action :set_game, only: [:show, :join, :put_card, :refresh_show , :reload, :edit, :update, :destroy]  
   def index
     @games = Game.all
+    respond_to do |format|
+      format.html { render action: 'index' }
+      format.js {render :action=>"index.js.erb"}
+    end
   end
 
   def show
     respond_to do |format|
       format.html { render action: 'show' }
-      format.js
+      format.js {render :action=>"show.js.erb"}
     end
   end
 
@@ -67,12 +71,6 @@ before_action :set_game, only: [:show, :join, :put_card, :refresh_show , :reload
     @mover = Player.find(@game.mover)
     respond_to do |format|
       format.html { redirect_to @game}
-      format.js
-    end
-  end
-
-  def refresh_show
-    respond_to do |format|
       format.js
     end
   end
