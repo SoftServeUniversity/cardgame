@@ -15,3 +15,7 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.navbar, .navbar-top, .navbar-inverse {
+	margin: 0 0 0 0;
+}

@@ -36,7 +36,8 @@ class Deck < ActiveRecord::Base
 			if self.cursor <= 35 
 				self.cursor += 1
 				self.deck_cards[cursor - 1]
-			else puts 'Deck is empty'
+			else
+			 puts 'Deck is empty'
 			end
 		end
 end

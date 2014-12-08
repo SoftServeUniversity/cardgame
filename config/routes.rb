@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  post 'games/:id', :controller => 'games', :action => 'put_card', :as => 'put_card'
+  post 'games/:id/put_card', :controller => 'games', :action => 'put_card', :as => 'put_card'
+  post 'games/:id/end_turn', :controller => 'games', :action => 'end_turn', :as => 'end_turn'
+  post 'games/:id/update', :controller => 'games', :action => 'update', :as => 'update'
 
   resources :games
+
+  get 'games/:id', :controller => 'games', :action => 'refresh_show', :as => 'refresh_show'
 
   root 'games#index'
   # The priority is based upon order of creation: first created -> highest priority.

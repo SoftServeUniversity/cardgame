@@ -15,6 +15,14 @@ class GameState
 		operation_is_not_allowed "get_card_from_player"
 	end
 
+	 def end_turn _player_id
+	 	operation_is_not_allowed "end_turn"
+	 end
+
+	 def show_results
+	 	operation_is_not_allowed "show_results"
+	 end
+
 	def operation_is_not_allowed operation_name
 		puts "Oparation #{operation_name} is not allowed for Order's state #{@game.state_name}" 
 	end

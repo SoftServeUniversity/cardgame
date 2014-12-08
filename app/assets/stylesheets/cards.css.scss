@@ -1,6 +1,8 @@
 .wood {
 	background-image: url("table.jpg");
+	min-width: 700px;
 	padding: 0 0 0 0;
+	border-radius: 4px;
 }
 
 /*AJAX-divs with ul`s of cards inside*/
@@ -9,8 +11,7 @@
 }
 
 #table_cards, #table_player_cards {
-	min-width: 210px;
-	height: 290px;
+	height: 250px;
 	margin: 50px 0 0 0;
 }
 #table_player_cards {
@@ -21,7 +22,7 @@
 
 /*Defence cards offset to cover hitcards*/
 .defenceCards {
-	margin: -80px 0 0 0;
+	margin: -70px 0 0 0;
 }
 .defenceCards li {
 	box-shadow: 0px -5px 3px -3px #888888;
@@ -29,6 +30,7 @@
 
 
 .playerCardsList, .tableCardsList {
+	min-width: 540px;
 	list-style-type: none;
 	padding: 0 0 0 0;
 }
@@ -43,9 +45,9 @@
 
 
 /*Cards itsels*/
-.tableCards {
-	width: 100px;
+.tableCards, .deckCards {
+	width: 85px;
 }
 .playerCards {
-	width: 120px;
+	width: 100px;
 }

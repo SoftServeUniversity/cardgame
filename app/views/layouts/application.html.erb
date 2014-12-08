@@ -13,13 +13,12 @@
 		<%= render 'layouts/header' %>
 		
 
-		<div class='container-fluid'>
+		<div class='container'>
 			<div class='row maincontent'>
-				<div class='col-sm-10 yieldcontent'>
+				<div class='col-md-10 yieldcontent'>
 					<%= yield %>
 				</div>
-				<div class='col-sm-2 yieldcontent'>
-					<%= yield :tableDeck %>
+				<div class='col-md-2 yieldcontent'>
 					<%= yield :information %>
 				</div>
 			</div>
