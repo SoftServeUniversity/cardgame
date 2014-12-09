@@ -10,6 +10,7 @@
 				<div class="navbar-form navbar-right">
 					<div class='btn btn-success'>
 					<span class='btn btn-disabled'>Signed in as <b><%= current_user.username %></b></span>
+						<%= link_to 'Home', show_path(current_user), class: "btn" %>
 						<%= link_to 'Log out', destroy_user_session_path, :method => :delete, class: "btn" %>					
 						<%= link_to 'Edit', edit_user_registration_path, class: "btn" %>
 					</div>
