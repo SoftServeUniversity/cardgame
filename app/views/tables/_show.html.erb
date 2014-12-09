@@ -43,3 +43,20 @@
 <%= link_to "End Turn", end_turn_url, remote: true, :method => :post %>
 <%= link_to 'Edit', edit_game_path(@game) , :class => "btn btn-info" %> |
 <%= link_to 'Back', games_path , :class => "btn btn-danger" %>
+
+<% content_for :show do %>
+  <script type="text/javascript">
+    $(document).ready(function () {
+   		setInterval(function(){
+		refreshPartial();
+		}, 10000); 
+	});
+
+	function refreshPartial() {
+  		$.ajax({
+          	url: "<%= @game %>",
+          	dataType: "script" 
+ 		})
+	};
+  </script>
+<% end %>
