@@ -1,14 +1,27 @@
 class GamesController < ApplicationController
+
   before_filter :authenticate_user!, except: [:show, :index]
-  before_action :set_game, only: [:show, :join, :put_card,:end_turn, :end_game, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :end_game, :edit, :update, :destroy]  
+
   def index
     @games = Game.all
+    respond_to do |format|
+      format.html { render action: 'index' }
+      format.js {render :action=>"index.js.erb"}
+    end
   end
 
   def show
     if !@game
       redirect_to games_path
     end
+    respond_to do |format|
+      format.html { render action: 'show' }
+      format.js {render :action=>"show.js.erb"}
+    end
+  end
+
+  def reload
   end
 
   def new
@@ -39,13 +52,8 @@ class GamesController < ApplicationController
     @game.prepare_game_to_start
     save_game @game
     respond_to do |format|
-      if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Card game was successfully updated.' }
+        format.html { redirect_to @game }
         format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
     end
   end
 

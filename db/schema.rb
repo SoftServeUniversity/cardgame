@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203114403) do
+ActiveRecord::Schema.define(version: 20141206203300) do
 
   create_table "decks", force: true do |t|
     t.integer  "game_id"
@@ -24,8 +24,6 @@ ActiveRecord::Schema.define(version: 20141203114403) do
 
   create_table "games", force: true do |t|
     t.string   "state_name"
-    t.string   "winner"
-    t.string   "loser"
     t.integer  "attacker"
     t.integer  "defender"
     t.integer  "mover"
@@ -68,9 +66,11 @@ ActiveRecord::Schema.define(version: 20141203114403) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end
