@@ -12,21 +12,30 @@
 <% end %>
 
 <div class="row wood">
-		<div id = "table_cards" class="row">
-			<div class="col-xs-10">
+		<div id="table_row_game" class="row">
+			<div id="table_cards" class="col-xs-10">
 				<%= render partial: 'tables/table' %>
 			</div>
-			<div class="col-xs-2">
-				<%= render partial: 'tables/table_deck' %>
-			</div>
+			<% if @game.deck %>
+				<div id="table_deck" class="col-xs-2">
+					<%= render partial: 'tables/table_deck' %>
+				</div>
+			<% else %>
+				<div id="table_deck" class="col-xs-2">
+				</div>
+			<% end %>
 		</div>
-		<div id = "table_player_cards" class="row">
-			<div class="col-xs-10">
+		<div id="table_row_player" class="row">
+			<div id="table_player_cards" class="col-xs-10">
 				<%= render partial: 'tables/table_player_cards'%>
 			</div>
-			<div class="col-xs-2">
-				<%= link_to "End Turn", end_turn_url, :method => :post, :class => "btn btn-default btn-lg" %><br />
-				<%= link_to 'Reload', url: url_for( :controller => :games, :action => :show ), remote: true, :method => :get, :class => "btn btn-default" %>
+			<div id="table_controls" class="col-xs-2">
+				<div>
+					<%= link_to "End Turn", end_turn_url, :method => :post, :class => "btn btn-default" %><br />
+				</div>
+				<div>
+					<%= link_to 'Reload', url: url_for( :controller => :games, :action => :show ), remote: true, :method => :get, :class => "btn btn-default" %>
+				</div>
 			</div>
 		</div>
 </div>

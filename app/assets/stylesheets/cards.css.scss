@@ -1,23 +1,30 @@
 .wood {
 	background-image: url("table.jpg");
-	min-width: 700px;
+	min-width: 660px;
 	padding: 0 0 0 0;
 	border-radius: 4px;
 }
 
 /*AJAX-divs with ul`s of cards inside*/
-#table_deck {
-	margin: 50px 0 0 0;
+#table_row_game, #table_row_player {
+	margin: 0 0 0 0;
+	padding-top: 15px;
+}
+#table_row_player {	
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
-#table_cards, #table_player_cards {
-	height: 250px;
+#table_cards, #table_player_cards, #table_deck {
+	height: 265px;
 	margin: 50px 0 0 0;
 }
 #table_player_cards {
-	height: 410px;
-	padding: 15px 0 0 0;
-	background-color: rgba(0, 0, 0, 0.5);
+	min-height: 310px;
+	margin: 0 0 0 0;
+}
+
+#table_controls {
+
 }
 
 /*Defence cards offset to cover hitcards*/
@@ -50,4 +57,11 @@
 }
 .playerCards {
 	width: 100px;
+	margin-bottom: 15px;
+}
+
+@media (max-width: 992px) {
+	 .playerCards {
+	  width: 85px;
+	}
 }
