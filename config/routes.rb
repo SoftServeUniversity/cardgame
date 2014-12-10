@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   post 'games/:id/put_card', :controller => 'games', :action => 'put_card', :as => 'put_card'
   post 'games/:id/end_turn', :controller => 'games', :action => 'end_turn', :as => 'end_turn'
+  post 'games/:id/end_game', :controller => 'games', :action => 'end_game', :as => 'end_game'
 
   resources :games
 

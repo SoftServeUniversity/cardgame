@@ -1,17 +1,11 @@
 .maincontent {
 	background-color: grey;
+	border-radius: 4px;
 }
 
 .yieldcontent {
 	background-color: #E7E7E7;
 }
-
-.tablewood {
-	height: 540px;
-	background-image: image-url("table.jpg");
-	background-size: cover;
-}
-
 
 .logo {
 	float: left;
@@ -38,3 +32,4 @@ a.btn:hover {
 .centertext {
 	text-align: center;
 }
+
