@@ -50,7 +50,6 @@ class Game < ActiveRecord::Base
     @state.get_card_from_player _card, _player_id
   end
 
-
   def end_turn _player_id
     puts "///////////////////////////////////////////END TURN GAME"
     @state.end_turn _player_id

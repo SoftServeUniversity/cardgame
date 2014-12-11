@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
 before_filter :authenticate_user!, except: [:show, :index]
-before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :edit, :update, :destroy]  
+before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :end_game, :edit, :update, :destroy]  
+
   def index
     @games = Game.all
     respond_to do |format|
@@ -10,6 +11,9 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :ed
   end
 
   def show
+    if !@game
+      redirect_to games_path
+    end
     respond_to do |format|
       format.html { render action: 'show' }
       format.js {render :action=>"show.js.erb"}
@@ -63,9 +67,27 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :ed
     @game.table.save
     @game.save
     if @game.game_ended?
+<<<<<<< HEAD
       @game.set_game_state(EndOfGame.new @game)
       @game.show_results
       @game.save
+=======
+      puts "_______________________________________Game Ended"
+      if @game.players[0].cards_count == 0
+        puts "_______________________________________Winner player 0"
+        @game.winner = @game.players[0]
+        @game.loser = @game.players[1]
+      else
+        puts "_______________________________________Winner player 1"
+        @game.winner = @game.players[1]
+        @game.loser = @game.players[0]
+      end
+      @game.save
+      puts "_______________________________________Game saved"
+      end_game
+    else
+      redirect_to game_path
+>>>>>>> SuperMaster
     end
 
     redirect_to game_path
@@ -78,18 +100,32 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :ed
     redirect_to game_path
   end
 
+  def end_turn
+    puts "Controller End Turn"
+    @game.end_turn self.current_user.player.id
+    save_game @game
+    redirect_to game_path
+  end
+
   def destroy
     @game.destroy
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> SuperMaster
     redirect_to games_path
   end
 
-  private
-    def set_game
-      @game = Game.find(params[:id])
-      @game.init_state
-    end
+  def end_game
+    puts"_______________________________________Controller Action End Game"
+    puts"_______________________________________outside"
+    if @game.players[1]
+      puts"_______________________________________intside player exist"
+      @user1 = User.find @game.players[0].user_id
+      @user2 = User.find @game.players[1].user_id
 
+<<<<<<< HEAD
     def game_params
       params.require(:game).permit(:name, :description)
     end
@@ -101,3 +137,55 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :ed
       game.save
     end
 end
+=======
+      @user1.games_count += 1
+      @user2.games_count += 1
+
+      if @game.winner
+        puts"_______________________________________inside is winner"
+        if @user1 == @game.winner
+          @user1.win_count += 1
+          @user2.lose_count += 1
+        else
+          @user2.win_count += 1
+          @user1.lose_count += 1
+        end
+      else
+        puts"_______________________________________intside button pressed"
+        if current_user == @user1
+          @user2.win_count += 1
+          @user1.lose_count += 1
+        else
+          @user1.win_count += 1
+          @user2.lose_count += 1
+        end
+      end
+      @user1.save
+      @user2.save
+    end
+
+    @game.destroy
+
+    redirect_to games_path
+  end
+
+  private
+  def set_game
+    @game = Game.find(params[:id])
+    @game.init_state
+  rescue
+    @game = nil
+  end
+
+  def game_params
+    params.require(:game).permit(:name, :description)
+  end
+  def save_game game
+    game.players[0].save
+    game.players[1].save
+    game.table.save
+    game.deck.save
+    game.save
+  end
+end
+>>>>>>> SuperMaster

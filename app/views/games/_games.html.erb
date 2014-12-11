@@ -14,7 +14,7 @@
             <td><%= game.name %></td>
             <td><%= game.description %></td>
             <td><%= link_to 'Show', game, :class => 'btn ' %></td>
-            <td><%= link_to 'Join', edit_game_path(game), :class => 'btn btn-default' %></td>
+            <td><%= link_to 'Join' , update_url(:id => game.id), :method => :post, :class => 'btn' %></td>
             <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
         </tr>
     <% end %>
