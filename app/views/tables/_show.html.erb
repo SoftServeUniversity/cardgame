@@ -1,13 +1,3 @@
-<p id = "notice"><%= notice %></p>
-<% if @game.deck %>
-	<% content_for :tableDeck do %>
-		<div id = "table_deck">
-			<%= render partial: 'tables/table_deck' %>
-		</div>
-	<% end %>
-<% end %>
-
-<% if current_user.player %>
 <% content_for :information do %>
 	<p>Cards count: <%= current_user.player.cards_count %>	
 	<p>Mover: <%= @game.mover %></p>
@@ -20,24 +10,38 @@
 		<p>Deck cards count : <%= 36 - @game.deck.cursor %></p>
 	<% end %>
 <% end %>
-<% end %>
 
 <div class="row wood">
-	<div id = "table_cards">
-		<%= render partial: 'tables/table' %>
-	</div>	
-	<div id = "table_player_cards">
-		<%= render partial: 'tables/table_player_cards'%>
-	</div>
+		<div id="table_row_game" class="row">
+			<div id="table_cards" class="col-xs-10">
+				<%= render partial: 'tables/table' %>
+			</div>
+			<% if @game.deck %>
+				<div id="table_deck" class="col-xs-2">
+					<%= render partial: 'tables/table_deck' %>
+				</div>
+			<% else %>
+				<div id="table_deck" class="col-xs-2">
+				</div>
+			<% end %>
+		</div>
+		<div id="table_row_player" class="row">
+			<div id="table_player_cards" class="col-xs-10">
+				<%= render partial: 'tables/table_player_cards'%>
+			</div>
+			<div id="table_controls" class="col-xs-2">
+				<div>
+					<%= link_to "End Turn", end_turn_url, remote: true, :method => :post, :class => "btn btn-default" %><br />
+				</div>
+				<div>
+					<%= link_to "EndGame", end_game_url, :method => :post, :class => "btn btn-default btn-lg" %><br />
+				</div>
+				<div>
+					<%= link_to 'Reload', url: url_for( :controller => :games, :action => :show ), remote: true, :method => :get, :class => "btn btn-default" %>
+				</div>
+			</div>
+		</div>
 </div>
-
-<%= link_to 'reload', url: url_for( :controller => :games, :action => :show ) , remote: true, :method => :get %><br/>
-
-
-<%= link_to "End Turn", end_turn_url, remote: true, :method => :post %>
-<%= link_to 'Edit', edit_game_path(@game) , :class => "btn btn-info" %> |
-<%= link_to 'Back', games_path , :class => "btn btn-danger" %>
-
 <% content_for :show do %>
   <script type="text/javascript">
     $(document).ready(function () {
