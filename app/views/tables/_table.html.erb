@@ -1,4 +1,4 @@
-<% if @game.table != nil %>
+<% if @game.table %>
 	<% defenceCards = [] %>
 	<% @game.table.table_cards.each_index do |index| %>
 		<% if (index+1) % 2 == 0 %>

@@ -1,0 +1,22 @@
+<table>
+	<thead>
+		<tr>
+			<th>Nick</th>
+			<th>Games</th>
+			<th>Wins</th>
+			<th>Loses</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+			<tr>
+	    	<td><%= user.username %></td>
+	    	<td><%= user.games_count %></td>
+	    	<td><%= user.win_count %></td>
+	    	<td><%= user.lose_count %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<%= link_to 'Back', games_path , :class => "btn btn-danger" %>

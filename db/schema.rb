@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20141206203300) do
 
   create_table "games", force: true do |t|
     t.string   "state_name"
+    t.string   "winner"
+    t.string   "loser"
     t.integer  "attacker"
     t.integer  "defender"
     t.integer  "mover"

@@ -1,2 +1,5 @@
 <h1>Welcome <%= current_user.username %></h1>
+<h2>Played games: <%= current_user.games_count %></h2>
+<h2>Win games: <%= current_user.win_count %></h2>
+<h2>Lose games: <%= current_user.lose_count %></h2>
 <%= link_to 'Back', games_path , :class => "btn btn-danger" %>

@@ -1,16 +1,3 @@
-<% content_for :information do %>
-	<p>Cards count: <%= current_user.player.cards_count %>	
-	<p>Mover: <%= @game.mover %></p>
-	<p>Player ID: <%= current_user.player.id %></p>
-	<p>Player Game state: <%= current_user.player.game.state_name %></p>
-	<p>Attacker: <%= @game.attacker %></p>
-	<p>Defender: <%= @game.defender %></p>
-	<% if @game.deck %>
-		<p>Trump: <%= @game.deck.trump %></p>
-		<p>Deck cards count : <%= 36 - @game.deck.cursor %></p>
-	<% end %>
-<% end %>
-
 <div class="row wood">
 		<div id="table_row_game" class="row">
 			<div id="table_cards" class="col-xs-10">
