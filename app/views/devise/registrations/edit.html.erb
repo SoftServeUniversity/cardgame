@@ -32,6 +32,11 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= f.label :view_theme %><br />
+    <%= f.select :view_theme, ['Classic', 'Modern'] %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

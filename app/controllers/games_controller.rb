@@ -67,11 +67,6 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
     @game.table.save
     @game.save
     if @game.game_ended?
-<<<<<<< HEAD
-      @game.set_game_state(EndOfGame.new @game)
-      @game.show_results
-      @game.save
-=======
       puts "_______________________________________Game Ended"
       if @game.players[0].cards_count == 0
         puts "_______________________________________Winner player 0"
@@ -87,7 +82,6 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
       end_game
     else
       redirect_to game_path
->>>>>>> SuperMaster
     end
 
     redirect_to game_path
@@ -109,11 +103,6 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
 
   def destroy
     @game.destroy
-<<<<<<< HEAD
- 
-=======
-
->>>>>>> SuperMaster
     redirect_to games_path
   end
 
@@ -124,20 +113,6 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
       puts"_______________________________________intside player exist"
       @user1 = User.find @game.players[0].user_id
       @user2 = User.find @game.players[1].user_id
-
-<<<<<<< HEAD
-    def game_params
-      params.require(:game).permit(:name, :description)
-    end
-    def save_game game
-      game.players[0].save
-      game.players[1].save
-      game.table.save
-      game.deck.save
-      game.save
-    end
-end
-=======
       @user1.games_count += 1
       @user2.games_count += 1
 
@@ -188,4 +163,3 @@ end
     game.save
   end
 end
->>>>>>> SuperMaster
