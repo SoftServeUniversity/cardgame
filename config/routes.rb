@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, :path_prefix => 'my'
-  get 'users/:id' , :controller => 'users', :action => 'show',  :as => 'user_show' 
+  get 'users/:id' , :controller => 'users', :action => 'show',  :as => 'user_show'
+  get 'users/:id/edit' , :controller => 'users', :action => 'edit',  :as => 'user_edit'
   post 'users/:id/update' , :controller => 'users', :action => 'update',  :as => 'user_update' 
 
 

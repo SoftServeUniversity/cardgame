@@ -12,7 +12,7 @@ class Deck < ActiveRecord::Base
 		self.cursor = 0
 		for i in 0..8 do
 				init_card_iteration i
-			end
+		end
 			shuffle_deck
 		end
 
