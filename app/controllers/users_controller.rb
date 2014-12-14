@@ -7,9 +7,8 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    @user.username = params[:username]
-    @user.save
-    redirect_to action: 'show'
+    @user.update(username: params[:username], view_theme: params[:view_theme])
+    render action: :edit
   end
 
   private
