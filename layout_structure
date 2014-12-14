@@ -1,0 +1,47 @@
+# INDEX PAGE
+html
+	head
+	body
+		render 'layouts/header'
+
+		yield => div class='container'
+			div class='row maincontent'
+				div class='col-md-12 yieldcontent'
+					div class="row wood"
+						div id="table_row_game" class="row"
+							div id="table_cards" class="col-xs-10"
+							div id="table_deck" class="col-xs-2"
+						div id="table_row_player" class="row"
+							div id="table_player_cards" class="col-xs-10"
+							div id="table_controls" class="col-xs-2"
+				div class='col-md-2 yieldcontent'
+					<%= yield :information %>
+							
+		render 'layouts/footer'
+
+
+
+
+
+
+
+# GAME TABLE
+
+html
+	head
+	body
+		render 'layouts/header'
+
+		yield => div class='container'
+			div class='row maincontent'
+				div class='col-md-10 yieldcontent'
+					div class="row wood"
+						div id="table_row_game" class="row"
+							div id="table_cards" class="col-xs-10"
+							div id="table_deck" class="col-xs-2"
+						div id="table_row_player" class="row"
+							div id="table_player_cards" class="col-xs-10"
+							div id="table_controls" class="col-xs-2"
+				div class='col-md-2 yieldcontent'
+
+		render 'layouts/footer'
