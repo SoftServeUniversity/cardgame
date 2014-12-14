@@ -11,7 +11,10 @@ class UsersController < ApplicationController
     render action: :edit
   end
 
-  private
+	def statistic
+		@users = User.all.order("win_count DESC")
+	end
+	private
 
   def set_user
     @user = User.find(params[:id])
