@@ -12,6 +12,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    
     if !@game
       redirect_to games_path
     end

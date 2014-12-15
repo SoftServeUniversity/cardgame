@@ -1,22 +1,22 @@
-<table class = "table table-striped">
+<table class="table gamestable">
     <thead>
         <tr>
-            <th><%= "Name" %> </th>
-            <th><%= "Description" %></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th class="col-xs-4">Name</th>
+            <th class="col-xs-5">Description</th>
+            <th class="col-xs-1"></th>
+            <th class="col-xs-1"></th>
+            <th class="col-xs-1"></th>
         </tr>
     </thead>
     <tbody>
-    <% @games.each do |game| %>
+        <% @games.each do |game| %>
         <tr>
-            <td><%= game.name %></td>
-            <td><%= game.description %></td>
-            <td><%= link_to 'Show', game, :class => 'btn ' %></td>
-            <td><%= link_to 'Join' , update_url(:id => game.id), :method => :post, :class => 'btn' %></td>
-            <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
+            <td class="col-xs-4"><%= game.name %></td>
+            <td class="col-xs-5"><%= game.description %></td>
+            <td class="col-xs-1"><%= link_to 'Show', game, :class => '' %></td>
+            <td class="col-xs-1"><%= link_to 'Join' , update_url(:id => game.id), :method => :post, :class => '' %></td>
+            <td class="col-xs-1"><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => '' %></td>
         </tr>
-    <% end %>
+        <% end %>
     </tbody>
 </table>

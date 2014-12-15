@@ -5,6 +5,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
+      t.string :view_theme
+
       t.integer :games_count
       t.integer :lose_count
       t.integer :win_count
