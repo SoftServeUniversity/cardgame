@@ -15,10 +15,10 @@ class GamesController < ApplicationController
     if !@game
       redirect_to games_path
     end
-    respond_to do |format|
-      format.html { render action: 'show' }
-      format.js {render :action=>"show.js.erb"}
-    end
+    # respond_to do |format|
+    #   format.html { render action: 'show' }
+    #   format.js {render :action=>"show.js.erb"}
+    # end
   end
 
   def reload
