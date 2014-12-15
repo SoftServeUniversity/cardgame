@@ -24,9 +24,26 @@
 	margin: 0 0 0 0;
 }
 
-#table_controls {
-
+#table_controls span {
+	color: white;
+	text-decoration: none;
 }
+#table_controls a {
+	text-decoration: none;
+}
+#table_controls a:hover {
+	text-decoration: none;
+}
+
+.table_button {
+	min-width: 110px;
+	margin: 15px;
+	margin-left: 0px;
+}
+.table_button:hover {
+	box-shadow: 0px 0px 3px 3px white;
+}
+
 
 /*Defence cards offset to cover hitcards*/
 .defenceCards {
