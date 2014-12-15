@@ -3,12 +3,13 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
   
   def update
     @user = User.find(params[:id])
     @user.update(username: params[:username], view_theme: params[:view_theme])
-    render action: :edit
+    redirect_to user_show_path
   end
 
 	def statistic
