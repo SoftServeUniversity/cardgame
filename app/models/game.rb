@@ -3,7 +3,6 @@ require "deck"
 require "card"
 
 class Game < ActiveRecord::Base
-
   serialize :winner, Player
   serialize :loser, Player
 
@@ -38,6 +37,7 @@ class Game < ActiveRecord::Base
 
   def init
     @state = NewGame.new(self)
+    self.state_name = @state.class.name
   end
 
   def init_player _user
@@ -113,7 +113,7 @@ class Game < ActiveRecord::Base
 
     init_new_turn
   end
-
+#
   def set_attacker
     init_players_cards
 
