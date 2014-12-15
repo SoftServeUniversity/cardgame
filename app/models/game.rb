@@ -25,6 +25,8 @@ class Game < ActiveRecord::Base
       @state = MoveOfSecondPlayer.new self
     when 'EndOfGame'
       @state = EndOfGame.new self
+    when 'BreakTurn'
+      @state = BreakTurn.new self
     end
     @state
   end
@@ -85,24 +87,10 @@ class Game < ActiveRecord::Base
   end
 
   def do_end_turn
-    puts "//////////////Doing end of turn"
     self.table.clear
 
-    puts "///////////////////////////////////attacker"
-    puts self.attacker
-    puts "///////////////////////////////////defender"
-    puts self.defender
-    puts "///////////////////////////////////mover"
-    puts self.mover
+    self.attacker, self.defender = self.defender, self.attacker
 
-    att = self.attacker
-    self.mover = self.defender
-    puts "///////////////////////////////////mover"
-    puts self.mover
-    self.attacker = self.defender
-    self.defender = att
-
-    puts "///////////////////////////init new turn"
     init_new_turn
   end
 
@@ -116,12 +104,12 @@ class Game < ActiveRecord::Base
     end
     self.table.clear
 
-    puts "///////////////////////////////////mover"
-    puts self.mover
-    self.mover = attacker
+    # puts "///////////////////////////////////mover"
+    # puts self.mover
+    # self.mover = attacker
 
-    puts "///////////////////////////////////mover"
-    puts self.mover
+    # puts "///////////////////////////////////mover"
+    # puts self.mover
 
     init_new_turn
   end

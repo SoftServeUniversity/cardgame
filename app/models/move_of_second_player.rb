@@ -1,5 +1,6 @@
 require "game_state"
 require "move_of_first_player"
+require "break_turn"
 
 class MoveOfSecondPlayer < GameState
 
@@ -34,7 +35,11 @@ class MoveOfSecondPlayer < GameState
         @game.do_end_turn
       elsif (_player_id.to_i == @game.defender.to_i) #END from defender
         puts "//////////////////DEFENDER END OF TURN in state"
-        @game.do_break_turn 1
+        @game.set_game_state(BreakTurn.new @game)
+        @game.mover = @game.attacker
+        puts "//////////////////////////////////////////////////////BreakTurn"
+        puts @game.state_name
+        # @game.do_break_turn 1
       end
     end
   end
