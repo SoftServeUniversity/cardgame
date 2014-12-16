@@ -9,17 +9,21 @@
 
 	<ul class="tableCardsList hitCards">
 		<% hitCards.each do |card| %>
-			<li>
-				<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
-			</li>
+			<% if card %>
+				<li>
+					<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
+				</li>
+			<% end %>
 		<% end %>
 	</ul>
 
 	<ul class="tableCardsList defenceCards">
 		<% defenceCards.each do |card| %>
-			<li>
-				<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
-			</li>
+			<% if card %>
+				<li>
+					<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
+				</li>
+			<% end %>
 		<% end %>
 	</ul>
 <%end%>

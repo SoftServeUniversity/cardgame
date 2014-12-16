@@ -7,7 +7,7 @@ class MoveOfFirstPlayer < GameState
   def initialize _game
     super _game
   end
-  def get_card_from_player _card, _player
+  def get_card_from_player _card, _player, _attacker
     puts "==============================_player"
     puts _player
     if @game.mover == _player
@@ -18,7 +18,7 @@ class MoveOfFirstPlayer < GameState
         current_player = @game.players[1]
       end
 
-      if @game.do_get_card_from_player _card
+      if @game.do_get_card_from_player _card, _player, _attacker
         current_player.delete_card _card
         @game.set_game_state(MoveOfSecondPlayer.new @game)
         @game.mover = @game.players[1]
