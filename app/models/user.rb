@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
       self.games_count ||= 0
       self.lose_count ||= 0
       self.win_count ||= 0
+      self.view_theme ||= "Classic"
   end
 
   validates :username, :uniqueness => { :case_sensitive => false}

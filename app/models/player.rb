@@ -1,3 +1,4 @@
+require "card"
 class Player < ActiveRecord::Base
 
   serialize :player_cards, Array
@@ -5,34 +6,25 @@ class Player < ActiveRecord::Base
   belongs_to :game
   belongs_to :user
 
-  def put_card _rang, _suite
-    card = self.player_cards[0]
-    puts "???????????????????????     #{_rang} _____ #{_suite}"
+  def put_card rang, suite
+    player_card = self.player_cards[0]
     if self.cards_count > 0
-      self.player_cards.each do |elem|
-        puts "____________________     #{elem.rang} _____ #{elem.suite}"
-        if ((elem.rang.to_f == _rang.to_f) && (elem.suite.to_s == _suite.to_s))
-          card = elem
+      self.player_cards.each do |card|
+        if ((card.rang.to_f == rang.to_f) && (card.suite.to_s == suite.to_s))
+          player_card = card
         end
       end
     else
       puts 'Empty'
     end
-    card
+    player_card
   end
 
-  def delete_card _card
-    puts "======================="
-    puts _card.rang
-    puts _card.suite
-    puts "======================="
-    for i in 0...self.player_cards.length do
-      puts self.player_cards[i].rang
-      puts self.player_cards[i].suite
+def delete_card player_card
+    self.player_cards.each do |card|
+      if ((card.rang.to_i == player_card.rang.to_i) && (card.suite.to_s == player_card.suite.to_s))
 
-      if ((self.player_cards[i].rang.to_i == _card.rang.to_i) && (self.player_cards[i].suite.to_s == _card.suite.to_s))
-
-        puts self.player_cards.delete_at(i)
+        puts self.player_cards.delete(card)
         self.cards_count -= 1
         puts "____________________________DELETED"
         break

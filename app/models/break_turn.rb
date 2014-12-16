@@ -1,31 +1,29 @@
-require "game_state"
-
 class BreakTurn < GameState
 	
-	def initialize _game
-		super _game
+	def initialize game
+		super game
 	end
 
-	def get_card_from_player _card, _player_id
-    if @game.mover.to_i == _player_id.to_i
+	def get_card_from_player _card, _player
+    if @game.mover == _player
       
-      if @game.players[0].id.to_i == _player_id.to_i
+      if @game.players[0] == _player
         current_player = @game.players[0]
       else
         current_player = @game.players[1]
       end
 
-      if @game.do_get_card_from_player _card, _player_id
+      if @game.do_get_card_from_player _card
         current_player.delete_card _card
       end
     else
-      puts "Fatal ERROR"
+      puts "Access denied"
     end
   end
 
-  def end_turn _player_id
-    if @game.mover.to_i == _player_id.to_i
-    	if(@game.players[0].id == @game.mover.to_i)
+  def end_turn _player
+    if @game.mover == _player
+    	if(@game.players[0] == @game.mover)
     		player = 1
     	else
     		player = 0
@@ -33,9 +31,9 @@ class BreakTurn < GameState
     	@game.do_break_turn player
     end
 
-     if @game.mover.to_i == @game.players[0].id.to_i
+     if @game.mover == @game.players[0]
       @game.set_game_state(MoveOfFirstPlayer.new @game)
-    elsif @game.mover.to_i == @game.players[1].id.to_i
+    elsif @game.mover == @game.players[1]
       @game.set_game_state(MoveOfSecondPlayer.new @game)
     end
   end

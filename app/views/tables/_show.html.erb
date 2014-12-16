@@ -37,12 +37,14 @@
 </div>
 <div class='col-md-2 yieldcontent infopanel'>
 	<p>View Theme: <%= current_user.view_theme %>	
-	<p>Cards count: <%= current_user.player.cards_count %>	
-	<p>Mover: <%= @game.mover %></p>
+	<p>Cards count: <%= current_user.player.cards_count %>
+	<% if (@game.mover.user && @game.attacker.user && @game.defender.user) %>	
+		<p>Mover: <%= @game.mover.user.username %></p>
+		<p>Attacker: <%= @game.attacker.user.username %></p>
+		<p>Defender: <%= @game.defender.user.username %></p>
+	<% end %>
 	<p>Player ID: <%= current_user.player.id %></p>
 	<p>Player Game state: <%= current_user.player.game.state_name %></p>
-	<p>Attacker: <%= @game.attacker %></p>
-	<p>Defender: <%= @game.defender %></p>
 	<% if @game.deck %>
 		<p>Trump: <%= @game.deck.trump %></p>
 		<p>Deck cards count : <%= 36 - @game.deck.cursor %></p>
@@ -50,18 +52,18 @@
 </div>
 
 <% content_for :show do %>
-  <script type="text/javascript">
-    $(document).ready(function () {
-   		setInterval(function(){
-		refreshPartial();
-		}, 5000); 
-	});
-
-	function refreshPartial() {
-  		$.ajax({
-          	url: "<%= @game %>",
-          	dataType: "script" 
- 		})
-	};
-  </script>
+   <script type="text/javascript">
+     $(document).ready(function () {
+    		setInterval(function(){
+ 		refreshPartial();
+ 		}, 10000); 
+ 	});
+     
+ 	function refreshPartial() {
+   		$.ajax({
+           	url: "<%= @game %>",
+           	dataType: "script" 
+  		})
+ 	};
+   </script>
 <% end %>

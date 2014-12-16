@@ -9,9 +9,9 @@ class GamePrepare < GameState
 
   def prepare_game_to_start
     @game.do_preparation_for_game
-    if @game.mover.to_i == @game.players[0].id.to_i
+    if @game.mover == @game.players[0]
       @game.set_game_state(MoveOfFirstPlayer.new @game)
-    elsif @game.mover.to_i == @game.players[1].id.to_i
+    elsif @game.mover == @game.players[1]
       @game.set_game_state(MoveOfSecondPlayer.new @game)
     end
   end

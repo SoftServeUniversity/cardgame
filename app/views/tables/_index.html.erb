@@ -1,8 +1,4 @@
-<div class = "row">
-    <div class = "col-md-10 pull-right">
-        <div class = "jumbotron text-center">
-            <h2>Games</h2>
-            <div class = "table table-striped" id = "card_games"><%= render 'games' %></div><div class='col-md-12 yieldcontent'>
+<div class='col-md-12 yieldcontent'>
     <div class="row">
         <div class="jumbotron jumboart text-center">
             <%= link_to new_game_path do%>
@@ -24,38 +20,18 @@
 </div>
 
 <% content_for :index do %>
-  <script type="text/javascript">
-    $(document).ready(function () {
+   <script type="text/javascript">
+     $(document).ready(function () {
       setInterval(function(){
-    refreshIndex();
-    }, 10000); 
+   refreshIndex();
+   }, 10000); 
   });
-
+     
   function refreshIndex() {
-      $.ajax({
+     $.ajax({
             url: "<%= @games %>",
             dataType: "script" 
     })
   };
-  </script>
-<% end %>
-         <%= link_to 'New game', new_game_path, :class => 'btn btn-success' %>
-        </div>
-    </div>
-</div>
-<% content_for :index do %>
-  <script type="text/javascript">
-    $(document).ready(function () {
-   		setInterval(function(){
-		refreshIndex();
-		}, 10000); 
-	});
-
-	function refreshIndex() {
-  		$.ajax({
-          	url: "<%= @games %>",
-          	dataType: "script" 
- 		})
-	};
-  </script>
+   </script>
 <% end %>

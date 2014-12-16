@@ -1,26 +1,22 @@
+require "card"
 class Deck < ActiveRecord::Base
 	serialize :deck_cards, Array
 
 	belongs_to :game
 
-	# def initialize
-	#   super
- #  	init_cards
-	# end
-
 	def init_cards
-		self.cursor = 0
-		for i in 0..8 do
-				init_card_iteration i
-			end
-			shuffle_deck
-		end
+  	self.cursor = 0
+  	(0..8).each do |rang|
+    	init_card_iteration rang
+  	end
+  	shuffle_deck
+ 	end
 
-		def init_card_iteration i
-				deck_cards << Card.new('hearts', i)
-				deck_cards << Card.new('spades', i)
-				deck_cards << Card.new('diamonds', i)
-				deck_cards << Card.new('clubs', i)
+		def init_card_iteration rang
+				deck_cards << Card.new('hearts', rang)
+				deck_cards << Card.new('spades', rang)
+				deck_cards << Card.new('diamonds', rang)
+				deck_cards << Card.new('clubs', rang)
 		end
 
 		def shuffle_deck

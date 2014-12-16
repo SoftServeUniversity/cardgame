@@ -7,33 +7,35 @@ class MoveOfFirstPlayer < GameState
   def initialize _game
     super _game
   end
-  def get_card_from_player _card, _player_id
-    if @game.mover.to_i == _player_id.to_i
+  def get_card_from_player _card, _player
+    puts "==============================_player"
+    puts _player
+    if @game.mover == _player
       
-      if @game.players[0].id.to_i == _player_id.to_i
+      if @game.players[0] == _player
         current_player = @game.players[0]
       else
         current_player = @game.players[1]
       end
 
-      if @game.do_get_card_from_player _card, _player_id
+      if @game.do_get_card_from_player _card
         current_player.delete_card _card
         @game.set_game_state(MoveOfSecondPlayer.new @game)
-        @game.mover = @game.players[1].id
+        @game.mover = @game.players[1]
       end
     else
-      puts "Fatal ERROR"
+      puts "Access denied"
     end
   end
 
-  def end_turn _player_id
+  def end_turn _player
     puts "////////////////////END OF TURN in state"
-    if @game.mover.to_i == _player_id.to_i
-      if(_player_id.to_i == @game.attacker.to_i && @game.table.cards_count > 0) #END from attacker
+    if @game.mover == _player
+      if(_player == @game.attacker && @game.table.cards_count > 0) #END from attacker
         puts "////////////////////ATTACKER END OF TURN in state"
         @game.set_game_state(MoveOfSecondPlayer.new @game)
         @game.do_end_turn
-      elsif (_player_id.to_i == @game.defender.to_i) #END from defender
+      elsif (_player == @game.defender) #END from defender
         puts "////////////////////DEFENDER END OF TURN in state"
         @game.set_game_state(BreakTurn.new @game)
         @game.mover = @game.attacker

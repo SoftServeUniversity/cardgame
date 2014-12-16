@@ -11,15 +11,10 @@ class GamesController < ApplicationController
     end
   end
 
-  def show
-    
+  def show   
     if !@game
       redirect_to games_path
     end
-    # respond_to do |format|
-    #   format.html { render action: 'show' }
-    #   format.js {render :action=>"show.js.erb"}
-    # end
   end
 
   def reload
@@ -63,7 +58,7 @@ class GamesController < ApplicationController
     puts "____________________________--"
     puts card.rang
     puts card.suite
-    @game.get_card_from_player card, self.current_user.player.id
+    @game.get_card_from_player card, self.current_user.player
     @game.players[0].save
     @game.players[1].save
     @game.table.save
@@ -89,7 +84,7 @@ class GamesController < ApplicationController
 
   def end_turn
     puts "Controller End Turn"
-    @game.end_turn self.current_user.player.id
+    @game.end_turn self.current_user.player
     save_game @game
     redirect_to game_path
   end
@@ -100,7 +95,10 @@ class GamesController < ApplicationController
     redirect_to games_path
   end
 
-  def end_game
+  def end_game 
+    if !@game
+        redirect_to games_path
+    end
     puts"_______________________________________Controller Action End Game"
     puts"_______________________________________outside"
     if @game.players[1]
