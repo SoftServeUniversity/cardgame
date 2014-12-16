@@ -1,0 +1,220 @@
+.playerModernCards {
+	width: 100px;
+	height: 145px;
+	background-color: white;
+	position: relative;
+}
+
+.mRang {
+	position:absolute;
+ 	top:0;
+}
+.mSuite {
+	position:absolute;
+ 	top: 1em;
+}
+
+
+
+.m5clubs {
+	width: 100px;
+	height: 145px;
+	background-image: url("m5clubs.png");
+	background-size: cover;
+}
+.m5diamonds {
+	width: 100px;
+	height: 145px;
+	background-image: url("m5diamonds.png");
+	background-size: cover;
+}
+.m5hearts {
+	width: 100px;
+	height: 145px;
+	background-image: url("m5hearts.png");
+	background-size: cover;
+}
+.m5spades {
+	width: 100px;
+	height: 145px;
+	background-image: url("m5spades.png");
+	background-size: cover;
+}
+.m6clubs {
+	width: 100px;
+	height: 145px;
+	background-image: url("m6clubs.png");
+	background-size: cover;
+}
+.m6diamonds {
+	width: 100px;
+	height: 145px;
+	background-image: url("m6diamonds.png");
+	background-size: cover;
+}
+.m6hearts {
+	width: 100px;
+	height: 145px;
+	background-image: url("m6hearts.png");
+	background-size: cover;
+}
+.m6spades {
+	width: 100px;
+	height: 145px;
+	background-image: url("m6spades.png");
+	background-size: cover;
+}
+.m7clubs {
+	width: 100px;
+	height: 145px;
+	background-image: url("m7clubs.png");
+	background-size: cover;
+}
+.m7diamonds {
+	width: 100px;
+	height: 145px;
+	background-image: url("m7diamonds.png");
+	background-size: cover;
+}
+.m7hearts {
+	width: 100px;
+	height: 145px;
+	background-image: url("m7hearts.png");
+	background-size: cover;
+}
+.m7spades {
+	width: 100px;
+	height: 145px;
+	background-image: url("m7spades.png");
+	background-size: cover;
+}
+.m8clubs {
+	width: 100px;
+	height: 145px;
+	background-image: url("m8clubs.png");
+	background-size: cover;
+}
+.m8diamonds {
+	width: 100px;
+	height: 145px;
+	background-image: url("m8diamonds.png");
+	background-size: cover;
+}
+.m8hearts {
+	width: 100px;
+	height: 145px;
+	background-image: url("m8hearts.png");
+	background-size: cover;
+}
+.m8spades {
+	width: 100px;
+	height: 145px;
+	background-image: url("m8spades.png");
+	background-size: cover;
+}
+
+
+
+@media (max-width: 992px) {
+	 .playerModernCards {
+	  width: 85px;
+	  height: 123px;
+	}
+
+	.m5clubs {
+		width: 85px;
+		height: 123px;
+		background-image: url("m5clubs.png");
+		background-size: cover;
+	}
+	.m5diamonds {
+		width: 85px;
+		height: 123px;
+		background-image: url("m5diamonds.png");
+		background-size: cover;
+	}
+	.m5hearts {
+		width: 85px;
+		height: 123px;
+		background-image: url("m5hearts.png");
+		background-size: cover;
+	}
+	.m5spades {
+		width: 85px;
+		height: 123px;
+		background-image: url("m5spades.png");
+		background-size: cover;
+	}
+	.m6clubs {
+		width: 85px;
+		height: 123px;
+		background-image: url("m6clubs.png");
+		background-size: cover;
+	}
+	.m6diamonds {
+		width: 85px;
+		height: 123px;
+		background-image: url("m6diamonds.png");
+		background-size: cover;
+	}
+	.m6hearts {
+		width: 85px;
+		height: 123px;
+		background-image: url("m6hearts.png");
+		background-size: cover;
+	}
+	.m6spades {
+		width: 85px;
+		height: 123px;
+		background-image: url("m6spades.png");
+		background-size: cover;
+	}
+	.m7clubs {
+		width: 85px;
+		height: 123px;
+		background-image: url("m7clubs.png");
+		background-size: cover;
+	}
+	.m7diamonds {
+		width: 85px;
+		height: 123px;
+		background-image: url("m7diamonds.png");
+		background-size: cover;
+	}
+	.m7hearts {
+		width: 85px;
+		height: 123px;
+		background-image: url("m7hearts.png");
+		background-size: cover;
+	}
+	.m7spades {
+		width: 85px;
+		height: 123px;
+		background-image: url("m7spades.png");
+		background-size: cover;
+	}
+	.m8clubs {
+		width: 85px;
+		height: 123px;
+		background-image: url("m8clubs.png");
+		background-size: cover;
+	}
+	.m8diamonds {
+		width: 85px;
+		height: 123px;
+		background-image: url("m8diamonds.png");
+		background-size: cover;
+	}
+	.m8hearts {
+		width: 85px;
+		height: 123px;
+		background-image: url("m8hearts.png");
+		background-size: cover;
+	}
+	.m8spades {
+		width: 85px;
+		height: 123px;
+		background-image: url("m8spades.png");
+		background-size: cover;
+	}
+}
