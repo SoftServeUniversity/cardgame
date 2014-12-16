@@ -58,7 +58,7 @@ class GamesController < ApplicationController
     puts "____________________________--"
     puts card.rang
     puts card.suite
-    @game.get_card_from_player card, self.current_user.player
+    @game.get_card_from_player card, self.current_user.player, @game.attacker
     @game.players[0].save
     @game.players[1].save
     @game.table.save

@@ -47,8 +47,8 @@ class Game < ActiveRecord::Base
     @state.prepare_game_to_start
   end
 
-  def get_card_from_player _card, _player
-    @state.get_card_from_player _card, _player
+  def get_card_from_player _card, _player, _attacker
+    @state.get_card_from_player _card, _player, _attacker
   end
 
   def end_turn _player
@@ -72,7 +72,7 @@ class Game < ActiveRecord::Base
 
   def do_preparation_for_game
     puts "Doing preparation for game..."
-    table = Table.create({:game => self, :cards_count => 0})
+    table = Table.create({:game => self, :cards_count => 0, :defender_cursor => 1, :attacker_cursor => 0})
     deck = Deck.create({:game => self})
 
     deck.init_cards
@@ -80,9 +80,9 @@ class Game < ActiveRecord::Base
     set_attacker
   end
 
-  def do_get_card_from_player _card
+  def do_get_card_from_player _card, _player, _attacker
     puts "Doing getting card from player"
-    self.table.add_card _card
+    self.table.add_card _card, _player, _attacker
   end
 
   def do_end_turn
