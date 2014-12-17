@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'users/:id/edit' , :controller => 'users', :action => 'edit',  :as => 'user_edit'
-  put 'users/:id' , :controller => 'users', :action => 'update',  :as => 'user_update'
+  post 'users/:id' , :controller => 'users', :action => 'update',  :as => 'user_update'
   devise_for :users, :path_prefix => 'my'
 
   get 'users/:id' , :controller => 'users', :action => 'show',  :as => 'user_show'
