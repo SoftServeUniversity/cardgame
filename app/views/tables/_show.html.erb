@@ -1,5 +1,11 @@
 <div class='col-md-10 yieldcontent'>
-	<div class="row wood">
+	<% if current_user.view_theme.to_s.downcase %>
+		<% tableStyle = "table#{current_user.view_theme.to_s}" %>
+	<% else %>
+		<% tableStyle = "tableClassic" %>
+	<% end %>
+
+	<div class="row <%= "#{tableStyle}" %> ">
 			<div id="table_row_game" class="row">
 				<div id="table_cards" class="col-xs-10">
 					<%= render partial: 'tables/table' %>
