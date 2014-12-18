@@ -1,0 +1,47 @@
+<ul class="playerCardsList">	
+	<% if current_user.player %>	
+		<% current_user.player.player_cards.each do |card| %>	
+			<li>
+				<%= link_to put_card_url(:suite => card.suite, :rang => card.rang), remote: true , :method => :post do %>
+					<div class="playerModernCards">
+						<div class="mRang">							
+							<% case card.rang %>
+							<% when 0 %>
+								<span>6</span>
+							<% when 1 %>
+								<span>7</span>
+							<% when 2 %>
+								<span>8</span>
+							<% when 3 %>
+								<span>9</span>
+							<% when 4 %>
+								<span>10</span>
+							<% when 5 %>
+								<span>J</span>
+							<% when 6 %>
+								<span>Q</span>
+							<% when 7 %>
+								<span>K</span>
+							<% else %>
+								<span>A</span>
+							<% end %>						
+						</div>
+						<div class="mSuite">							
+							<% case card.suite %>
+							<% when 'diamonds' %>
+								<span>&diams;</span>
+							<% when 'spades' %>
+								<span>&spades;</span>
+							<% when 'hearts' %>
+								<span>&hearts;</span>
+							<% else %>
+								<span>&clubs;</span>
+							<% end %>						
+						</div>
+						<div class="m<%= card.rang.to_s + card.suite.to_s %>"></div>				
+					</div>
+				<% end %>
+			</li>
+		<% end %>
+	<% end %>
+</ul>

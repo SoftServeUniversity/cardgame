@@ -1,0 +1,97 @@
+<% if @game.table %>
+	<% hitCards = [] %>
+	<% @game.table.table_cards.each_index do |index| %>
+		<% if (index) % 2 == 0 %>
+			<% hitCards << @game.table.table_cards[index] %>
+		<% end %>
+	<% end %>
+	<% defenceCards = @game.table.table_cards - hitCards %>
+
+	<ul class="tableCardsList hitCards">
+		<% hitCards.each do |card| %>
+			<li>
+				<div class="t_playerModernCards">
+					<div class="mRang">							
+						<% case card.rang %>
+						<% when 0 %>
+							<span>6</span>
+						<% when 1 %>
+							<span>7</span>
+						<% when 2 %>
+							<span>8</span>
+						<% when 3 %>
+							<span>9</span>
+						<% when 4 %>
+							<span>10</span>
+						<% when 5 %>
+							<span>J</span>
+						<% when 6 %>
+							<span>Q</span>
+						<% when 7 %>
+							<span>K</span>
+						<% else %>
+							<span>A</span>
+						<% end %>						
+					</div>
+					<div class="mSuite">							
+						<% case card.suite %>
+						<% when 'diamonds' %>
+							<span>&diams;</span>
+						<% when 'spades' %>
+							<span>&spades;</span>
+						<% when 'hearts' %>
+							<span>&hearts;</span>
+						<% else %>
+							<span>&clubs;</span>
+						<% end %>						
+					</div>
+					<div class="t_m<%= card.rang.to_s + card.suite.to_s %>"></div>				
+				</div>
+			</li>
+		<% end %>
+	</ul>
+
+	<ul class="tableCardsList defenceCards">
+		<% defenceCards.each do |card| %>
+			<li>
+				<div class="t_playerModernCards">
+					<div class="mRang">							
+						<% case card.rang %>
+						<% when 0 %>
+							<span>6</span>
+						<% when 1 %>
+							<span>7</span>
+						<% when 2 %>
+							<span>8</span>
+						<% when 3 %>
+							<span>9</span>
+						<% when 4 %>
+							<span>10</span>
+						<% when 5 %>
+							<span>J</span>
+						<% when 6 %>
+							<span>Q</span>
+						<% when 7 %>
+							<span>K</span>
+						<% else %>
+							<span>A</span>
+						<% end %>						
+					</div>
+					<div class="mSuite">							
+						<% case card.suite %>
+						<% when 'diamonds' %>
+							<span>&diams;</span>
+						<% when 'spades' %>
+							<span>&spades;</span>
+						<% when 'hearts' %>
+							<span>&hearts;</span>
+						<% else %>
+							<span>&clubs;</span>
+						<% end %>						
+					</div>
+					<div class="t_m<%= card.rang.to_s + card.suite.to_s %>"></div>				
+				</div>
+			</li>
+		<% end %>
+	</ul>
+<%end%>

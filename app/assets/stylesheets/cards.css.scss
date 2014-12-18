@@ -49,9 +49,10 @@
 .defenceCards {
 	margin: -70px 0 0 0;
 }
-.defenceCards li {
+.defenceCards li, .defenceCards .playerModernCards, .defenceCards .t_playerModernCards, .defenceCards .t_modernDeck, .defenceCards .t_modernBack {
 	box-shadow: 0px -5px 3px -3px rgba(0, 0, 0, 0.6);
 }
+
 
 
 .playerCardsList, .tableCardsList {

@@ -38,6 +38,7 @@
 <div class='col-md-2 yieldcontent infopanel'>
 	<p>View Theme: <%= current_user.view_theme %>	
 	<p>Cards count: <%= current_user.player.cards_count %>	
+	<p>Cards in deck count: <%= @game.deck.deck_cards.count %>	
 	<p>Mover: <%= @game.mover %></p>
 	<p>Player ID: <%= current_user.player.id %></p>
 	<p>Player Game state: <%= current_user.player.game.state_name %></p>

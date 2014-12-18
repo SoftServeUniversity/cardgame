@@ -1,25 +1,5 @@
-<% if @game.table %>
-	<% hitCards = [] %>
-	<% @game.table.table_cards.each_index do |index| %>
-		<% if (index) % 2 == 0 %>
-			<% hitCards << @game.table.table_cards[index] %>
-		<% end %>
-	<% end %>
-	<% defenceCards = @game.table.table_cards - hitCards %>
-
-	<ul class="tableCardsList hitCards">
-		<% hitCards.each do |card| %>
-			<li>
-				<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
-			</li>
-		<% end %>
-	</ul>
-
-	<ul class="tableCardsList defenceCards">
-		<% defenceCards.each do |card| %>
-			<li>
-				<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
-			</li>
-		<% end %>
-	</ul>
-<%end%>
+<% if current_user.view_theme %>
+	<%= render "theme_#{current_user.view_theme.to_s.downcase}/#{current_user.view_theme.to_s.downcase}_table" %>
+<% else %>
+	<%= render "theme_classic/classic_table" %>
+<% end %>

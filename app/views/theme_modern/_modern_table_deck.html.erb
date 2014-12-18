@@ -1,0 +1,151 @@
+<% counter = @game.deck.deck_cards.count - @game.deck.cursor %>
+<% deckTrump = @game.deck.deck_cards[35] %>
+<% if counter > 2 %>
+	<ul class="tableCardsList hitCards">
+		<li>
+			<div class="t_playerModernCards">
+				<div class="mRang">							
+					<% case deckTrump.rang %>
+					<% when 0 %>
+						<span>6</span>
+					<% when 1 %>
+						<span>7</span>
+					<% when 2 %>
+						<span>8</span>
+					<% when 3 %>
+						<span>9</span>
+					<% when 4 %>
+						<span>10</span>
+					<% when 5 %>
+						<span>J</span>
+					<% when 6 %>
+						<span>Q</span>
+					<% when 7 %>
+						<span>K</span>
+					<% else %>
+						<span>A</span>
+					<% end %>						
+				</div>
+				<div class="mSuite">							
+					<% case deckTrump.suite %>
+					<% when 'diamonds' %>
+						<span>&diams;</span>
+					<% when 'spades' %>
+						<span>&spades;</span>
+					<% when 'hearts' %>
+						<span>&hearts;</span>
+					<% else %>
+						<span>&clubs;</span>
+					<% end %>						
+				</div>
+				<div class="t_m<%= deckTrump.rang.to_s + deckTrump.suite.to_s %>"></div>				
+			</div>
+		</li>
+	</ul>
+	<ul class="tableCardsList defenceCards">
+		<li>
+			<div class="t_playerModernDeck">
+				<div class="t_modernDeck"></div>	
+			</div>
+		</li>
+	</ul>
+
+
+<% elsif counter == 2 %>
+	<ul class="tableCardsList hitCards">
+		<li>
+			<div class="t_playerModernCards">
+				<div class="mRang">							
+					<% case deckTrump.rang %>
+					<% when 0 %>
+						<span>6</span>
+					<% when 1 %>
+						<span>7</span>
+					<% when 2 %>
+						<span>8</span>
+					<% when 3 %>
+						<span>9</span>
+					<% when 4 %>
+						<span>10</span>
+					<% when 5 %>
+						<span>J</span>
+					<% when 6 %>
+						<span>Q</span>
+					<% when 7 %>
+						<span>K</span>
+					<% else %>
+						<span>A</span>
+					<% end %>						
+				</div>
+				<div class="mSuite">							
+					<% case deckTrump.suite %>
+					<% when 'diamonds' %>
+						<span>&diams;</span>
+					<% when 'spades' %>
+						<span>&spades;</span>
+					<% when 'hearts' %>
+						<span>&hearts;</span>
+					<% else %>
+						<span>&clubs;</span>
+					<% end %>						
+				</div>
+				<div class="t_m<%= deckTrump.rang.to_s + deckTrump.suite.to_s %>"></div>				
+			</div>
+		</li>
+	</ul>
+	<ul class="tableCardsList defenceCards">
+		<li>
+			<div class="t_playerModernCards">
+				<div class="t_modernBack"></div>	
+			</div>
+		</li>
+	</ul>
+	
+<% elsif counter == 1 %>
+	<ul class="tableCardsList hitCards">
+		<li>
+			<div class="t_playerModernCards">
+				<div class="mRang">							
+					<% case deckTrump.rang %>
+					<% when 0 %>
+						<span>6</span>
+					<% when 1 %>
+						<span>7</span>
+					<% when 2 %>
+						<span>8</span>
+					<% when 3 %>
+						<span>9</span>
+					<% when 4 %>
+						<span>10</span>
+					<% when 5 %>
+						<span>J</span>
+					<% when 6 %>
+						<span>Q</span>
+					<% when 7 %>
+						<span>K</span>
+					<% else %>
+						<span>A</span>
+					<% end %>						
+				</div>
+				<div class="mSuite">							
+					<% case deckTrump.suite %>
+					<% when 'diamonds' %>
+						<span>&diams;</span>
+					<% when 'spades' %>
+						<span>&spades;</span>
+					<% when 'hearts' %>
+						<span>&hearts;</span>
+					<% else %>
+						<span>&clubs;</span>
+					<% end %>						
+				</div>
+				<div class="t_m<%= deckTrump.rang.to_s + deckTrump.suite.to_s %>"></div>				
+			</div>
+		</li>
+	</ul>
+<% else %>
+	<ul class="tableCardsList hitCards">
+		<li>
+		</li>
+	</ul>
+<% end %>
