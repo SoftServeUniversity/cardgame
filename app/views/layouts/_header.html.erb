@@ -8,16 +8,20 @@
 					</div>
 				<% end %>
 			</div>
-			<div class="col-xs-6 col-xs-offset-1">
+			<div class="col-xs-2">
+				<%= link_to 'Show Games', games_path , :class => "btn" %>
+			</div>
+			<div class="col-xs-4 col-xs-offset-1">
 				<% if user_signed_in? %>
 					<div class="navbar-right">
 						<div class='btn btn-success'>
-							<%= current_user.games_count %>
-							<%= current_user.win_count %>
-							<%= current_user.lose_count %>
-						<span class='btn btn-disabled'>Signed in as <b><%= current_user.username %></b></span>
-							<%= link_to 'Home', user_show_path(current_user), class: "btn" %>
-							<%= link_to 'statistics', statistic_path , class: "btn" %>
+						<span class='btn btn-disabled'>
+							Signed in as 
+							<%= link_to user_show_path(current_user) do %>
+								<b><%= current_user.username %></b>
+							<% end %>
+						</span>
+							<%= link_to 'Global Statistics', statistic_path , class: "btn" %>
 							<%= link_to 'Log out', destroy_user_session_path, :method => :delete, class: "btn" %>					
 							<%= link_to 'Edit', edit_user_registration_path, class: "btn" %>
 						</div>

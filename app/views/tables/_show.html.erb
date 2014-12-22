@@ -1,8 +1,14 @@
 <div class='col-md-10 yieldcontent'>
-	<% if current_user.view_theme.to_s.downcase %>
-		<% tableStyle = "table#{current_user.view_theme.to_s}" %>
+	<% if current_user %>	
+		<% if current_user.view_theme == nil %>
+			<% tableStyle = "tableClassic" %>
+		<% elsif current_user.view_theme %>
+			<% tableStyle = "table#{current_user.view_theme.to_s}" %>
+		<% else %>
+			<% tableStyle = "tableClassic" %>
+		<% end %>
 	<% else %>
-		<% tableStyle = "tableClassic" %>
+			<% tableStyle = "tableClassic" %>
 	<% end %>
 
 	<div class="row <%= "#{tableStyle}" %> ">
@@ -42,15 +48,19 @@
 	</div>
 </div>
 <div class='col-md-2 yieldcontent infopanel'>
-	<p>View Theme: <%= current_user.view_theme %>	
-	<p>Cards count: <%= current_user.player.cards_count %>	
-	<p>Cards in deck count: <%= @game.deck.deck_cards.count %>	
-	<p>Mover: <%= @game.mover %></p>
-	<p>Player ID: <%= current_user.player.id %></p>
-	<p>Player Game state: <%= current_user.player.game.state_name %></p>
-	<p>Attacker: <%= @game.attacker %></p>
-	<p>Defender: <%= @game.defender %></p>
+	<% if current_user %>
+		<p>View Theme: <%= current_user.view_theme %>	
+		<p>Cards count: <%= current_user.player.cards_count %>	
+		<p>Player ID: <%= current_user.player.id %></p>
+		<p>Player Game state: <%= current_user.player.game.state_name %></p>
+	<% end %>
+	<% if @game %>
+		<p>Mover: <%= @game.mover %></p>
+		<p>Attacker: <%= @game.attacker %></p>
+		<p>Defender: <%= @game.defender %></p>
+	<% end %>
 	<% if @game.deck %>
+		<p>Cards in deck count: <%= @game.deck.deck_cards.count %>	
 		<p>Trump: <%= @game.deck.trump %></p>
 		<p>Deck cards count : <%= 36 - @game.deck.cursor %></p>
 	<% end %>

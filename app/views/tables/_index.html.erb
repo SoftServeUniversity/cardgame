@@ -6,14 +6,14 @@
             <% end %>
         </div>
         <% if @games.count > 0 %>
-            <div id = "card_games">
-            <h2 class="text-center">Games</h2>
-                <%= render 'games' %>
+            <div id = "card_games" class="tablePad">
+              <h2 class="text-center">Games</h2>
+              <%= render 'games' %>
             </div>
         <% else %>
-            <div id = "card_games">
-            <h2 class="text-center">Nobody plays(</h2>
-                <%= render 'games' %>
+            <div id = "card_games" class="tablePad">
+              <h2 class="text-center">Nobody plays(</h2>
+              <%= render 'games' %>
             </div>
         <% end %>
     </div>

@@ -1,13 +1,37 @@
-<h1>Welcome, <%= current_user.username %>!</h1>
+<div class='col-md-12 yieldcontent'>
+    <div class="row">
+    	<div class="jumbotron jumboart text-center">
+    		<%= link_to user_edit_path do %>
+    			<% if current_user.username %>
+					<h2> <%= current_user.username %> </h2>
+				<% else %>
+					<h2> <%= current_user.email %> </h2>
+				<% end %>
+			<% end %>
 
-<%= current_user.email %>
-<br />
-<%= current_user.games_count %>
-<%= current_user.win_count %>
-<%= current_user.lose_count %>
-<br />
-<%= current_user.view_theme %>
-
-
-<%= link_to 'Edit Profile', user_edit_path , :class => "btn btn-danger" %>
-<%= link_to 'Back', games_path , :class => "btn btn-danger" %>
+			<%= link_to edit_user_registration_path do %>
+    			<div>Edit Profile</div>
+			<% end %>
+		</div>
+		
+		<div class="tablePad">	
+			<h2 class="text-center">Your Statistics</h2>
+			<table class="table gamestable">
+   				<thead>
+   				    <tr>
+   				    	<th class="col-xs-4">Games Played</th>
+   				    	<th class="col-xs-4">Wins</th>
+   				    	<th class="col-xs-4">Loses</th>
+					</tr>
+   				</thead>
+   				<tbody>
+   					<tr>
+						<td class="col-xs-4"><%= current_user.games_count %></td>
+						<td class="col-xs-4"><%= current_user.win_count %></td>
+						<td class="col-xs-4"><%= current_user.lose_count %></td>
+   					</tr>
+   				</tbody>
+   			</table>
+   		</div>		
+	</div>
+</div>
