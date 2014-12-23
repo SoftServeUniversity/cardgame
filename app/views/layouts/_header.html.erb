@@ -1,36 +1,40 @@
-<div class="navbar navbar-inverse mainHeader">
-	<div class="container">
-			<div class="">
-				<%= link_to root_path do %>
-					<div class="logo">
-						<%= image_tag("logo.gif",:width => 45) %> <span class="">Dooraque</span>
-					</div>
-				<% end %>
-			
-				<ul class="nav navbar-nav">
-					<li><%= link_to 'Show Games', games_path , :class => "" %></li>
-					<li><%= link_to 'Global Statistics', statistic_path , class: "" %></li>
+<div class="mainHeader">
+	<div class="leftHeader">	
+		<div class="headerLogo">
+			<%= link_to root_path do %>
+				<%= image_tag("logo.gif",:width => 45) %> <span class="">Dooraque</span>
+			<% end %>
+		</div>
+		
+		
+			<ul class="headerMenu">
+				<li><%= link_to 'Show Games', games_path , :class => "" %></li>
+				<li><%= link_to 'Global Statistics', statistic_path , class: "" %></li>
+			</ul>
+	</div>
+
+	<div class="rightHeader">
+		<% if user_signed_in? %>
+			<div class="headerUserBar">
+				<ul class="">
+					<li>
+						<%= link_to user_show_path(current_user) do %>
+							<b><%= current_user.username %></b>
+						<% end %>
+					</li>	
+					<li><%= link_to 'Log out', destroy_user_session_path, :method => :delete, class: "" %></li>		
+					<li><%= link_to 'Edit', edit_user_registration_path, class: "" %></li>
 				</ul>
 			</div>
-			<div class="navbar-header pull-right">
-				<% if user_signed_in? %>
-					<ul class="nav navbar-nav">
-						<li>
-							<%= link_to user_show_path(current_user) do %>
-								<b><%= current_user.username %></b>
-							<% end %>
-						</li>	
-						<li><%= link_to 'Log out', destroy_user_session_path, :method => :delete, class: "" %></li>		
-						<li><%= link_to 'Edit', edit_user_registration_path, class: "" %></li>
-					</ul>
-				<% else %>
-  					<%= form_for(:user, :url => session_path(:user), :html => {:class => "form-inline"}) do |f| %>
-						<%= f.text_field :email, :placeholder => "Email or Username", class: "form-control" %>
-						<%= f.password_field :password, :placeholder => "Password", class: "form-control" %>
-						<%= f.submit 'Log in', class: "btn btn-success" %>
-						<%= link_to 'Sign up', new_user_registration_path, class: "" %>
-					<% end %>
+		<% else %>
+			<div class="headerFormWarp">
+ 					<%= form_for(:user, :url => session_path(:user), :html => {:class => "headerForm"}) do |f| %>
+					<%= f.text_field :email, :placeholder => "Email or Username", class: "" %>
+					<%= f.password_field :password, :placeholder => "Password", class: "" %>
+					<%= f.submit 'Log in', class: "btn btn-success" %>
+					<%= link_to 'Sign up', new_user_registration_path, class: "" %>
 				<% end %>
 			</div>
+		<% end %>
 	</div>
 </div>
