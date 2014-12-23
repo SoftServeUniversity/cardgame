@@ -1,42 +1,36 @@
-<div class="navbar navbar-top navbar-inverse">
+<div class="navbar navbar-inverse mainHeader">
 	<div class="container">
-		<div class="row">
-			<div class="col-xs-5 headLogo">
+			<div class="">
 				<%= link_to root_path do %>
 					<div class="logo">
 						<%= image_tag("logo.gif",:width => 45) %> <span class="">Dooraque</span>
 					</div>
 				<% end %>
+			
+				<ul class="nav navbar-nav">
+					<li><%= link_to 'Show Games', games_path , :class => "" %></li>
+					<li><%= link_to 'Global Statistics', statistic_path , class: "" %></li>
+				</ul>
 			</div>
-			<div class="col-xs-2">
-				<%= link_to 'Show Games', games_path , :class => "btn" %>
-			</div>
-			<div class="col-xs-4 col-xs-offset-1">
+			<div class="navbar-header pull-right">
 				<% if user_signed_in? %>
-					<div class="navbar-right">
-						<div class='btn btn-success'>
-						<span class='btn btn-disabled'>
-							Signed in as 
+					<ul class="nav navbar-nav">
+						<li>
 							<%= link_to user_show_path(current_user) do %>
 								<b><%= current_user.username %></b>
 							<% end %>
-						</span>
-							<%= link_to 'Global Statistics', statistic_path , class: "btn" %>
-							<%= link_to 'Log out', destroy_user_session_path, :method => :delete, class: "btn" %>					
-							<%= link_to 'Edit', edit_user_registration_path, class: "btn" %>
-						</div>
-					</div>
+						</li>	
+						<li><%= link_to 'Log out', destroy_user_session_path, :method => :delete, class: "" %></li>		
+						<li><%= link_to 'Edit', edit_user_registration_path, class: "" %></li>
+					</ul>
 				<% else %>
-					<div class='form-group'>
-  					<%= form_for(:user, :url => session_path(:user), :html => {:class => "navbar-form navbar-right"}) do |f| %>
+  					<%= form_for(:user, :url => session_path(:user), :html => {:class => "form-inline"}) do |f| %>
 						<%= f.text_field :email, :placeholder => "Email or Username", class: "form-control" %>
 						<%= f.password_field :password, :placeholder => "Password", class: "form-control" %>
 						<%= f.submit 'Log in', class: "btn btn-success" %>
-						<%= link_to 'Sign up', new_user_registration_path, class: "btn btn-danger " %>
+						<%= link_to 'Sign up', new_user_registration_path, class: "" %>
 					<% end %>
-					</div>
 				<% end %>
-			</div> 
-		</div> 
+			</div>
 	</div>
 </div>
