@@ -96,9 +96,11 @@ class Game < ActiveRecord::Base
   def do_break_turn breaker
     puts "////////////////Doing breaking turn"
     self.table.table_cards.each do |card|
-      puts card.suite
-      puts card.rang
-      self.players[breaker].add_card card
+      if(card)
+        puts card.suite
+        puts card.rang
+        self.players[breaker].add_card card
+      end
     end
     self.table.clear
 

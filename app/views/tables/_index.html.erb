@@ -1,9 +1,17 @@
 <div class='col-md-12 yieldcontent'>
     <div class="row">
         <div class="jumbotron jumboart text-center">
-            <%= link_to new_game_path do%>
+          <% if current_user %>
+            <% if current_user.player%>
+              <%= link_to my_game_url(:id => current_user.player.game.id) do%>
+                <h2 class="text-center">MY GAME</h2>
+              <% end %>
+            <% else %>
+              <%= link_to new_game_path do%>
                 <h2 class="text-center">NEW GAME</h2>
+              <% end %>
             <% end %>
+          <% end %>
         </div>
         <% if @games.count > 0 %>
             <div id = "card_games">

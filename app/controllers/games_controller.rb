@@ -16,6 +16,9 @@ class GamesController < ApplicationController
       redirect_to games_path
     end
   end
+  def my_game
+    redirect_to games_path
+  end
 
   def reload
   end
@@ -99,10 +102,7 @@ class GamesController < ApplicationController
     if !@game
         redirect_to games_path
     end
-    puts"_______________________________________Controller Action End Game"
-    puts"_______________________________________outside"
     if @game.players[1]
-      puts"_______________________________________intside player exist"
       @user1 = User.find @game.players[0].user_id
       @user2 = User.find @game.players[1].user_id
 
@@ -110,7 +110,7 @@ class GamesController < ApplicationController
       @user2.games_count += 1
 
       if @game.winner
-        puts"_______________________________________inside is winner"
+
         if @user1 == @game.winner
           @user1.win_count += 1
           @user2.lose_count += 1
@@ -119,7 +119,6 @@ class GamesController < ApplicationController
           @user1.lose_count += 1
         end
       else
-        puts"_______________________________________intside button pressed"
         if current_user == @user1
           @user2.win_count += 1
           @user1.lose_count += 1
