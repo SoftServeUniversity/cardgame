@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  table_cards: MyText
+  game_id: 1
+  cards_count: 1
+
+two:
+  table_cards: MyText
+  game_id: 1
+  cards_count: 1

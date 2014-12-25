@@ -1,0 +1,36 @@
+	<% counter = 36 - @game.deck.cursor %>
+	<% deckTrump = @game.deck.deck_cards[35] %>
+	<% if counter > 2 %>
+		<ul class="tableCardsList hitCards">	
+			<li>
+				<%= image_tag("#{deckTrump.rang}#{deckTrump.suite}.png", class: "deckCards") %>
+			</li>
+		</ul>
+		<ul class="tableCardsList defenceCards">
+			<li>
+				<%= image_tag("deck.png", class: "deckCards") %>
+			</li>
+		</ul>
+	<% elsif counter == 2 %>
+		<ul class="tableCardsList hitCards">
+			<li>
+				<%= image_tag("#{deckTrump.rang}#{deckTrump.suite}.png", class: "deckCards") %>
+			</li>
+		</ul>
+		<ul class="tableCardsList defenceCards">
+			<li>
+				<%= image_tag("back.png", class: "deckCards") %>
+			</li>
+		</ul>
+	<% elsif counter == 1 %>
+		<ul class="tableCardsList hitCards">
+			<li>
+				<%= image_tag("#{deckTrump.rang}#{deckTrump.suite}.png", class: "deckCards") %>
+			</li>
+		</ul>
+	<% else %>
+		<ul class="tableCardsList hitCards">
+			<li>
+			</li>
+		</ul>
+	<% end %>

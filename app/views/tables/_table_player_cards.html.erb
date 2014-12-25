@@ -1,0 +1,11 @@
+<ul class="playerCardsList">
+	<% if current_user.player %>
+		<% current_user.player.player_cards.each do |card| %>
+			<li>
+				<%= link_to put_card_url(:suite => card.suite, :rang => card.rang), remote: true , :method => :post do %>
+				  <%= image_tag("#{card.rang}#{card.suite}.png", class: "playerCards") %>
+				<% end %>
+			</li>				
+		<% end %>	
+	<% end %>
+</ul>

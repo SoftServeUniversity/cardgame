@@ -1,0 +1,34 @@
+.maincontent {
+	border-radius: 4px;
+}
+
+.infopanel {
+	background-color: #E7E7E7;
+}
+
+.logo {
+	float: left;
+	color: white;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 35px;
+	vertical-align: middle;
+}
+
+a.btn{
+	color: black;
+}
+a.btn:hover {
+	color: #5cb85c !important;
+}
+
+.fblinks {
+	/*float: left;*/
+	margin: 0 50px 0 0;
+	display: inline-block;
+}
+
+.centertext {
+	text-align: center;
+}
+
