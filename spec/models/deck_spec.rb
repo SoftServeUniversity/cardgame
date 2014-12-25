@@ -2,11 +2,14 @@ require 'rails_helper'
 
 describe Deck do
   before(:example) do
-  	@deck = Deck.new
+  	@deck = create(:deck)
   	@deck.init_cards
   end
   it "should build array of cards" do
   	expect(@deck.deck_cards.length).to eq(36)
+    @deck.deck_cards.each do |card|
+      expect(card).to be_kind_of(Card)
+    end
   end
 
   it "should find trump" do
@@ -17,7 +20,7 @@ describe Deck do
   	@deck.get_one
   	expect(@deck.cursor).to eq(1)
   	output = capture(:stdout) do
-      answer = Deck.new
+      answer = create(:deck)
       answer.init_cards
       answer.cursor = 36
       answer.get_one
@@ -26,14 +29,14 @@ describe Deck do
   end
 
   it "should be able to shuffle in init" do
-  	@deck2 = Deck.new
+  	@deck2 = create(:deck)
   	@deck2.init_cards
   	expect(@deck.deck_cards[35]).to_not eq(@deck2.deck_cards[35])
   	expect(@deck.deck_cards[0]).to_not eq(@deck2.deck_cards[0])
   end
 
   it "should init card iteration in init" do
-  	@deck3 = Deck.new
+  	@deck3 = create(:deck)
   	temp = Card.new('diamonds', 5)
   	@deck3.init_card_iteration 5
   	expect(@deck3.deck_cards[2].rang).to eq(temp.rang)

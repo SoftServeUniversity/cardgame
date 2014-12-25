@@ -9,25 +9,49 @@ describe Game do
     @user2 = User.new(:email => "kochun@gmail.com",:password => "12qwaszx", :id => 7)
   end
 
-  describe Game, "init_state" do
-  	it "should switch states" do
+  describe  "init_state" do
+  	it "should switch to NewGame" do
   		expect(@game.state_name).to eq("NewGame")
   		@game.init_player @user
   		expect(@game.state_name).to eq("ExpectationOfSecondPlayer")
   		@game.init_player @user2
   		expect(@game.state_name).to eq("GamePrepare")
   	end
+
+    it "should switch to ExpectationOfSecondPlayer" do
+      @game.init_player @user
+      expect(@game.state_name).to eq("ExpectationOfSecondPlayer")
+    end
+
+    it "should switch to GamePrepare" do
+      @game.init_player @user
+      @game.init_player @user2
+      expect(@game.state_name).to eq("GamePrepare")    
+    end
+
+    it "should switch to another player's move" do
+      @game.init_player @user
+      @game.init_player @user2
+      @game.prepare_game_to_start
+      if @game.attacker.user_id == @game.players[0].user_id
+        expect(@game.state_name).to eq("MoveOfFirstPlayer")
+      else
+        expect(@game.state_name).to eq("MoveOfSecondPlayer")
+      end
+    end
   end
 
-  describe Game, "set_game_state" do
+  describe "set_game_state" do
   	it "should set states" do
   		@game.set_game_state(ExpectationOfSecondPlayer.new @game)
   		expect(@game.state_name).to eq("ExpectationOfSecondPlayer")
-  		@game.set_game_state(EndOfGame.new @game)
+#
+  		@game.set_game_state(BreakTurn.new @game)
+      expect(@game.state_name).to eq("BreakTurn")
   	end
   end
 
-  describe Game, "do_init_first_player" do
+  describe  "do_init_first_player" do
   	it "should init_first player" do
   		@game.do_init_first_player @user
   		expect(@game.players[0].user_id).to eq(@user.id)
@@ -48,13 +72,13 @@ describe Game do
   	@game.do_preparation_for_game
   end
 
-  describe Game, "do_init_second_player" do
+  describe  "do_init_second_player" do
   	it "should init_second player" do
   		expect(@game.players[1].user_id).to eq(@user2.id)
   	end
   end
 
-  describe Game, "do_preparation_for_game" do
+  describe "do_preparation_for_game" do
   	it "should prepare game" do
   		expect(@game.table).to_not eq(nil)
   		expect(@game.deck).to_not eq(nil)
@@ -62,14 +86,14 @@ describe Game do
   	end
   end
 
-  describe Game, "do_get_card_from_player" do
+  describe "do_get_card_from_player" do
   	it "should get card from player" do
-  		@game.table.add_card(@card, @user.id)
+  		@game.table.add_card(@card, @game.players[0], @game.players[0])
   		expect(@game.table.table_cards[0]).to eq(@card)
   	end
   end
 
-  describe Game, "do_end_turn" do
+  describe  "do_end_turn" do
   	before(:example) do
   	  @att = @game.attacker
   	  expect(@att).to eq(@game.mover)
@@ -85,10 +109,10 @@ describe Game do
   	end
   end
 
-  describe Game, "do_break_turn" do
+  describe "do_break_turn" do
   	before(:example) do
   	  @card = @game.players[0].player_cards[2]
-  	  @game.table.add_card(@card, @user.id)
+  	  @game.table.add_card(@card, @game.players[0], @game.players[0])
   	  @game.do_break_turn 1
   	end
 #
@@ -118,7 +142,7 @@ describe Game do
     @game.deck.init_cards
   end
 
-  describe Game, "init_players_cards" do
+  describe "init_players_cards" do
     before(:example) do
       expect(@game.players[0].player_cards).to eq([])
       expect(@game.players[1].player_cards).to eq([])
@@ -131,7 +155,7 @@ describe Game do
     end
   end
 
-  describe Game, "set_attacker" do
+  describe "set_attacker" do
     before(:example) do
       @game.set_attacker
       @first_min = @game.find_smallest_trump @game.players[0]
@@ -140,18 +164,18 @@ describe Game do
 #
     it "should set attacker" do
       if (@first_min != nil) && (@second_min == nil)
-        expect(@game.attacker).to eq(@game.players[0].id)
+        expect(@game.attacker).to eq(@game.players[0])
       elsif (@first_min == nil) && (@second_min != nil)
-        expect(@game.attacker).to eq(@game.players[1].id)
+        expect(@game.attacker).to eq(@game.players[1])
       elsif @first_min.rang < @second_min.rang
-        expect(@game.attacker).to eq(@game.players[0].id)
+        expect(@game.attacker).to eq(@game.players[0])
       else
-        expect(@game.attacker).to eq(@game.players[1].id)
+        expect(@game.attacker).to eq(@game.players[1])
       end
     end
   end
 
-  describe Game, "find_smallest_trump" do
+  describe "find_smallest_trump" do
     before(:example) do
       @game.init_players_cards
       @trump1 = @game.find_smallest_trump(@game.players[0])
@@ -159,8 +183,6 @@ describe Game do
       @game2 = Game.new
       @game2.init
       @game2.init_state
-      @user = User.new(:email => "kichun@gmail.com",:password => "12qwaszx", :id => 5)
-      @user2 = User.new(:email => "kychun@gmail.com",:password => "12qwaszx", :id => 4)
       @game2.do_init_first_player @user
       @game2.do_init_first_player @user2
       @game2.deck = Deck.create({:game => @game2})
@@ -173,8 +195,12 @@ describe Game do
 #
     it "should find smallest trump" do
       expect(@trump3.rang).to eq(1)
-      expect(@trump1.suite).to eq(@game.deck.trump)
-      expect(@trump2.suite).to eq(@game.deck.trump)
+      if @trump1 
+        expect(@trump1.suite).to eq(@game.deck.trump)
+      end
+      if @trump2
+        expect(@trump2.suite).to eq(@game.deck.trump)
+      end
     end
   end
 
