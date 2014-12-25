@@ -142,6 +142,8 @@ class Game < ActiveRecord::Base
   end
 
   def init_players_cards
+    self.players[0].clear
+    self.players[1].clear
     6.times do
       self.players[0].add_card (deck.get_one)
       self.players[1].add_card (deck.get_one)

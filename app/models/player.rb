@@ -46,4 +46,7 @@ def delete_card player_card
     self.player_cards.push new_card
     self.cards_count  += 1
   end
+  def clear
+    self.player_cards = []
+  end
 end

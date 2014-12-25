@@ -17,7 +17,7 @@ class MoveOfFirstPlayer < GameState
       else
         current_player = @game.players[1]
       end
-
+      puts "Access granted"
       if @game.do_get_card_from_player _card, _player, _attacker
         current_player.delete_card _card
         @game.set_game_state(MoveOfSecondPlayer.new @game)
