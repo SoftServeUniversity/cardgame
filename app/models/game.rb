@@ -151,9 +151,7 @@ class Game < ActiveRecord::Base
         end
       end
     end
-
   end
-
 
   def do_get_card_from_player _card, _player, _attacker
     puts "Doing getting card from player"
@@ -171,7 +169,7 @@ class Game < ActiveRecord::Base
   def do_break_turn breaker
     puts "////////////////Doing breaking turn"
     self.table.table_cards.each do |card|
-      if card != nil
+      if card
         self.players[breaker].add_card card
       end
     end
@@ -179,7 +177,7 @@ class Game < ActiveRecord::Base
 
     init_new_turn
   end
-  
+
   def set_attacker
     init_players_cards
 

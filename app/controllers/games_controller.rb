@@ -17,6 +17,10 @@ class GamesController < ApplicationController
     end
   end
 
+  def my_game
+    redirect_to games_path
+  end
+
   def reload
   end
 
@@ -109,6 +113,7 @@ class GamesController < ApplicationController
 
       if @game.winner
         puts"_______________________________________inside is winner"
+
         if @user1 == @game.winner
           @user1.win_count += 1
           @user2.lose_count += 1
