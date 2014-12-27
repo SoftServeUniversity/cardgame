@@ -17,6 +17,10 @@ class GamesController < ApplicationController
     end
   end
 
+  def my_game
+    redirect_to games_path
+  end
+
   def reload
   end
 
@@ -26,9 +30,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new game_params
-    @game.init
-    @game.init_state
-    @game.init_player self.current_user
+    @game.do_init_first_player self.current_user
     @game.players[0].save
     @game.save
     respond_to do |format|
@@ -43,9 +45,9 @@ class GamesController < ApplicationController
   end
 
   def update
-    @game.init_player self.current_user
+    @game.do_init_second_player self.current_user
     @game.players[1].save
-    @game.prepare_game_to_start
+    @game.do_preparation_for_game
     save_game @game
     respond_to do |format|
         format.html { redirect_to @game }
@@ -111,6 +113,7 @@ class GamesController < ApplicationController
 
       if @game.winner
         puts"_______________________________________inside is winner"
+
         if @user1 == @game.winner
           @user1.win_count += 1
           @user2.lose_count += 1
@@ -140,7 +143,6 @@ class GamesController < ApplicationController
   private
   def set_game
     @game = Game.find(params[:id])
-    @game.init_state
   rescue
     @game = nil
   end

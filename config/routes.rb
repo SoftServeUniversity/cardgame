@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'users' , :controller => 'users', :action => 'statistic',  :as => 'statistic'
 
+  get 'games/:id/my_game', :controller => 'games', :action => 'show', :as => 'my_game'
+  
   post 'games/:id/put_card', :controller => 'games', :action => 'put_card', :as => 'put_card'
   post 'games/:id/end_turn', :controller => 'games', :action => 'end_turn', :as => 'end_turn'
   post 'games/:id/end_game', :controller => 'games', :action => 'end_game', :as => 'end_game'

@@ -1,7 +1,7 @@
 class CreateGames < ActiveRecord::Migration
   def change
     create_table :games do |t|
-      t.string :state_name
+      t.string :state
       t.string :winner
       t.string :loser
       t.string :attacker
