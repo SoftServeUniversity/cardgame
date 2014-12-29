@@ -37,7 +37,7 @@ describe Deck do
 
   it "should init card iteration in init" do
   	@deck3 = create(:deck)
-  	temp = Card.new('diamonds', 5)
+  	temp = build(:card, suite:"diamonds", rang: 5)
   	@deck3.init_card_iteration 5
   	expect(@deck3.deck_cards[2].rang).to eq(temp.rang)
   	expect(@deck3.deck_cards[2].suite).to eq(temp.suite)

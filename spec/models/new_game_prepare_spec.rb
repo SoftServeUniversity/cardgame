@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-describe NewGame do
+describe :new_game do
   before(:example) do
-  	@game = Game.new
-    @user = User.new(:email => "kichun@gmail.com",:password => "12qwaszx", :id => 5)
+  	@game = create(:game)
+    @user = create(:user)
   end
 
   it "should initialize player" do
   	@game.do_init_first_player @user
+  	expect(@game.players[0]).to be_kind_of(Player)
   	expect(@game.players[0].user_id).to eq(@user.id)
-	  @game.set_game_state(ExpectationOfSecondPlayer.new @game)
-	  expect(@game.state_name).to eq("ExpectationOfSecondPlayer")
+	  expect(@game.state).to eq("expactation_second_player")
   end
 end

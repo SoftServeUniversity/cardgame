@@ -80,7 +80,7 @@ class Game < ActiveRecord::Base
 
           if self.do_get_card_from_player _card, _player, _attacker
             current_player.delete_card _card
-
+            puts "Access granted"
             if self.move_of_first_player?
               self.second_player_move
               self.mover = self.players[1]

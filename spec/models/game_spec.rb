@@ -2,53 +2,41 @@ require 'rails_helper'
 
 describe Game do
   before(:example) do
-  	@game = Game.new
-  	@game.init
-  	@game.init_state
-  	@user = User.new(:email => "kichun@gmail.com",:password => "12qwaszx", :id => 5)
-    @user2 = User.new(:email => "kochun@gmail.com",:password => "12qwaszx", :id => 7)
+  	@game = create(:game)
+    @user = create(:user)
+    @user2 = create(:user)
   end
 
   describe  "init_state" do
   	it "should switch to NewGame" do
-  		expect(@game.state_name).to eq("NewGame")
-  		@game.init_player @user
-  		expect(@game.state_name).to eq("ExpectationOfSecondPlayer")
-  		@game.init_player @user2
-  		expect(@game.state_name).to eq("GamePrepare")
+  		expect(@game.state).to eq("new_game")
+  		@game.do_init_first_player @user
+  		expect(@game.state).to eq("expactation_second_player")
+  		@game.do_init_second_player @user2
+  		expect(@game.state).to eq("game_prepare")
   	end
 
     it "should switch to ExpectationOfSecondPlayer" do
-      @game.init_player @user
-      expect(@game.state_name).to eq("ExpectationOfSecondPlayer")
+      @game.do_init_first_player @user
+      expect(@game.state).to eq("expactation_second_player")
     end
 
     it "should switch to GamePrepare" do
-      @game.init_player @user
-      @game.init_player @user2
-      expect(@game.state_name).to eq("GamePrepare")    
+      @game.do_init_first_player @user
+      @game.do_init_second_player @user2
+      expect(@game.state).to eq("game_prepare")    
     end
 
     it "should switch to another player's move" do
-      @game.init_player @user
-      @game.init_player @user2
-      @game.prepare_game_to_start
+      @game.do_init_first_player @user
+      @game.do_init_second_player @user2
+      @game.do_preparation_for_game
       if @game.attacker.user_id == @game.players[0].user_id
-        expect(@game.state_name).to eq("MoveOfFirstPlayer")
+        expect(@game.state).to eq("move_of_first_player")
       else
-        expect(@game.state_name).to eq("MoveOfSecondPlayer")
+        expect(@game.state).to eq("move_of_second_player")
       end
     end
-  end
-
-  describe "set_game_state" do
-  	it "should set states" do
-  		@game.set_game_state(ExpectationOfSecondPlayer.new @game)
-  		expect(@game.state_name).to eq("ExpectationOfSecondPlayer")
-#
-  		@game.set_game_state(BreakTurn.new @game)
-      expect(@game.state_name).to eq("BreakTurn")
-  	end
   end
 
   describe  "do_init_first_player" do
@@ -61,14 +49,12 @@ end
 
 describe Game do
   before(:example) do
-  	@game = Game.new
-  	@game.init
-  	@game.init_state
-  	@user = User.new(:email => "kichun@gmail.com",:password => "12qwaszx", :id => 5)
-    @user2 = User.new(:email => "kochun@gmail.com",:password => "12qwaszx", :id => 7)
+  	@game = create(:game)
+    @user = create(:user)
+    @user2 = create(:user)
     @game.do_init_first_player @user
   	@game.do_init_second_player @user2
-  	@card = Card.new("hearts", 4)
+  	@card = build(:card)
   	@game.do_preparation_for_game
   end
 
@@ -129,16 +115,14 @@ end
 
 describe Game do
   before(:example) do
-    @game = Game.new
-    @game.init
-    @game.init_state
-    @user = User.new(:email => "kichun@gmail.com",:password => "12qwaszx", :id => 5)
-    @user2 = User.new(:email => "kochun@gmail.com",:password => "12qwaszx", :id => 7)
+    @game = create(:game)
+    @user = create(:user)
+    @user2 = create(:user)
     @game.do_init_first_player @user
     @game.do_init_second_player @user2
-    @card = Card.new("hearts", 4)
-    @game.table = Table.create({:game => @game, :cards_count => 0})
-    @game.deck = Deck.create({:game => @game})
+    @card = build(:card)
+    @game.table = create(:table)
+    @game.deck = create(:deck)
     @game.deck.init_cards
   end
 
@@ -151,7 +135,13 @@ describe Game do
 #
     it "should give 6 cards to each player" do
       expect(@game.players[0].player_cards.length).to eq(6)
+      @game.players[0].player_cards.each do |card|
+        expect(card).to be_kind_of(Card)
+      end  
       expect(@game.players[1].player_cards.length).to eq(6)
+      @game.players[1].player_cards.each do |card|
+        expect(card).to be_kind_of(Card)
+      end
     end
   end
 
@@ -180,16 +170,14 @@ describe Game do
       @game.init_players_cards
       @trump1 = @game.find_smallest_trump(@game.players[0])
       @trump2 = @game.find_smallest_trump(@game.players[1])
-      @game2 = Game.new
-      @game2.init
-      @game2.init_state
+      @game2 = create(:game)
       @game2.do_init_first_player @user
-      @game2.do_init_first_player @user2
-      @game2.deck = Deck.create({:game => @game2})
-      @game2.players[0].player_cards[0] = Card.new("#{@game2.deck.trump}", 4)
-      @game2.players[0].player_cards[1] = Card.new("#{@game2.deck.trump}", 1)
-      @game2.players[0].player_cards[2] = Card.new("#{@game2.deck.trump}", 3)
-      @game2.players[0].player_cards[3] = Card.new("#{@game2.deck.trump}", 5)
+      @game2.do_init_second_player @user2
+      @game2.deck = create(:deck)
+      @game2.players[0].player_cards[0] = build(:card, suite:"#{@game2.deck.trump}", rang: 4)
+      @game2.players[0].player_cards[1] = build(:card, suite:"#{@game2.deck.trump}", rang: 1)
+      @game2.players[0].player_cards[2] = build(:card, suite:"#{@game2.deck.trump}", rang: 3)
+      @game2.players[0].player_cards[3] = build(:card, suite:"#{@game2.deck.trump}", rang: 5)
       @trump3 = @game2.find_smallest_trump @game2.players[0]
     end
 #
