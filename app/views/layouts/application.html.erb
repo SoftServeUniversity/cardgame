@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="MyApp">
 	<head>
-  	<title>NewCardGame</title>
-  		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  		<%= yield :index %>
-  		<%= yield :show %>
-  		<%= csrf_meta_tags %>
+  	<title>Angular + Rails CardGame</title>
+		<%= stylesheet_link_tag    "application", media: "all" %>
+  	<%= javascript_include_tag "application" %>
 	</head>
-
-
 	<body>
-		
 		<%= render 'layouts/header' %>
 
 		<div class='container'>
@@ -21,7 +15,5 @@
 		</div>
 		
 		<%= render 'layouts/footer' %>
-		
 	</body>
-
 </html>

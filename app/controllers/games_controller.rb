@@ -8,6 +8,7 @@ class GamesController < ApplicationController
     respond_to do |format|
       format.html { render action: 'index' }
       format.js {render :action=>"index.js.erb"}
+      format.json {render json: @games}
     end
   end
 

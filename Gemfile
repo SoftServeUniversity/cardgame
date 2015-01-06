@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
@@ -26,6 +26,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 
 gem 'carrierwave'
+
+gem 'angularjs-rails'
+
+gem 'angular_rails_csrf'
 
 gem 'will_paginate'
 # bundle exec rake doc:rails generates the API under doc/api.

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users, :path_prefix => 'my'
+  get 'main/index'
+
+  devise_for :users
   
   get 'users/:id' , :controller => 'users', :action => 'show',  :as => 'user_show'
   get 'users/:id/edit' , :controller => 'users', :action => 'edit',  :as => 'user_edit'
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
 
   get 'games/:id', :controller => 'games', :action => 'refresh_show', :as => 'refresh_show'
 
-  root 'games#index'
+  root 'main#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
