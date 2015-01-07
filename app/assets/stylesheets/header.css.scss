@@ -1,4 +1,12 @@
-.mainHeader {
+.navbar-brand > img {
+	display: inline-block !important;	
+}
+
+.navbar-form {
+	margin-right: 0 !important;
+}
+
+/*.mainHeader {
 	height: 80px;
 	min-width: 680px;
 	width: 100%;
@@ -18,7 +26,7 @@
 }
 
 .logo {
-	/*float: left;*/
+	float: left;
 	color: white;
 	font-weight: bold;
 	font-style: italic;
@@ -30,7 +38,7 @@
 	display: inline-block;
 	list-style-type: none;
 }
-
+ 
 .leftHeader {
 	display: inline-block;		
 	vertical-align: middle;
@@ -43,4 +51,4 @@
 	vertical-align: middle;
 	float: right;
 	width: 50%;
-}
+}*/
