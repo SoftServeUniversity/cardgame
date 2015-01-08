@@ -30,17 +30,21 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new game_params
-    @game.do_init_first_player self.current_user
-    @game.players[0].save
-    @game.save
-    respond_to do |format|
-      if @game.save
-        format.html { redirect_to @game, notice: 'Card game was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @game }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
+    if @game.valid?
+        @game.do_init_first_player self.current_user
+        @game.players[0].save
+        @game.save
+        respond_to do |format|
+          if @game.save
+            format.html { redirect_to @game, notice: 'Card game was successfully created.' }
+            format.json { render action: 'show', status: :created, location: @game }
+          else
+            format.html { render action: 'new' }
+            format.json { render json: @game.errors, status: :unprocessable_entity }
+          end
+        end
+    else
+      redirect_to new_game_path , notice: 'You should give your game some name.'
     end
   end
 

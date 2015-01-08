@@ -44,7 +44,7 @@
 		<p>Defender: <%= @game.defender.user.username %></p>
 	<% end %>
 	<p>Player ID: <%= current_user.player.id %></p>
-	<p>Player Game state: <%= current_user.player.game.state_name %></p>
+	<p>Player Game state: <%= @game.state_name %></p>
 	<% if @game.deck %>
 		<p>Trump: <%= @game.deck.trump %></p>
 		<p>Deck cards count : <%= 36 - @game.deck.cursor %></p>

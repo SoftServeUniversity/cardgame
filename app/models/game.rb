@@ -1,4 +1,6 @@
 class Game < ActiveRecord::Base
+  validates :name, presence: true
+  
   serialize :winner, Player
   serialize :loser, Player
   serialize :attacker, Player
