@@ -19,6 +19,13 @@ Rails.application.routes.draw do
   get 'games/:id', :controller => 'games', :action => 'refresh_show', :as => 'refresh_show'
 
   root 'games#index'
+
+  get '/403', to: "error#error_403"
+  get '/404', to: "error#error_404"
+  get '/500', to: "error#error_500"
+
+  # Default root
+  get '*path', to: redirect("/404")
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -7,8 +7,8 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    @user.update(username: params[:username], view_theme: params[:view_theme])
-    render action: :edit
+    @user.update_attributes(user_params)
+    render action: :show
   end
 	def statistic
 		@users = User.all.order("win_count DESC")
@@ -18,4 +18,8 @@ class UsersController < ApplicationController
 	def set_user
 	  @user = User.find(params[:id])
 	end
+
+  def user_params
+    params.require(:user).permit(:username, :view_theme)
+  end
 end

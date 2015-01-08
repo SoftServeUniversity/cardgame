@@ -21,8 +21,8 @@
 				</div>
 			<% else %>
 				<div class='form-group'>
-  				<%= form_for(:user, :url => session_path(:user), :html => {:class => "navbar-form navbar-right"}) do |f| %>
-					<%= f.text_field :email, :placeholder => "Email or Username", class: "form-control" %>
+  				<%= form_for(:user, :as => :user ,:url => session_path(:user), :html => {:class => "navbar-form navbar-right"}) do |f| %>
+					<%= f.text_field :login, :placeholder => "Username", class: "form-control" %>
 					<%= f.password_field :password, :placeholder => "Password", class: "form-control" %>
 					<%= f.submit 'Log in', class: "btn btn-success" %>
 					<%= link_to 'Sign up', new_user_registration_path, class: "btn btn-danger " %>
