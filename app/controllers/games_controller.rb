@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-before_filter :authenticate_user!, except: [:show, :index]
+before_filter :authenticate_user!, except: [:index]
 before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :end_game, :edit, :update, :destroy]  
 
   def index
