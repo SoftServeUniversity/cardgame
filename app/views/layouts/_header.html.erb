@@ -1,22 +1,23 @@
 <div class="navbar navbar-inverse navbar-top">
+	<div class="container">
 	<div class="row">
 		<div class="col-xs-4" id="logo">
 			<%= link_to root_path, class: "navbar-brand" do %>
-				<%= image_tag("logo.gif",:width => 20) %><span class="">Dooraque</span>
+				<%= image_tag("logo.gif",:width => 20) %><span class="">  Dooraque</span>
 			<% end %>
 		</div>
 		
-		<div class="col-xs-3 col-xs-offset-1">
+		<div class="col-xs-4 divCenter">
 			<ul class="nav navbar-nav">
 				<li><%= link_to 'Games', games_path , :class => "" %></li>
 				<li><%= link_to 'Statistics', statistic_path , class: "" %></li>
 			</ul>
 		</div>
 
-		<div class="col-xs-3 col-xs-offset-1">
+		<div class="col-xs-4">
 			<% if user_signed_in? %>
 				<div class="headerUserBar">
-					<ul class="">
+					<ul class="nav navbar-nav navbar-right">
 						<li>
 							<%= link_to user_show_path(current_user) do %>
 								<b><%= current_user.username %></b>
@@ -34,11 +35,12 @@
 						<%= f.submit 'Log in', class: "btn btn-success" %>
 					<% end %>
 				</div>
-				<ul class="nav navbar-nav pull-right">
+				<ul class="nav navbar-nav navbar-right">
 					<li><%= link_to 'Log in', "#", class: "", id: "logInButton" %></li>
-					<li><%= link_to 'Sign up', new_user_registration_path, class: "" %></li>
+					<li><%= link_to 'Register', new_user_registration_path, class: "" %></li>
 				</ul>
 			<% end %>
 		</div>
-	</div>	
+	</div>
+	</div>
 </div>

@@ -14,8 +14,14 @@
  *= require_self
  */
 
+$grid-float-breakpoint: 320px;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.container .jumbotron, .container-fluid .jumbotron {
+	border-radius: 0;
+}
 
 body {
 	min-width: 680px;

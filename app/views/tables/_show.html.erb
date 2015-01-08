@@ -48,23 +48,33 @@
 	</div>
 </div>
 <div class='col-md-2 yieldcontent infopanel'>
-	<% if current_user %>
-		<p>View Theme: <%= current_user.view_theme %>	
-		<p>Cards count: <%= current_user.player.cards_count %>	
-		<p>Player ID: <%= current_user.player.id %></p>
-		<p>Player Game state: <%= current_user.player.game.state_name %></p>
-	<% end %>
-	<% if @game %>
-		<p>Mover: <%= @game.mover %></p>
-		<p>Attacker: <%= @game.attacker %></p>
-		<p>Defender: <%= @game.defender %></p>
-	<% end %>
-	<% if @game.deck %>
-		<p>Cards in deck count: <%= @game.deck.deck_cards.count %>	
-		<p>Trump: <%= @game.deck.trump %></p>
-		<p>Deck cards count : <%= 36 - @game.deck.cursor %></p>
-	<% end %>
+	<div class="list-group">
+		<% if @game.deck %>
+			<p class="list-group-item">Trump: <%= @game.deck.trump %></p>
+			<p class="list-group-item">Cards left: <%= @game.deck.deck_cards.length - @game.deck.cursor %></p>
+		<% end %>
+
+		<% if @game && current_user %>
+			<p class="list-group-item">			
+				<% if current_user.player.id == @game.mover %>
+					<% if current_user.player.id == @game.attacker %>				
+						Your attack!
+					<% elsif current_user.player.id == @game.defender %>
+						Your defence!	
+					<% end %>
+				<% else %>
+					<% if current_user.player.id == @game.attacker %>				
+						Opponent`s defence!
+					<% elsif current_user.player.id == @game.defender %>
+						Opponent`s attack!	
+					<% end %>
+				<% end %>
+			</p>
+		<% end %>
+	</div>
 </div>
+
+
 
 <% content_for :show do %>
   <script type="text/javascript">
