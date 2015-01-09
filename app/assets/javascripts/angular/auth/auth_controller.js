@@ -4,7 +4,7 @@ MyApp.controller("AuthController", ["$scope", "Auth", "$location", function($sco
 	$scope.signedIn = false;
 	$scope.login = function(){
 		Auth.login($scope.user).then(function(user){
-			$scope.signedIn = Auth.isAuthenticated
+			$scope.signedIn = Auth.isAuthenticated()
 			// $location.path('/home');
 		});
 	};
