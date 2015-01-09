@@ -12,6 +12,21 @@ html {
 	/*background-color: black;*/
 }
 
+.turnInfo {
+	background-color: black !important;
+	color: white;
+	background-color: #222222 !important;
+	box-shadow: inset 0px 0px 20px 3px rgba(0, 0, 0, 0.6) !important;
+	border-color: #090909 !important;
+	border-radius: 4px 4px 0 0 !important;
+	margin: 0 0 0 0 !important;
+}
+
+.panel-body .popover {
+	color: #222222 !important;
+}
+
+
 a.btn{
 	color: black;
 }

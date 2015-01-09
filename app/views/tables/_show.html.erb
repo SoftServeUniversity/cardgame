@@ -1,79 +1,88 @@
-<div class='col-md-10 yieldcontent'>
-	<% if current_user %>	
-		<% if current_user.view_theme == nil %>
-			<% tableStyle = "tableClassic" %>
-		<% elsif current_user.view_theme %>
-			<% tableStyle = "table#{current_user.view_theme.to_s}" %>
-		<% else %>
-			<% tableStyle = "tableClassic" %>
-		<% end %>
-	<% else %>
-			<% tableStyle = "tableClassic" %>
-	<% end %>
+<div class="row">
+	<div class="col-md-12 panel panel-default turnInfo">
+  		<div class="row panel-body text-center">
+  			<div class="col-xs-12">
+    			<% if @game && current_user %>		
+						<% if current_user.player.id == @game.mover %>
+							<% if current_user.player.id == @game.attacker %>				
+								<span>Your attack!</span>
+							<% elsif current_user.player.id == @game.defender %>
+								<span>Your defence!</span>
+							<% end %>
+						<% else %>
+							<% if current_user.player.id == @game.attacker %>				
+								<span>Opponent`s defence!</span>
+							<% elsif current_user.player.id == @game.defender %>
+								<span>Opponent`s attack!</span>	
+							<% end %>
+						<% end %>
+				<% end %>
 
-	<div class="row <%= "#{tableStyle}" %> ">
-			<div id="table_row_game" class="row">
-				<div id="table_cards" class="col-xs-10">
-					<%= render partial: 'tables/table' %>
-				</div>
+				<span class="pull-right" id="turnInfoButton">
+					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+				</span>
+
 				<% if @game.deck %>
-					<div id="table_deck" class="col-xs-2">
-						<%= render partial: 'tables/table_deck' %>
-					</div>
-				<% else %>
-					<div id="table_deck" class="col-xs-2">
+					<div class="hide" id="turnInfoHint">
+						<span>Trump: <%= make_suite (@game.deck.trump) %></span> <br />
+						<span>Cards left: <%= @game.deck.deck_cards.length - @game.deck.cursor %></span>
 					</div>
 				<% end %>
 			</div>
-			<div id="table_row_player" class="row">
-				<div id="table_player_cards" class="col-xs-10">
-					<%= render partial: 'tables/table_player_cards'%>
+ 		</div>
+	</div>
+</div>
+<div class="row">
+	<div class='col-md-12 yieldcontent'>
+		<% if current_user %>	
+			<% if current_user.view_theme == nil %>
+				<% tableStyle = "tableClassic" %>
+			<% elsif current_user.view_theme %>
+				<% tableStyle = "table#{current_user.view_theme.to_s}" %>
+			<% else %>
+				<% tableStyle = "tableClassic" %>
+			<% end %>
+		<% else %>
+				<% tableStyle = "tableClassic" %>
+		<% end %>
+	
+		<div class="row <%= "#{tableStyle}" %> ">
+				<div id="table_row_game" class="row">
+					<div id="table_cards" class="col-xs-10">
+						<%= render partial: 'tables/table' %>
+					</div>
+					<% if @game.deck %>
+						<div id="table_deck" class="col-xs-2">
+							<%= render partial: 'tables/table_deck' %>
+						</div>
+					<% else %>
+						<div id="table_deck" class="col-xs-2">
+						</div>
+					<% end %>
 				</div>
-				<div id="table_controls" class="col-xs-2">
-					<%= link_to end_turn_url, remote: true, :method => :post do%>
-						<div  class="table_button">
-							<span class="glyphicon glyphicon-repeat" aria-hidden="true">&nbsp;</span><span>End&nbsp;Turn</span>
+				<div id="table_row_player" class="row">
+					<div id="table_player_cards" class="col-xs-10">
+						<%= render partial: 'tables/table_player_cards'%>
+					</div>
+					<div id="table_controls" class="col-xs-2">
+						<%= link_to end_turn_url, remote: true, :method => :post do%>
+							<div  class="table_button">
+								<span class="glyphicon glyphicon-repeat" aria-hidden="true">&nbsp;</span><span>End&nbsp;Turn</span>
+							</div>
+						<% end %>
+						<%= link_to end_game_url, :method => :post do %>
+							<div class="table_button">
+								<span class="glyphicon glyphicon-flag" aria-hidden="true">&nbsp;</span><span>End&nbsp;Game</span>
+							</div>
+						<% end %>
+						<div>
+							<%= link_to 'Reload', url: url_for( :controller => :games, :action => :show ), remote: true, :method => :get, :class => "btn btn-default" %>
 						</div>
-					<% end %>
-					<%= link_to end_game_url, :method => :post do %>
-						<div class="table_button">
-							<span class="glyphicon glyphicon-flag" aria-hidden="true">&nbsp;</span><span>End&nbsp;Game</span>
-						</div>
-					<% end %>
-					<div>
-						<%= link_to 'Reload', url: url_for( :controller => :games, :action => :show ), remote: true, :method => :get, :class => "btn btn-default" %>
 					</div>
 				</div>
-			</div>
+		</div>
 	</div>
 </div>
-<div class='col-md-2 yieldcontent infopanel'>
-	<div class="list-group">
-		<% if @game.deck %>
-			<p class="list-group-item">Trump: <%= @game.deck.trump %></p>
-			<p class="list-group-item">Cards left: <%= @game.deck.deck_cards.length - @game.deck.cursor %></p>
-		<% end %>
-
-		<% if @game && current_user %>
-			<p class="list-group-item">			
-				<% if current_user.player.id == @game.mover %>
-					<% if current_user.player.id == @game.attacker %>				
-						Your attack!
-					<% elsif current_user.player.id == @game.defender %>
-						Your defence!	
-					<% end %>
-				<% else %>
-					<% if current_user.player.id == @game.attacker %>				
-						Opponent`s defence!
-					<% elsif current_user.player.id == @game.defender %>
-						Opponent`s attack!	
-					<% end %>
-				<% end %>
-			</p>
-		<% end %>
-	</div>
-</div>
-
 
 
 <% content_for :show do %>
