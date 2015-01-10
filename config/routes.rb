@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   get 'users/:id/edit' , :controller => 'users', :action => 'edit',  :as => 'user_edit'
   post 'users/:id' , :controller => 'users', :action => 'update',  :as => 'user_update'
+  
   devise_for :users, :path_prefix => 'my'
 
   get 'users/:id' , :controller => 'users', :action => 'show',  :as => 'user_show'
 
   get 'users' , :controller => 'users', :action => 'statistic',  :as => 'statistic'
 
+  get 'games/:id/my_game', :controller => 'games', :action => 'show', :as => 'my_game'
 
   post 'games/:id/put_card', :controller => 'games', :action => 'put_card', :as => 'put_card'
   post 'games/:id/end_turn', :controller => 'games', :action => 'end_turn', :as => 'end_turn'
@@ -18,6 +20,13 @@ Rails.application.routes.draw do
   get 'games/:id', :controller => 'games', :action => 'refresh_show', :as => 'refresh_show'
 
   root 'games#index'
+
+  get '/403', to: "error#error_403"
+  get '/404', to: "error#error_404"
+  get '/500', to: "error#error_500"
+
+  # Default root
+  get '*path', to: redirect("/404")
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

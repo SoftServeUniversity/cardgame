@@ -10,14 +10,14 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
     end
   end
 
-  def show
+  def show   
     if !@game
       redirect_to games_path
     end
-    # respond_to do |format|
-    #   format.html { render action: 'show' }
-    #   format.js {render :action=>"show.js.erb"}
-    # end
+  end
+
+  def my_game
+    redirect_to games_path
   end
 
   def reload
@@ -29,26 +29,28 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
 
   def create
     @game = Game.new game_params
-    @game.init
-    @game.init_state
-    @game.init_player self.current_user
-    @game.players[0].save
-    @game.save
-    respond_to do |format|
-      if @game.save
-        format.html { redirect_to @game, notice: 'Card game was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @game }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
+    if @game.valid?
+        @game.do_init_first_player self.current_user
+        @game.players[0].save
+        @game.save
+        respond_to do |format|
+          if @game.save
+            format.html { redirect_to @game, notice: 'Card game was successfully created.' }
+            format.json { render action: 'show', status: :created, location: @game }
+          else
+            format.html { render action: 'new' }
+            format.json { render json: @game.errors, status: :unprocessable_entity }
+          end
+        end
+    else
+      redirect_to new_game_path , notice: 'You should give your game some name.'
     end
   end
 
   def update
-    @game.init_player self.current_user
+    @game.do_init_second_player self.current_user
     @game.players[1].save
-    @game.prepare_game_to_start
+    @game.do_preparation_for_game
     save_game @game
     respond_to do |format|
         format.html { redirect_to @game }
@@ -61,7 +63,7 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
     puts "____________________________--"
     puts card.rang
     puts card.suite
-    @game.get_card_from_player card, self.current_user.player.id
+    @game.get_card_from_player card, self.current_user.player, @game.attacker
     @game.players[0].save
     @game.players[1].save
     @game.table.save
@@ -96,7 +98,7 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
 
   def end_turn
     puts "Controller End Turn"
-    @game.end_turn self.current_user.player.id
+    @game.end_turn self.current_user.player
     save_game @game
     redirect_to game_path
   end
@@ -106,7 +108,10 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
     redirect_to games_path
   end
 
-  def end_game
+  def end_game 
+    if !@game
+        redirect_to games_path
+    end
     puts"_______________________________________Controller Action End Game"
     puts"_______________________________________outside"
     if @game.players[1]
@@ -118,6 +123,7 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
 
       if @game.winner
         puts"_______________________________________inside is winner"
+
         if @user1 == @game.winner
           @user1.win_count += 1
           @user2.lose_count += 1
@@ -147,7 +153,6 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
   private
   def set_game
     @game = Game.find(params[:id])
-    @game.init_state
   rescue
     @game = nil
   end

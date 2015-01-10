@@ -23,12 +23,12 @@ ActiveRecord::Schema.define(version: 20141211234619) do
   end
 
   create_table "games", force: true do |t|
-    t.string   "state_name"
+    t.string   "state"
     t.string   "winner"
     t.string   "loser"
-    t.integer  "attacker"
-    t.integer  "defender"
-    t.integer  "mover"
+    t.string   "attacker"
+    t.string   "defender"
+    t.string   "mover"
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20141211234619) do
     t.text     "table_cards"
     t.integer  "game_id"
     t.integer  "cards_count"
+    t.integer  "attacker_cursor"
+    t.integer  "defender_cursor"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -55,6 +57,7 @@ ActiveRecord::Schema.define(version: 20141211234619) do
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
+    t.string   "view_theme"
     t.integer  "games_count"
     t.integer  "lose_count"
     t.integer  "win_count"

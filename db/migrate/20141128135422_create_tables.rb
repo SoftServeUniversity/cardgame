@@ -4,6 +4,8 @@ class CreateTables < ActiveRecord::Migration
       t.text :table_cards
       t.integer :game_id
       t.integer :cards_count
+      t.integer :attacker_cursor
+      t.integer :defender_cursor
 
       t.timestamps
     end

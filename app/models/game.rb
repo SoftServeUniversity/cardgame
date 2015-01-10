@@ -1,127 +1,181 @@
-require "new_game"
-require "deck"
-require "card"
-
 class Game < ActiveRecord::Base
-
+  validates :name, presence: true
+  
   serialize :winner, Player
   serialize :loser, Player
+  serialize :attacker, Player
+  serialize :defender, Player
+  serialize :mover, Player
 
   has_many :players, dependent: :destroy
   has_one :deck, dependent: :destroy
   has_one :table, dependent: :destroy
 
-  def init_state
-    case self.state_name
-    when 'NewGame'
-      @state = NewGame.new self
-    when 'ExpectationOfSecondPlayer'
-      @state = ExpectationOfSecondPlayer.new self
-    when 'GamePrepare'
-      @state = GamePrepare.new self
-    when 'MoveOfFirstPlayer'
-      @state = MoveOfFirstPlayer.new self
-    when 'MoveOfSecondPlayer'
-      @state = MoveOfSecondPlayer.new self
-    when 'EndOfGame'
-      @state = EndOfGame.new self
+  state_machine :state, :initial => :new_game do
+
+    event :init_first_player do
+      transition :new_game => :expactation_second_player
     end
-    @state
+
+    event :init_second_player do
+      transition :expactation_second_player => :game_prepare
+    end
+
+    event :first_player_move do
+      transition [:game_prepare, :move_of_second_player, :break_turn] => :move_of_first_player
+    end
+
+    event :second_player_move do
+      transition [:game_prepare, :move_of_first_player, :break_turn] => :move_of_second_player
+    end
+
+    event :set_break_turn do
+      transition [:move_of_first_player, :move_of_second_player] => :break_turn
+    end
+
+
+    state :new_game do
+      def do_init_first_player _user
+        puts "Doing init first player..."
+        player = Player.create({:game => self, :user => _user})
+        self.init_first_player
+      end
+    end
+
+    state :expactation_second_player do
+      def do_init_second_player _user
+        puts "Doing init second player..."
+        player = Player.create({:game => self, :user => _user})
+        self.init_second_player
+      end
+    end
+
+    state :game_prepare do
+      def do_preparation_for_game
+        puts "Doing preparation for game..."
+        table = Table.create({:game => self, :cards_count => 0, :defender_cursor => 1, :attacker_cursor => 0})
+        deck = Deck.create({:game => self})
+
+        deck.init_cards
+
+        set_attacker
+
+        if self.mover == self.players[0]
+          self.first_player_move
+        elsif self.mover == self.players[1]
+          self.second_player_move
+        end
+      end
+    end
+
+    state :move_of_first_player, :move_of_second_player do
+      def get_card_from_player _card, _player, _attacker
+        puts "==============================_player"
+        puts _player
+        if self.mover == _player
+
+          if self.players[0] == _player
+            current_player = self.players[0]
+          else
+            current_player = self.players[1]
+          end
+
+          if self.do_get_card_from_player _card, _player, _attacker
+            current_player.delete_card _card
+            puts "Access granted"
+            if self.move_of_first_player?
+              self.second_player_move
+              self.mover = self.players[1]
+            else
+              self.first_player_move
+              self.mover = self.players[0]
+            end
+          end
+        else
+          puts "Access denied"
+        end
+      end
+
+      def end_turn _player
+        puts "////////////////////END OF TURN in state"
+        if self.mover == _player
+          if(_player == self.attacker && self.table.cards_count > 0) #END from attacker
+            puts "////////////////////ATTACKER END OF TURN in state"
+            if self.move_of_first_player?
+              self.second_player_move
+            else
+              self.first_player_move
+            end
+            self.do_end_turn
+          elsif (_player == self.defender) #END from defender
+            puts "////////////////////DEFENDER END OF TURN in state"
+            self.set_break_turn
+            self.mover = self.attacker
+            puts "//////////////////////////////////////////////////////BreakTurn"
+            puts self.state
+          end
+        end
+      end
+    end
+
+    state :break_turn do
+      def get_card_from_player _card, _player, _attacker
+        if self.mover == _player
+
+          if self.players[0] == _player
+            current_player = self.players[0]
+          else
+            current_player = self.players[1]
+          end
+
+          if self.do_get_card_from_player _card, _player, _attacker
+            current_player.delete_card _card
+          end
+        else
+          puts "Access denied"
+        end
+      end
+
+      def end_turn _player
+        if self.mover == _player
+          if(self.players[0] == self.mover)
+            player = 1
+          else
+            player = 0
+          end
+          self.do_break_turn player
+        end
+
+        if self.mover == self.players[0]
+          self.first_player_move
+        elsif self.mover == self.players[1]
+          self.second_player_move
+        end
+      end
+    end
   end
 
-  def set_game_state _state
-    @state = _state
-    self.state_name = _state.class.name
-  end
-
-  def init
-    @state = NewGame.new(self)
-  end
-
-  def init_player _user
-    @state.init_player _user
-  end
-
-  def prepare_game_to_start
-    @state.prepare_game_to_start
-  end
-
-  def get_card_from_player _card, _player_id
-    @state.get_card_from_player _card, _player_id
-  end
-
-  def end_turn _player_id
-    puts "///////////////////////////////////////////END TURN GAME"
-    @state.end_turn _player_id
-  end
-
-  def show_results
-    @state.show_results
-  end
-
-  def do_init_first_player _user
-    puts "Doing init first player..."
-    player = Player.create({:game => self, :user => _user})
-  end
-
-  def do_init_second_player _user
-    puts "Doing init second player..."
-    player = Player.create({:game => self, :user => _user})
-  end
-
-  def do_preparation_for_game
-    puts "Doing preparation for game..."
-    table = Table.create({:game => self, :cards_count => 0})
-    deck = Deck.create({:game => self})
-
-    deck.init_cards
-
-    set_attacker
-  end
-
-  def do_get_card_from_player _card, _player_id
+  def do_get_card_from_player _card, _player, _attacker
     puts "Doing getting card from player"
-    self.table.add_card(_card, _player_id)
+    self.table.add_card _card, _player, _attacker
   end
 
   def do_end_turn
-    puts "//////////////Doing end of turn"
     self.table.clear
 
-    puts "///////////////////////////////////attacker"
-    puts self.attacker
-    puts "///////////////////////////////////defender"
-    puts self.defender
-    puts "///////////////////////////////////mover"
-    puts self.mover
-
-    att = self.attacker
-    self.mover = self.defender
-    puts "///////////////////////////////////mover"
-    puts self.mover
-    self.attacker = self.defender
-    self.defender = att
-
-    puts "///////////////////////////init new turn"
+    self.attacker, self.defender = self.defender, self.attacker
+    self.mover = self.attacker
     init_new_turn
   end
 
-  def do_break_turn _breaker
+  def do_break_turn breaker
     puts "////////////////Doing breaking turn"
-    for i in 0...self.table.table_cards.length
-      puts "i = " + i.to_s
-      puts self.table.table_cards[i].suite
-      puts self.table.table_cards[i].rang
-      self.players[_breaker].add_card self.table.table_cards[i]
+    self.table.table_cards.each do |card|
+      if card
+        self.players[breaker].add_card card
+      end
     end
     self.table.clear
-
-    puts "///////////////////////////////////mover"
-    puts self.mover
-    self.mover = attacker
-
-    puts "///////////////////////////////////mover"
-    puts self.mover
 
     init_new_turn
   end
@@ -133,13 +187,6 @@ class Game < ActiveRecord::Base
     second_min = find_smallest_trump self.players[1]
     puts "---------------------------------------------------"
 
-    if first_min
-      puts first_min.rang
-    end
-    if second_min
-      puts second_min.rang
-    end
-
     if(!first_min && !second_min)
       puts "-------------------------------No trump"
       self.deck.shuffle_deck
@@ -147,38 +194,40 @@ class Game < ActiveRecord::Base
     else
       if (!first_min)
         puts "----------------- first_min = nil"
-        self.attacker = self.players[1].id
-        self.defender = self.players[0].id
-        self.mover = self.players[1].id
+        self.attacker = self.players[1]
+        self.defender = self.players[0]
+        self.mover = self.players[1]
       elsif (!second_min)
         puts "----------------- second_min = nil"
-        self.attacker = self.players[0].id
-        self.defender = self.players[1].id
-        self.mover = self.players[0].id
+        self.attacker = self.players[0]
+        self.defender = self.players[1]
+        self.mover = self.players[0]
       elsif first_min.rang < second_min.rang
         puts "----------------- first_min <  second_min"
-        self.attacker = self.players[0].id
-        self.defender = self.players[1].id
-        self.mover = self.players[0].id
+        self.attacker = self.players[0]
+        self.defender = self.players[1]
+        self.mover = self.players[0]
       else
         puts "----------------- first_min >  second_min"
-        self.attacker = self.players[1].id
-        self.defender = self.players[0].id
-        self.mover = self.players[1].id
+        self.attacker = self.players[1]
+        self.defender = self.players[0]
+        self.mover = self.players[1]
       end
     end
   end
 
   def init_players_cards
+    self.players[0].clear
+    self.players[1].clear
     6.times do
       self.players[0].add_card (deck.get_one)
       self.players[1].add_card (deck.get_one)
     end
   end
 
-  def find_smallest_trump _player
+  def find_smallest_trump player
     min = nil
-    _player.player_cards.each do |card|
+    player.player_cards.each do |card|
       if card.suite.to_s == self.deck.trump.to_s
         if min
           if (card.rang < min.rang)
@@ -193,14 +242,14 @@ class Game < ActiveRecord::Base
   end
 
   def init_new_turn
-    for i in self.players[0].cards_count ... 6
+    (6-self.players[0].cards_count).times do
       puts"//////////////////////////// get one card to player 0"
       if (self.deck.cursor < 36)
         self.players[0].add_card self.deck.get_one
       end
     end
 
-    for i in self.players[1].cards_count ... 6
+    (6-self.players[1].cards_count).times do
       puts"//////////////////////////// get one card to player 1"
       if (self.deck.cursor < 36)
         self.players[1].add_card self.deck.get_one

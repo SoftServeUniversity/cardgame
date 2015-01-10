@@ -14,12 +14,12 @@ class UsersController < ApplicationController
     redirect_to user_show_path
   end
 
-	def statistic
-		@users = User.all.order("win_count DESC")
-	end
+  def statistic
+    @users = User.all.order("win_count DESC")
+  end
 
 
-	private
+  private
 
   def set_user
     @user = User.find(params[:id])

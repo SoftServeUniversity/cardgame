@@ -22,16 +22,16 @@
 <% content_for :index do %>
   <script type="text/javascript">
     $(document).ready(function () {
-   		setInterval(function(){
-		refreshIndex();
-		}, 10000); 
-	});
+      setInterval(function(){
+    refreshIndex();
+    }, 10000); 
+  });
 
-	function refreshIndex() {
-  		$.ajax({
-          	url: "<%= @games %>",
-          	dataType: "script" 
- 		})
-	};
+  function refreshIndex() {
+      $.ajax({
+            url: "<%= @games %>",
+            dataType: "script" 
+    })
+  };
   </script>
 <% end %>
