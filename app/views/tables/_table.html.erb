@@ -1,0 +1,29 @@
+<% if @game.table %>
+	<% defenceCards = [] %>
+	<% @game.table.table_cards.each_index do |index| %>
+		<% if (index+1) % 2 == 0 %>
+		<% defenceCards << @game.table.table_cards[index] %>
+		<% end %>
+	<% end %>
+	<% hitCards = @game.table.table_cards - defenceCards %>
+
+	<ul class="tableCardsList hitCards">
+		<% hitCards.each do |card| %>
+			<% if card %>
+				<li>
+					<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+
+	<ul class="tableCardsList defenceCards">
+		<% defenceCards.each do |card| %>
+			<% if card %>
+				<li>
+					<%= image_tag("#{card.rang}#{card.suite}.png", class: "tableCards") %>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+<%end%>
