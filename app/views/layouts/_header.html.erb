@@ -36,8 +36,8 @@
 				</div>
 			<% else %>
 				<div id="logInForm" class="hide">
-					<%= form_for(:user, :url => session_path(:user), :html => {:class => "form-group"}) do |f| %>
-						<%= f.text_field :email, :placeholder => "Email", class: "form-control" %>
+					<%= form_for(:user, :as => :user ,:url => session_path(:user), :html => {:class => "form-group"}) do |f| %>
+						<%= f.text_field :login, :placeholder => "Email", class: "form-control" %>
 						<%= f.password_field :password, :placeholder => "Password", class: "form-control" %>
 						<%= f.submit 'Log in', class: "btn btn-success" %>
 					<% end %>
