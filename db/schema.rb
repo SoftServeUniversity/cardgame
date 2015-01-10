@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 20141211234619) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
-    t.string   "view_theme"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

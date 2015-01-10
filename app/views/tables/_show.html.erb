@@ -2,17 +2,17 @@
 	<div class="col-md-12 panel panel-default turnInfo">
   		<div class="row panel-body text-center">
   			<div class="col-xs-12">
-    			<% if @game && current_user.player %>		
-						<% if current_user.player.id == @game.mover %>
-							<% if current_user.player.id == @game.attacker %>				
+    			<% if @game && current_user.player %>
+						<% if current_user.username == @game.mover.user.username %>
+							<% if current_user.username == @game.attacker.user.username %>				
 								<span>Your attack!</span>
-							<% elsif current_user.player.id == @game.defender %>
+							<% elsif current_user.username == @game.defender.user.username %>
 								<span>Your defence!</span>
 							<% end %>
 						<% else %>
-							<% if current_user.player.id == @game.attacker %>				
+							<% if current_user.username == @game.attacker.user.username %>				
 								<span>Opponent`s defence!</span>
-							<% elsif current_user.player.id == @game.defender %>
+							<% elsif current_user.username == @game.defender.user.username %>
 								<span>Opponent`s attack!</span>	
 							<% end %>
 						<% end %>
