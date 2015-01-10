@@ -1,5 +1,9 @@
 module GamesHelper
 
+  def mover_check
+    (@game.mover.user && @game.attacker.user && @game.defender.user)    
+  end
+
   def make_suite cardSuite
     case cardSuite
       when 'diamonds'
