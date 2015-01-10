@@ -74,14 +74,12 @@
 									<span class="glyphicon glyphicon-repeat" aria-hidden="true">&nbsp;</span><span>End&nbsp;Turn</span>
 								</div>
 							<% end %>
+							<br />
 							<%= link_to end_game_url, :method => :post do %>
 								<div class="table_button">
 									<span class="glyphicon glyphicon-flag" aria-hidden="true">&nbsp;</span><span>End&nbsp;Game</span>
 								</div>
 							<% end %>
-							<div>
-								<%= link_to 'Reload', url: url_for( :controller => :games, :action => :show ), remote: true, :method => :get, :class => "btn btn-default" %>
-							</div>
 						</div>
 					<% end %>
 				</div>
