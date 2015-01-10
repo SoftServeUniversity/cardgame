@@ -188,6 +188,25 @@
 	box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.4);
 }
 
+
+.t_m0clubs, .t_m1clubs, .t_m2clubs, .t_m3clubs, .t_m4clubs,
+.t_m0spades, .t_m1spades, .t_m2spades, .t_m3spades, .t_m4spades {
+	width: 85px;
+	height: 123px;
+	background-image: url("black_fist3.png");
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
+}
+.t_m0diamonds, .t_m1diamonds, .t_m2diamonds, .t_m3diamonds, .t_m4diamonds,
+.t_m0hearts, .t_m1hearts, .t_m2hearts, .t_m3hearts, .t_m4hearts {
+	width: 85px;
+	height: 123px;
+	background-image: url("red_fist3.png");
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+
 .t_m5clubs {
 	width: 85px;
 	height: 123px;
@@ -326,6 +345,21 @@
 	 .playerModernCards {
 	  width: 85px;
 	  height: 123px;
+	}
+
+	.m0clubs, .m1clubs, .m2clubs, .m3clubs, .m4clubs,
+	.m0spades, .m1spades, .m2spades, .m3spades, .m4spades {
+		width: 85px;
+		height: 123px;
+		background-image: url("black_fist3.png");
+		background-size: cover;
+	}
+	.m0diamonds, .m1diamonds, .m2diamonds, .m3diamonds, .m4diamonds,
+	.m0hearts, .m1hearts, .m2hearts, .m3hearts, .m4hearts {
+		width: 85px;
+		height: 123px;
+		background-image: url("red_fist3.png");
+		background-size: cover;
 	}
 
 	.m5clubs {
