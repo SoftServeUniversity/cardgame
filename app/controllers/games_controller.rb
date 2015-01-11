@@ -9,7 +9,7 @@ class GamesController < ApplicationController
   end
 
   def show 
-    render json: @game  
+    render json: resp_to_json  
     if !@game
       render json: @games
     end
@@ -148,5 +148,22 @@ class GamesController < ApplicationController
     game.table.save
     game.deck.save
     game.save
+  end
+
+  def resp_to_json
+    resp = {
+      game_name: @game.name,
+      game_description: @game.description,
+      game_state: @game.state,
+      game_mover: @game.mover.user.id,
+      game_attacker: @game.attacker.user.id,
+      game_defender: @game.attacker.user.id,
+      table_cards: @game.table.table_cards,
+      player_cards: self.current_user.player.player_cards,
+      trump: @game.deck.trump,
+      deck_cards_count: @game.deck.cursor,
+      current_user: self.current_user.id
+    }
+    resp
   end
 end

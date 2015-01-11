@@ -21,3 +21,9 @@ MyApp.factory("JoinFactory", ["$resource", function($resource){
 		join: {method: "POST", params: {id: "@id"}}
 	});
 }]);
+
+MyApp.factory("PutFactory", ["$resource", function($resource){
+	return $resource(" /games/:id/put_card.json", {}, {
+		put_card: {method: "POST", params: {id: "@id"}}
+	});
+}]);
