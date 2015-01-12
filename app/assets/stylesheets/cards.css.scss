@@ -5,6 +5,7 @@
 }
 #table_row_player {	
 	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 0 0 4px 4px;
 }
 
 #table_cards, #table_deck {
@@ -47,7 +48,7 @@
 
 
 .playerCardsList, .tableCardsList {
-	min-width: 540px;
+	/*min-width: 540px;*/
 	list-style-type: none;
 	padding: 0 0 0 0;
 }

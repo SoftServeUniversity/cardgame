@@ -1,3 +1,7 @@
+.navbar-top {
+	border-radius: 0 0 4px 4px !important;
+}
+
 .navbar-brand > img {
 	display: inline-block !important;	
 }
@@ -8,4 +12,9 @@
 
 li .popover {
 	width: 250px;
+}
+
+
+.navbar-bottom {
+	border-radius: 4px 4px 0 0 !important;
 }
