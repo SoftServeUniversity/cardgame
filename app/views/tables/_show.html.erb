@@ -1,0 +1,69 @@
+<!-- <div class='col-md-10 yieldcontent'>
+	<div class="row wood">
+			<div id="table_row_game" class="row">
+				<div id="table_cards" class="col-xs-10">
+					<#%= render partial: 'tables/table' %>
+				</div>
+				<#% if @game.deck %>
+					<div id="table_deck" class="col-xs-2">
+						<#%= render partial: 'tables/table_deck' %>
+					</div>
+				<#% else %>
+					<div id="table_deck" class="col-xs-2">
+					</div>
+				<#% end %>
+			</div>
+			<div id="table_row_player" class="row">
+				<div id="table_player_cards" class="col-xs-10">
+					<3%= render partial: 'tables/table_player_cards'%>
+				</div>
+				<div id="table_controls" class="col-xs-2">
+					<#%= link_to end_turn_url, remote: true, :method => :post do%>
+						<div  class="table_button">
+							<span class="glyphicon glyphicon-repeat" aria-hidden="true">&nbsp;</span><span>End&nbsp;Turn</span>
+						</div>
+					<#% end %>
+					<#%= link_to end_game_url, :method => :post do %>
+						<div class="table_button">
+							<span class="glyphicon glyphicon-flag" aria-hidden="true">&nbsp;</span><span>End&nbsp;Game</span>
+						</div>
+					<#% end %>
+					<div>
+						<№%= link_to 'Reload', url: url_for( :controller => :games, :action => :show ), remote: true, :method => :get, :class => "btn btn-default" %>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+<div class='col-md-2 yieldcontent infopanel'>
+	<p>View Theme: <%= current_user.view_theme %>	
+	<p>Cards count: <%= current_user.player.cards_count %>
+	<#% if (@game.mover.user && @game.attacker.user && @game.defender.user) %>	
+		<p>Mover: <%= @game.mover.user.username %></p>
+		<p>Attacker: <%= @game.attacker.user.username %></p>
+		<p>Defender: <%= @game.defender.user.username %></p>
+	<#% end %>
+	<p>Player ID: <%= current_user.player.id %></p>
+	<p>Player Game state: <%= current_user.player.game.state_name %></p>
+	<#% if @game.deck %>
+		<p>Trump: <%= @game.deck.trump %></p>
+		<p>Deck cards count : <#%= 36 - @game.deck.cursor %></p>
+	<#% end %>
+</div>
+
+<#% content_for :show do %>
+   <script type="text/javascript">
+     $(document).ready(function () {
+    		setInterval(function(){
+ 		refreshPartial();
+ 		}, 10000); 
+ 	});
+     
+ 	function refreshPartial() {
+   		$.ajax({
+           	url: "<%= @game %>",
+           	dataType: "script" 
+  		})
+ 	};
+   </script>
+<#% end %> -->

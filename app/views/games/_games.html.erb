@@ -1,0 +1,23 @@
+<table class="table gamestable">
+  <thead>
+    <tr>
+      <th class="col-xs-4">Name</th>
+      <th class="col-xs-5">Description</th>
+      <th class="col-xs-1"></th>
+      <th class="col-xs-1"></th>
+      <th class="col-xs-1"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td class="col-xs-4"><%= game.name %></td>
+        <td class="col-xs-5"><%= game.description %></td>
+        <% if current_user %>
+          <td class="col-xs-1"><%= link_to 'Join' , update_url(:id => game.id), :method => :post, :class =>(game.players[1] ? 'hidden' : (current_user.player) ? 'hidden' : '') %></td>
+          <td class="col-xs-1"><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => (!(game.players[0].user == current_user) ? 'hidden' : '') %></td>
+          <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
