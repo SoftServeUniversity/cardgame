@@ -1,12 +1,17 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("ShowGameController", ["$scope", "PutFactory" , "JoinFactory" , "GamesFactory", "GameFactory", "$location", "Auth" , function($scope, PutFactory , JoinFactory , GamesFactory, GameFactory, $location, Auth){
-	GameFactory.show({id: $location.path().split('/').pop()},function(data){
-		$scope.checkAuth();
-		$scope.currentGame = data;
-	},function(error){
-		console.log(error);
-	});
+MyApp.controller("ShowGameController", ["$scope", "$interval" , "EndService" , "PutService" , "GamesFactory", "GameFactory", "$location", "Auth" , function($scope, $interval , EndService , PutService , GamesFactory, GameFactory, $location, Auth){
+
+	$scope.updateGame = function() {
+            GameFactory.show({
+                id: $location.path().split('/').pop()
+            }, function(data) {
+                $scope.checkAuth();
+                $scope.currentGame = data;
+            }, function(error) {
+                console.log(error);
+            });
+      	};
 
 	$scope.checkAuth = function(){
   		$scope.isAuthenticated = Auth.isAuthenticated();
@@ -14,8 +19,23 @@ MyApp.controller("ShowGameController", ["$scope", "PutFactory" , "JoinFactory" ,
  	};
 
  	$scope.putCard = function(card){
- 		PutFactory.put_card({id: $location.path().split('/').pop(), suite: card.suite, rang: card.rang}, function(data){
-			setTimeout(function () {
+ 		PutService.put_card({id: $location.path().split('/').pop(), suite: card.suite, rang: card.rang}, function(data){
+			$scope.reloadCards();
+		}, function(error){
+			console.log(error);
+		});
+ 	};
+
+ 	$scope.endTurn = function(){
+ 		EndService.end_turn({id: $location.path().split('/').pop()}, function(data){
+ 			$scope.reloadCards();
+		}, function(error){
+			console.log(error);
+		});
+ 	};
+
+ 	$scope.reloadCards = function(){
+ 		setTimeout(function () {
         		$scope.$apply(function () {
             		GameFactory.show({id: $location.path().split('/').pop()},function(data){
 						$scope.currentGame = data;
@@ -24,9 +44,8 @@ MyApp.controller("ShowGameController", ["$scope", "PutFactory" , "JoinFactory" ,
 					});
         		});
     		}, 2000)
-		}, function(error){
-			console.log(error);
-		});
  	};
+
+ 	$scope.updateGame();
 
 }]);

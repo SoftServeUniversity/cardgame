@@ -1,6 +1,6 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("GameController", ["$scope", "JoinFactory" , "GamesFactory", "GameFactory", "$location", function($scope, JoinFactory , GamesFactory, GameFactory, $location){
+MyApp.controller("GameController", ["$scope", "JoinService" , "GamesFactory", "GameFactory", "$location", function($scope, JoinService , GamesFactory, GameFactory, $location){
 	$scope.games = GamesFactory.query();
 	$scope.currentUser = true;
 
@@ -21,13 +21,12 @@ MyApp.controller("GameController", ["$scope", "JoinFactory" , "GamesFactory", "G
 	};
 
 	$scope.joinGame = function(game){
-		JoinFactory.join({id: game.id}, function(){
+		JoinService.join({id: game.id}, function(){
 			$location.path("/games/"+ game.id);
 		});
 	};
-	// $scope.updateGame = function(){
-	// 	GamesFactory.update({id: game.id}), function(){
-	// 		$location.path("/show")
-	// 	}
-	// }
+	
+	$scope.showGame = function(game) {
+  		$location.path("/games/"+game.id);
+ 	};
 }]);
