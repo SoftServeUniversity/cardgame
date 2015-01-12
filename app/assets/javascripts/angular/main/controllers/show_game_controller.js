@@ -1,8 +1,9 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("ShowGameController", ["$scope", "$interval" , "EndService" , "PutService" , "GamesFactory", "GameFactory", "$location", "Auth" , function($scope, $interval , EndService , PutService , GamesFactory, GameFactory, $location, Auth){
+MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "PutService", "GamesFactory", "GameFactory", "$location", "Auth",
+    function($scope, $interval, EndService, PutService, GamesFactory, GameFactory, $location, Auth) {
 
-	$scope.updateGame = function() {
+        $scope.updateGame = function() {
             GameFactory.show({
                 id: $location.path().split('/').pop()
             }, function(data) {
@@ -61,9 +62,9 @@ MyApp.controller("ShowGameController", ["$scope", "$interval" , "EndService" , "
 
         $scope.updateGame();
 
-         $interval(function(){
-   $scope.reloadCards();
-  },1000);
+        $interval(function() {
+            $scope.reloadCards();
+        }, 1000);
 
     }
 ]);

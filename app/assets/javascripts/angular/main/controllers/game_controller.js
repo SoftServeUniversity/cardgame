@@ -1,13 +1,24 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("GameController", ["$scope", "Auth", "JoinService" , "GamesFactory", "GameFactory", "$location", function($scope, Auth, JoinService , GamesFactory, GameFactory, $location){
-	$scope.games = GamesFactory.query();
-	$scope.currentUser = Auth.isAuthenticated();
+MyApp.controller("GameController", ["$scope", "$interval" , "Auth" , "JoinService" , "GamesFactory", "GameFactory", "$location", function($scope, $interval , Auth , JoinService , GamesFactory, GameFactory, $location){
+	Auth.currentUser().then(function(user){
+ 	  $scope.signedIn = Auth.isAuthenticated();
+  	  $scope.currentUser = user;
+ 	});
+
+	$scope.indexGames = function(){
+		GamesFactory.query({}, function(data) {
+                $scope.games = data;
+            }, function(error) {
+                console.log(error);
+            }
+        );
+	}
 
 	$scope.deleteGame = function(game){
 		if(confirm("Are you sure?")){
 			GameFactory.delete({id: game.id}, function(){
-				$scope.games = GamesFactory.query();
+				$scope.indexGames();
 			});
 		}
 	};
@@ -29,4 +40,14 @@ MyApp.controller("GameController", ["$scope", "Auth", "JoinService" , "GamesFact
 	$scope.showGame = function(game) {
 		$location.path("/games/"+game.id);
 	};
+
+	$scope.indexGames();
+
+	$interval(function(){
+		setTimeout(function() {
+                $scope.$apply(function() {
+                    $scope.indexGames();
+                });
+            }, 2000);
+		},5000);
 }]);
