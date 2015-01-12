@@ -1,9 +1,8 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("ShowGameController", ["$scope", "EndFactory", "PutFactory", "JoinFactory", "GamesFactory", "GameFactory", "$location", "Auth",
-    function($scope, EndFactory, PutFactory, JoinFactory, GamesFactory, GameFactory, $location, Auth) {
+MyApp.controller("ShowGameController", ["$scope", "$interval" , "EndService" , "PutService" , "GamesFactory", "GameFactory", "$location", "Auth" , function($scope, $interval , EndService , PutService , GamesFactory, GameFactory, $location, Auth){
 
-        $scope.updateGame = function() {
+	$scope.updateGame = function() {
             GameFactory.show({
                 id: $location.path().split('/').pop()
             }, function(data) {
@@ -12,6 +11,7 @@ MyApp.controller("ShowGameController", ["$scope", "EndFactory", "PutFactory", "J
             }, function(error) {
                 console.log(error);
             });
+<<<<<<< HEAD
         };
 
         $scope.checkAuth = function() {
@@ -20,7 +20,7 @@ MyApp.controller("ShowGameController", ["$scope", "EndFactory", "PutFactory", "J
         };
 
         $scope.putCard = function(card) {
-            PutFactory.put_card({
+            PutService.put_card({
                 id: $location.path().split('/').pop(),
                 suite: card.suite,
                 rang: card.rang
@@ -47,7 +47,7 @@ MyApp.controller("ShowGameController", ["$scope", "EndFactory", "PutFactory", "J
         };
 
         $scope.endTurn = function() {
-            EndFactory.end_turn({
+            EndService.end_turn({
                 id: $location.path().split('/').pop()
             }, function(data) {
                 $scope.reloadCards();

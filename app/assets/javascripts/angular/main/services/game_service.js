@@ -16,26 +16,20 @@ MyApp.factory("GameFactory", ["$resource", function($resource){
 	});
 }]);
 
-MyApp.factory("JoinFactory", ["$resource", function($resource){
+MyApp.factory("JoinService", ["$resource", function($resource){
 	return $resource("games/:id/update.json", {}, {
 		join: {method: "POST", params: {id: "@id"}}
 	});
 }]);
 
-MyApp.factory("PutFactory", ["$resource", function($resource){
+MyApp.factory("PutService", ["$resource", function($resource){
 	return $resource(" /games/:id/put_card.json", {}, {
 		put_card: {method: "POST", params: {id: "@id"}}
 	});
 }]);
 
-MyApp.factory("EndFactory", ["$resource", function($resource){
- return $resource(" /games/:id/end_turn.json", {}, {
-  end_turn: {method: "POST", params: {id: "@id"}}
- });
-}]);
-
-MyApp.factory("EndGameService", ["$resource", function($resource){
-	return $resource(" /games/:id/end_game", {}, {
- 		end_game: {method: "POST", params: {}}
- 	});
+MyApp.factory("EndService", ["$resource", function($resource){
+	return $resource(" /games/:id/end_turn.json", {}, {
+		end_turn: {method: "POST", params: {id: "@id"}}
+	});
 }]);
