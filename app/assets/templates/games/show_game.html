@@ -1,41 +1,41 @@
 <h1>Hi am game</h1>
-{{currentGame}}<br>
-{{currentGame.player_cards}}<br>
+{{currentGame.game_state}}<br>
+{{currentGame.trump}}
 
 <div class='col-md-10 yieldcontent'>
-	<div class="row wood">
-			<div style="height: 500px" id="table_row_game" class="row">
-				<div id="table_cards" class="col-xs-10">
-					<ul>
-						<li style = "display: inline"  ng-repeat="card in currentGame.table_cards"><img style="width: 100px;" ng-src="assets/{{card.rang+card.suite}}.png"/>
-						</li>
-					</ul>
-				</div>
-					<div id="table_deck" class="col-xs-2">
-					</div>
-					<div id="table_deck" class="col-xs-2">
-					</div>
-			</div>
-			<div id="table_row_player" class="row">
-				<div id="table_player_cards" class="col-xs-10">
-					<ul>
-						<li style="display: inline"  ng-repeat="card in currentGame.player_cards" data-ng-click="putCard(card)" ><button ><img style="width: 100px;" ng-src="assets/{{card.rang+card.suite}}.png"></button>
-						</li>
-						<!-- <div style = "display: inline" ng-repeat="card in currentGame.player_cards" class="col-sm-4">
-  							<a ng-click="setSelectedCard(card)"><img src="assets/{{card.rang+card.suite}}.png" alt=""></a>
-						</div> -->
-					</ul>
-				</div>
-				<div id="table_controls" class="col-xs-2">
-						<div  class="table_button">
-							<span class="glyphicon glyphicon-repeat" aria-hidden="true" ng-click="endTurn()">&nbsp;</span><span>End&nbsp;Turn</span>
-						</div>
-						<div class="table_button">
-							<span class="glyphicon glyphicon-flag" aria-hidden="true" ng-click="endGame()">&nbsp;</span><span>End&nbsp;Game</span>
-						</div>
-					<div>
-					</div>
-				</div>
-			</div>
-	</div>
+ <div class="row wood">
+   <div style="height: 500px" id="table_row_game" class="row">
+    <div id="table_cards" class="col-xs-10">
+     <ul>
+      <li style = "display: inline"  ng-repeat="card in currentGame.table_cards"><img style="width: 100px;" ng-src="assets/{{card.rang+card.suite}}.png"/>
+      </li>
+     </ul>
+    </div>
+     <div id="table_deck" class="col-xs-2">
+     </div>
+     <div id="table_deck" class="col-xs-2">
+     </div>
+   </div>
+   <div id="table_row_player" class="row" style="display: inline-block">
+    <div id="table_player_cards" class="col-xs-10">
+     <ul>
+      <li style="display: inline"  ng-repeat="card in currentGame.player_cards" data-ng-click="putCard(card)" ><button ><img style="width: 100px;" ng-src="assets/{{card.rang+card.suite}}.png"></button>
+      </li>
+      <!-- <div style = "display: inline" ng-repeat="card in currentGame.player_cards" class="col-sm-4">
+         <a ng-click="setSelectedCard(card)"><img src="assets/{{card.rang+card.suite}}.png" alt=""></a>
+      </div> -->
+     </ul>
+    </div>
+    <div id="table_controls" class="col-xs-2" style="display: inline-block">
+      <div  class="table_button">
+       <span class="glyphicon glyphicon-repeat" aria-hidden="true" ng-click="endTurn()">&nbsp;</span><span>End&nbsp;Turn</span>
+      </div>
+      <div class="table_button">
+       <span class="glyphicon glyphicon-flag" aria-hidden="true" ng-click="endGame()">&nbsp;</span><span>End&nbsp;Game</span>
+      </div>
+     <div>
+     </div>
+    </div>
+   </div>
+ </div>
 </div>

@@ -61,5 +61,9 @@ MyApp.controller("ShowGameController", ["$scope", "$interval" , "EndService" , "
 
         $scope.updateGame();
 
+        $interval(function(){
+			$scope.reloadCards();
+		},5000);
+
     }
 ]);
