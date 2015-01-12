@@ -16,7 +16,7 @@
 					<div id="table_deck" class="col-xs-2">
 					</div>
 			</div>
-			<div id="table_row_player" class="row">
+			<div id="table_row_player" class="row" style="display: inline-block">
 				<div id="table_player_cards" class="col-xs-10">
 					<ul>
 						<li style="display: inline"  ng-repeat="card in currentGame.player_cards" data-ng-click="putCard(card)" ><button ><img style="width: 100px;" ng-src="assets/{{card.rang+card.suite}}.png"></button>
@@ -26,7 +26,7 @@
 						</div> -->
 					</ul>
 				</div>
-				<div id="table_controls" class="col-xs-2">
+				<div id="table_controls" class="col-xs-2" style="display: inline-block">
 						<div  class="table_button">
 							<span class="glyphicon glyphicon-repeat" aria-hidden="true" ng-click="endTurn()">&nbsp;</span><span>End&nbsp;Turn</span>
 						</div>

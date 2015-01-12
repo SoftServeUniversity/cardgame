@@ -1,8 +1,8 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("GameController", ["$scope", "JoinService" , "GamesFactory", "GameFactory", "$location", function($scope, JoinService , GamesFactory, GameFactory, $location){
+MyApp.controller("GameController", ["$scope", "Auth", "JoinService" , "GamesFactory", "GameFactory", "$location", function($scope, Auth, JoinService , GamesFactory, GameFactory, $location){
 	$scope.games = GamesFactory.query();
-	$scope.currentUser = true;
+	$scope.currentUser = Auth.isAuthenticated();
 
 	$scope.deleteGame = function(game){
 		if(confirm("Are you sure?")){
