@@ -11,7 +11,6 @@ MyApp.controller("ShowGameController", ["$scope", "$interval" , "EndService" , "
             }, function(error) {
                 console.log(error);
             });
-<<<<<<< HEAD
         };
 
         $scope.checkAuth = function() {
