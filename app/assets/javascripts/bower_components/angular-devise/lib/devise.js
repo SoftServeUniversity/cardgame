@@ -197,6 +197,7 @@
              *                  rejected by the server.
              */
             login: function(creds) {
+                console.log("Angular-Devise Logout()");
                 var withCredentials = arguments.length > 0,
                     loggedIn = service.isAuthenticated();
                     console.log("Angular-Devise login. creds: " + creds);
@@ -229,6 +230,7 @@
              *                  rejected by the server.
              */
             logout: function() {
+                console.log("Angular-Devise Logout()");
                 var returnOldUser = constant(service._currentUser);
                 console.log("Angular-Devise logout.");
                 return $http(httpConfig('logout'))
@@ -279,8 +281,10 @@
              */
             currentUser: function() {
                 if (service.isAuthenticated()) {
+                    console.log("Check CurrentUser " + "IsAuthenticated = true");
                     return $q.when(service._currentUser);
                 }
+                console.log("Check CurrentUser " + "IsAuthenticated = false");
                 return service.login();
             },
 
@@ -290,6 +294,7 @@
              * @returns Boolean
              */
             isAuthenticated: function(){
+                console.log("isAuthenticated()");
                 return !!service._currentUser;
             }
         };

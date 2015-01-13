@@ -52,7 +52,15 @@ MyApp.controller("NavController", ["$scope", "Auth", "$http",
             $scope.signedIn = Auth.isAuthenticated();
             $scope.user = {};
         });
-
+        
         $scope.resolveUser();
+
+        $scope.$watch('user', function(newValue, oldValue) {
+            console.log("____________________________________");
+            console.log(new Date());
+            console.log("____________________________________");
+            console.log("NewValue: " + newValue.username);
+            console.log("OldValue: " + oldValue.username);
+        });
     }
 ]);

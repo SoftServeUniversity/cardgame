@@ -10,7 +10,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
                 $scope.checkAuth();
                 $scope.currentGame = data;
             }, function(error) {
-                console.log(error);
+                // console.log(error);
             });
         };
 
@@ -27,7 +27,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
             }, function(data) {
                 $scope.reloadCards()
             }, function(error) {
-                console.log(error);
+                // console.log(error);
             });
         };
 
@@ -40,7 +40,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
                     }, function(data) {
                         $scope.currentGame = data;
                     }, function(error) {
-                        console.log(error);
+                        // console.log(error);
                     });
                 });
             }, 2000)
@@ -52,7 +52,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
             }, function(data) {
                 $scope.reloadCards();
             }, function(error) {
-                console.log(error);
+                // console.log(error);
             });
         };
 
