@@ -33,3 +33,11 @@ MyApp.factory("EndService", ["$resource", function($resource){
 		end_turn: {method: "POST", params: {id: "@id"}}
 	});
 }]);
+
+MyApp.service('userService',['$resource', function($resource){
+	return $resource(" users/:id.json", {}, {
+		get_user: {method: "GET", params: {id: "@id"}},
+		update_user: {method: "PUT", params: {id: "@id"}}
+	});
+	
+}]);

@@ -43,7 +43,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
                         console.log(error);
                     });
                 });
-            }, 1000)
+            }, 2000)
         };
 
         $scope.endTurn = function() {
@@ -64,7 +64,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
 
         $interval(function() {
             $scope.reloadCards();
-        }, 1000);
+        }, 5000);
 
     }
 ]);

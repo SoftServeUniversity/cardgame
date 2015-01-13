@@ -23,6 +23,10 @@ MyApp.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
 			templateUrl: "assets/games/show_game.html",
 			controller: "ShowGameController"
 		}).
+		when("/users_room", {
+			templateUrl: "assets/cabinet/users_room.html",
+			controller: "UserRoomController"
+		}).
 		otherwise({
 			redirectTo: "/home"
 		});

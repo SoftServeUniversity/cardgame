@@ -10,9 +10,7 @@ class GamesController < ApplicationController
 
   def show 
     render json: resp_to_json  
-    if !@game
-      render json: @games
-    end
+  
   end
 
   def my_game

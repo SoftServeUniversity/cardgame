@@ -24,13 +24,13 @@
       <tr ng-repeat="game in games">
         <td class="col-xs-4">{{game.name}}</td>
         <td class="col-xs-5">{{game.description}}</td>
-        <td class="col-xs-1" ng-if="currentUser">
+        <td class="col-xs-1" ng-if="user">
           <button type="button" class="btn btn-info" ng-click="showGame(game)"> show </button>
         </td>
-        <td class="col-xs-1" ng-if="currentUser">
+        <td class="col-xs-1" ng-if="user">
           <button type="button" class="btn btn-info" ng-click="joinGame(game)"> JOIN </button>
         </td>
-        <td class="col-xs-1" ng-if="currentUser">
+        <td class="col-xs-1" ng-if="user">
           <button type="button" class="btn btn-danger" ng-click="deleteGame(game)"> DELETE </button>
         </td>
       </tr>

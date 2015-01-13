@@ -2,8 +2,6 @@ var MyApp = angular.module("MyApp");
 
 MyApp.controller("NavController", ["$scope", "Auth", "$http",
     function($scope, Auth, $http) {
-        $scope.signedIn = Auth.isAuthenticated();
-        $scope.logout = Auth.logout();
 
         $scope.logout = function() {
             Auth.logout().then(function(oldUser) {
@@ -33,11 +31,12 @@ MyApp.controller("NavController", ["$scope", "Auth", "$http",
             //     deferred.reject(error);
             // });
         });
-
-        Auth.currentUser().then(function(user) {
-            $scope.signedIn = Auth.isAuthenticated();
-            $scope.user = user;
-        });
+        $scope.resolveUser = function(){
+            Auth.currentUser().then(function(user) {
+                $scope.signedIn = Auth.isAuthenticated();
+                $scope.user = user;
+            });
+        };
 
         $scope.$on("devise:new-registration", function(e, user) {
             $scope.signedIn = Auth.isAuthenticated();
@@ -54,5 +53,6 @@ MyApp.controller("NavController", ["$scope", "Auth", "$http",
             $scope.user = {};
         });
 
+        $scope.resolveUser();
     }
 ]);
