@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-top">
+<div id="mainHead" class="navbar navbar-inverse navbar-top">
 	<div class="container">
 	<div class="row">
 		<div class="col-xs-4" id="logo">
@@ -8,10 +8,6 @@
 		</div>
 		
 		<div class="col-xs-4 divCenter">
-			<ul class="nav navbar-nav">
-				<li><%= link_to 'Games', games_path , :class => "" %></li>
-				<li><%= link_to 'Statistics', statistic_path , class: "" %></li>
-			</ul>
 		</div>
 
 		<div class="col-xs-4">
@@ -68,5 +64,16 @@
 			<% end %>
 		</div>
 	</div>
+	</div>
+</div>
+<div id="headNav" class="col-md-12">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-4">
+				<span><%= link_to 'Home', root_path, class: "text-muted" %></span>
+				<span><%= link_to 'Games', games_path, class: "text-muted" %></span>
+				<span><%= link_to 'Statistics', statistic_path, class: "text-muted" %></span>
+			</div>
+		</div>
 	</div>
 </div>

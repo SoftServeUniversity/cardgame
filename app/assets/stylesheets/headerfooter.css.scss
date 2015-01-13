@@ -1,5 +1,15 @@
+#mainHead {
+	/*height: 80px;*/
+	/*padding-top: 15px;*/
+}
+#mainHead div#logo span{
+	/*font-size: 32px;*/
+}
+
+
 .navbar-top {
-	border-radius: 0 0 4px 4px !important;
+	border-radius: 0 0 0 0 !important;
+	margin-bottom: 0 !important;
 }
 
 .navbar-brand > img {
@@ -12,6 +22,24 @@
 
 li .popover {
 	width: 250px;
+}
+
+#headNav {
+	height: 25px;
+	margin-bottom: 20px;
+	color: #9d9d9d;
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 0 0 4px 4px;
+}
+
+#headNav span {
+	margin: 0 15px 0 0;
+}
+#headNav a {
+	text-decoration: none;
+}
+#headNav a:hover {
+	color: orange;
 }
 
 
