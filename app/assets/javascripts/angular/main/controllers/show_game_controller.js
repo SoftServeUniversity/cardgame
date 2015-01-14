@@ -1,7 +1,7 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , "CustomActionService", "GamesFactory", "GameFactory", "$location", "Auth",
-    function($scope, $interval, $routeParams , CustomActionService , GamesFactory, GameFactory, $location, Auth) {
+MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , "MY_CONST" , "CustomActionService", "GamesFactory", "GameFactory", "$location", "Auth",
+    function($scope, $interval, $routeParams , MY_CONST , CustomActionService , GamesFactory, GameFactory, $location, Auth) {
 
         $scope.updateGame = function() {
             GameFactory.show({
@@ -9,6 +9,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
             }, function(data) {
                 $scope.resolveUser();
                 $scope.currentGame = data;
+                $scope.deckCounter = MY_CONST.DECK_CARDS_NUMBER - data.cursor;
             }, function(error) {
                 // console.log(error);
             });
@@ -39,7 +40,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
                         // console.log(error);
                     });
                 });
-            }, 2000)
+            }, MY_CONST.TIMEOUT)
         };
 
         $scope.endTurn = function() {
@@ -61,7 +62,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
 
         $interval(function() {
             $scope.reloadCards();
-        }, 5000);
+        }, MY_CONST.INTERVAL);
 
     }
 ]);

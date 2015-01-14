@@ -18,6 +18,7 @@ MyApp.controller("UserRoomController", ["$scope", "userService", "Auth" , functi
  			view_theme: $scope.updatedUser.view_theme
  		}, function(data){
             $scope.user_stat = data;
+            $scope.user.username = data.username;
 			$scope.toggleForm();
 		});
  	};

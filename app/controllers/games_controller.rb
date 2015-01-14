@@ -159,11 +159,11 @@ class GamesController < ApplicationController
     if @game.mover
       start_game_params = { game_mover: @game.mover.user.id,
       game_attacker: @game.attacker.user.id,
-      game_defender: @game.attacker.user.id,
+      game_defender: @game.defender.user.id,
       table_cards: @game.table.table_cards,
       player_cards: self.current_user.player.player_cards,
-      trump: @game.deck.trump,
-      deck_cards_count: @game.deck.cursor }
+      deck_trump: @game.deck.deck_cards[35],
+      cursor: @game.deck.cursor }
       resp.merge! (start_game_params)
     end
 

@@ -30,9 +30,9 @@ MyApp.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
 		otherwise({
 			redirectTo: "/home"
 		});
-}]);
+}]).constant("MY_CONST", {
+        "TIMEOUT": 2000,
+        "INTERVAL": 5000,
+        "DECK_CARDS_NUMBER": 36
+    });
 
-MyApp.config([ "AuthInterceptProvider" ,function( AuthInterceptProvider) {
-        // Intercept 401 Unauthorized everywhere
-        AuthInterceptProvider.interceptAuth(true);
-    }]);

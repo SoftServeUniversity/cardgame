@@ -1,6 +1,6 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("GameController", ["$scope", "$interval" , "Auth" , "CustomActionService" , "GamesFactory", "GameFactory", "$location", function($scope, $interval , Auth , CustomActionService , GamesFactory, GameFactory, $location){
+MyApp.controller("GameController", ["$scope", "$interval" , "MY_CONST" , "Auth" , "CustomActionService" , "GamesFactory", "GameFactory", "$location", function($scope, $interval , MY_CONST , Auth , CustomActionService , GamesFactory, GameFactory, $location){
 
 	$scope.indexGames = function(){
 		GamesFactory.query({}, function(data) {
@@ -46,6 +46,6 @@ MyApp.controller("GameController", ["$scope", "$interval" , "Auth" , "CustomActi
             $scope.$apply(function() {
                 $scope.indexGames();
             });
-        }, 2000);
-	},5000);
+        }, MY_CONST.TIMEOUT);
+	}, MY_CONST.INTERVAL);
 }]);
