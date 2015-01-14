@@ -2,7 +2,6 @@ var MyApp = angular.module("MyApp");
 
 MyApp.controller("NavController", ["$scope", "Auth", "$http", "$location",
     function($scope, Auth, $http, $location) {
-
         $scope.logout = function() {
             Auth.logout().then(function(oldUser) {
                 alert(oldUser.username + "you're signed out now.");
@@ -14,6 +13,7 @@ MyApp.controller("NavController", ["$scope", "Auth", "$http", "$location",
         $scope.$on('devise:unauthorized', function(event, xhr, deferred) {
            $location.path("/login");
         });
+        
         $scope.resolveUser = function(){
             Auth.currentUser().then(function(user) {
                 $scope.signedIn = Auth.isAuthenticated();

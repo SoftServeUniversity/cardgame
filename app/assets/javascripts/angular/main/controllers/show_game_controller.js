@@ -1,14 +1,13 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "PutService", "GamesFactory", "GameFactory", "$location", "Auth", "$routeParams",
-    function($scope, $interval, EndService, PutService, GamesFactory, GameFactory, $location, Auth, $routeParams) {
+MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , "CustomActionService", "GamesFactory", "GameFactory", "$location", "Auth",
+    function($scope, $interval, $routeParams , CustomActionService , GamesFactory, GameFactory, $location, Auth) {
 
         $scope.updateGame = function() {
             GameFactory.show({
                 id: $routeParams.id
             }, function(data) {
                 $scope.checkAuth();
-                $scope.response = data;
                 $scope.gameEnded(data)
                 $scope.currentGame = data;
             }, function(error) {
@@ -16,18 +15,13 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
             });
         };
 
-        $scope.checkAuth = function() {
-            $scope.isAuthenticated = Auth.isAuthenticated();
-            $scope.currentUser = Auth.currentUser();
-        };
-
         $scope.putCard = function(card) {
-            PutService.put_card({
+            CustomActionService.put_card({
                 id: $routeParams.id,
+                action: "put_card",
                 suite: card.suite,
                 rang: card.rang
             }, function(data) {
-                $scope.response = data;
                 $scope.gameEnded(data);
                 $scope.reloadCards();
             }, function(error) {
@@ -51,8 +45,9 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
         };
 
         $scope.endTurn = function() {
-            EndService.end_turn({
-                id: $routeParams.id
+            CustomActionService.end_turn({
+                id: $routeParams.id,
+                action: "end_turn"
             }, function(data) {
                 $scope.reloadCards();
             }, function(error) {
@@ -81,3 +76,14 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
         };
     }
 ]);
+
+MyApp.filter("toArray", function(){
+    return function(obj) {
+        var result = [];
+        angular.forEach(obj, function(val, key) {
+            result.push(val);
+        });
+        return result;
+    };
+});
+

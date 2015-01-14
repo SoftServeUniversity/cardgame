@@ -1,6 +1,6 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("GameController", ["$scope", "$interval" , "Auth" , "JoinService" , "GamesFactory", "GameFactory", "$location", function($scope, $interval , Auth , JoinService , GamesFactory, GameFactory, $location){
+MyApp.controller("GameController", ["$scope", "$interval" , "Auth" , "CustomActionService" , "GamesFactory", "GameFactory", "$location", function($scope, $interval , Auth , CustomActionService , GamesFactory, GameFactory, $location){
 
 	$scope.indexGames = function(){
 		GamesFactory.query({}, function(data) {
@@ -13,7 +13,8 @@ MyApp.controller("GameController", ["$scope", "$interval" , "Auth" , "JoinServic
 
 	$scope.deleteGame = function(game){
 		if(confirm("Are you sure?")){
-			GameFactory.delete({id: game.id}, function(){
+			GameFactory.delete({id: game.id},
+			function(){
 				$scope.indexGames();
 			});
 		}
@@ -28,7 +29,7 @@ MyApp.controller("GameController", ["$scope", "$interval" , "Auth" , "JoinServic
 	};
 
 	$scope.joinGame = function(game){
-		JoinService.join({id: game.id}, function(){
+		CustomActionService.join({id: game.id , action: "update"}, function(){
 			$location.path("/games/"+ game.id);
 		});
 	};
