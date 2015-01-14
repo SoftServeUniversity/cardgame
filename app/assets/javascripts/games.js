@@ -1,11 +1,3 @@
-// $(function(){
-// 	$(".playerCardsList li").click(
-// 		function(){
-// 			$(this).hide('slow');
-// 		}
-// 	);
-// });
-
 $(function(){
 	$("#logInButton").popover({
 		html: true,
@@ -27,6 +19,47 @@ $(function(){
 		}
 	});
 
+
+
+
+
+	$("#newGameLogo").on("mouseover", function(){
+		$(this).animate({
+			"height": "+=0.5em",
+		}, 80
+		);
+	});
+
+	$("#newGameLogo").on("mouseleave", function(){
+		$(this).animate({
+			"height": "-=0.5em",
+		}, 400
+		);
+	});
+
+
+
+	// Cards Animations
+
+	$(".playerCardsList li").on("mouseover", function(){
+		var card = $(this);
+		var position = card.position();
+		if( position.top == 0 ){			
+			$(this).css({"position": "relative"});
+			$(this).animate({
+				"top": "-50px",
+			}, 150
+			);
+		}	
+	});
+
+	$(".playerCardsList li").on("mouseleave", function(){		
+		$(this).css({"position": "relative"});
+		$(this).animate({
+			"top": "0px",
+		}, 400
+		);
+	});
 
 
 });

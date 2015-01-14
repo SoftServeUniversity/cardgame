@@ -1,8 +1,9 @@
 <table class="table gamestable">
     <thead>
         <tr>
-            <th class="col-xs-4">Name</th>
-            <th class="col-xs-5">Description</th>
+            <th class="col-xs-3">Game Name</th>
+            <th class="col-xs-3">Description</th>
+            <th class="col-xs-3">Game Owner</th>
             <th class="col-xs-1"></th>
             <th class="col-xs-1"></th>
             <th class="col-xs-1"></th>
@@ -11,8 +12,9 @@
     <tbody>
         <% @games.each do |game| %>
         <tr>
-            <td class="col-xs-4"><%= game.name %> | <%= game.players[0].user.username %> </td>
-            <td class="col-xs-5"><%= game.description %> | <%= game.state_name %></p></td>
+            <td class="col-xs-3"><%= game.name %></td>
+            <td class="col-xs-3"><%= game.description %> | <%= game.state_name %></p></td>
+            <td class="col-xs-3"><%= game.players[0].user.username %></p></td>
             <td class="col-xs-1">
                 <% if current_user %>
                     <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => '' %>

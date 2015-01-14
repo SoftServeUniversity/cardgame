@@ -2,12 +2,12 @@
     <div class="row">
         <div class="jumbotron jumboart text-center">
             <%= link_to new_game_path do%>
-                <h2 class="text-center">NEW GAME</h2>
+                <%= image_tag("newgame.png", class: "textart", id: "newGameLogo") %>
             <% end %>
         </div>
         <% if @games.count > 0 %>
             <div id = "card_games" class="tablePad">
-              <h2 class="text-center">Games</h2>
+              <%= image_tag("games.png", class: "textart") %>
               <%= render 'games' %>
             </div>
         <% else %>

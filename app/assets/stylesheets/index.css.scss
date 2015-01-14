@@ -1,16 +1,30 @@
 .jumboart {
+	height: 120px;
+}
+
+.jumboart h2 {
+	color: #fc9200;
+	text-decoration: none;	
+}
+
+.jumboart h2:hover, .jumboart a:hover {
+	text-shadow: 0 0 3px #fc9200 !important;
+	text-decoration: none;	
 }
 
 #card_games {
+	text-align: center;
 	padding-left: 50px;
 	padding-right: 50px;
 	padding-bottom: 20px;
-	padding-top: 1px;
+	padding-top: 20px;
 	background-color: #eeeeee;
 }
 
 .gamestable {
 	background-color: white;
+	text-align: left !important;
+	margin: 20px 0 0 0;
 }
 
 .gamestable td {
@@ -18,4 +32,12 @@
 	overflow: auto;
 	word-wrap: break-word;
 	vertical-align:middle;
+}
+
+.textart {
+	height: 1.7em;
+}
+
+#card_games .textart {
+	height: 1.5em;
 }

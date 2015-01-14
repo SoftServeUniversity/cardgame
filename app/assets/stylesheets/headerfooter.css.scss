@@ -9,8 +9,27 @@
 #userDropdown {
 	height: 78px;
 	padding-top: 43px;
+	transition: color 0.3s;
 }
 
+#userDropdown:hover {
+	color: #fc9200;
+	text-shadow: 0 0 3px #fc9200 !important;	
+	transition: text-shadow 0.5s;
+}
+
+.navbar-inverse .navbar-nav > .open > a {
+	color: #fc9200 !important;
+}
+
+.dropdown-menu a {
+	transition: color 0.3s;
+}
+.dropdown-menu a:hover {
+	color: #fc9200 !important;
+	text-shadow: 0 0 1px #fc9200 !important;	
+	transition: text-shadow 0.5s;
+}
 
 .navbar-top {
 	border-radius: 0 0 0 0 !important;
@@ -42,9 +61,12 @@ li .popover {
 }
 #headNav a {
 	text-decoration: none;
+	transition: color 0.3s;
 }
 #headNav a:hover {
-	color: orange;
+	color: #fc9200;	
+	text-shadow: 0 0 3px #fc9200 !important;	
+	transition: text-shadow 0.5s;
 }
 
 
