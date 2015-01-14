@@ -6,7 +6,7 @@
     /**
      * Set to true to intercept 401 Unauthorized responses
      */
-    var interceptAuth = false;
+    var interceptAuth = true;
 
     // The interceptAuth config function
     this.interceptAuth = function(value) {
@@ -16,6 +16,7 @@
 
     this.$get = ['$rootScope', '$q', function($rootScope, $q) {
         // Only for intercepting 401 requests.
+        console.log("Angular-Devise Intercepter");
         return {
             responseError: function(response) {
                 // Determine if the response is specifically disabling the interceptor.
@@ -196,9 +197,10 @@
              *                  rejected by the server.
              */
             login: function(creds) {
+                console.log("Angular-Devise Logout()");
                 var withCredentials = arguments.length > 0,
                     loggedIn = service.isAuthenticated();
-
+                    console.log("Angular-Devise login. creds: " + creds);
                 creds = creds || {};
                 return $http(httpConfig('login', creds))
                     .then(service.parse)
@@ -228,7 +230,9 @@
              *                  rejected by the server.
              */
             logout: function() {
+                console.log("Angular-Devise Logout()");
                 var returnOldUser = constant(service._currentUser);
+                console.log("Angular-Devise logout.");
                 return $http(httpConfig('logout'))
                     .then(reset)
                     .then(returnOldUser)
@@ -277,8 +281,10 @@
              */
             currentUser: function() {
                 if (service.isAuthenticated()) {
+                    console.log("Check CurrentUser " + "IsAuthenticated = true");
                     return $q.when(service._currentUser);
                 }
+                console.log("Check CurrentUser " + "IsAuthenticated = false");
                 return service.login();
             },
 
@@ -288,6 +294,7 @@
              * @returns Boolean
              */
             isAuthenticated: function(){
+                console.log("isAuthenticated()");
                 return !!service._currentUser;
             }
         };
