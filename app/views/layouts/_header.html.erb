@@ -51,15 +51,17 @@
 				</div>
 			<% else %>
 				<div id="logInForm" class="hide">
-					<%= form_for(:user, :as => :user, :url => session_path(:user), :html => {:class => "form-group"}) do |f| %>
+					<%= form_for(:user, :as => :user, :url => session_path(:user), :html => {:class => "new_user"}) do |f| %>
+						<%= f.label :login, "Email:" %>
 						<%= f.text_field :login, :placeholder => "Email", class: "form-control" %>
+						<%= f.label :password, "Password:" %>
 						<%= f.password_field :password, :placeholder => "Password", class: "form-control" %>
-						<%= f.submit 'Log in', class: "btn btn-success" %>
+						<%= f.submit 'Log in', class: "" %>
 					<% end %>
 				</div>
 				<ul class="nav navbar-nav navbar-right">
-					<li><%= link_to 'Log in', "#", class: "", id: "logInButton" %></li>
-					<li><%= link_to 'Register', new_user_registration_path, class: "" %></li>
+					<li><%= link_to 'Log in', "#", class: "logInGroup", id: "logInButton" %></li>
+					<li><%= link_to 'Register', new_user_registration_path, class: "logInGroup" %></li>
 				</ul>
 			<% end %>
 		</div>

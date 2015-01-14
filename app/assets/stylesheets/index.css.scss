@@ -1,5 +1,6 @@
 .jumboart {
 	height: 120px;
+	padding-top: 48px !important;
 }
 
 .jumboart h2 {
@@ -22,12 +23,14 @@
 }
 
 .gamestable {
+	color: #960004;
 	background-color: white;
 	text-align: left !important;
 	margin: 20px 0 0 0;
 }
 
 .gamestable td {
+	color: #fc9200;
 	max-width: 130px;
 	overflow: auto;
 	word-wrap: break-word;

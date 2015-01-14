@@ -16,14 +16,15 @@
 	margin: 0 0 0 0;
 }
 
+
+
+
 #table_controls span {
-	color: white;
 	text-decoration: none;
+}
+#table_controls span:hover {
 }
 #table_controls a {
-	text-decoration: none;
-}
-#table_controls a:hover {
 	text-decoration: none;
 }
 
@@ -31,10 +32,19 @@
 	min-width: 96px;
 	margin: 15px;
 	margin-left: 0px;
+	color: #C4C4C4;
+	text-decoration: none;
+	transition: color 0.3s;
 }
 .table_button:hover {
-	box-shadow: 0px 0px 3px 3px white;
+	color: #fc9200 !important;	
+	text-shadow: 0 0 3px #fc9200;	
+	transition: text-shadow 0.5s;
 }
+
+
+
+
 
 
 /*Defence cards offset to cover hitcards*/
