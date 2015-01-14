@@ -1,7 +1,7 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("NavController", ["$scope", "Auth", "$http",
-    function($scope, Auth, $http) {
+MyApp.controller("NavController", ["$scope", "Auth", "$http", "$location",
+    function($scope, Auth, $http, $location) {
 
         $scope.logout = function() {
             Auth.logout().then(function(oldUser) {
@@ -12,24 +12,7 @@ MyApp.controller("NavController", ["$scope", "Auth", "$http",
         };
 
         $scope.$on('devise:unauthorized', function(event, xhr, deferred) {
-            // $scope.credentials = {
-            //     login: "qwe",
-            //     password: "qweqweqwe"
-            // };
-            // Auth.login($scope.credentials).then(function() {
-            // 	console.log("Relogin");
-            //     // Successfully logged in.
-            //     // Redo the original request.
-            //     return $http(xhr.config);
-            // }).then(function(response) {
-            //     // Successfully recovered from unauthorized error.
-            //     // Resolve the original request's promise.
-            //     deferred.resolve(response);
-            // }, function(error) {
-            //     // There was an error logging in.
-            //     // Reject the original request's promise.
-            //     deferred.reject(error);
-            // });
+           $location.path("/login");
         });
         $scope.resolveUser = function(){
             Auth.currentUser().then(function(user) {
