@@ -8,6 +8,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
                 id: $routeParams.id
             }, function(data) {
                 $scope.resolveUser();
+                $scope.gameEnded(data)
                 $scope.currentGame = data;
                 $scope.deckCounter = MY_CONST.DECK_CARDS_NUMBER - data.cursor;
             }, function(error) {
@@ -22,7 +23,8 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
                 suite: card.suite,
                 rang: card.rang
             }, function(data) {
-                $scope.reloadCards()
+                $scope.gameEnded(data);
+                $scope.reloadCards();
             }, function(error) {
                 // console.log(error);
             });
@@ -55,7 +57,11 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
         };
 
         $scope.endGame = function() {
-            alert("endGame");
+            if(confirm("Are you sure?")){
+                GameFactory.delete({id: game.id}, function(){
+                    $location.path("users_room");
+                });
+            }
         };
 
         $scope.updateGame();
@@ -64,6 +70,11 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
             $scope.reloadCards();
         }, MY_CONST.INTERVAL);
 
+        $scope.gameEnded = function(date){
+            if(date.status == "ended"){
+                $location.path("/users_room");
+            }
+        };
     }
 ]);
 

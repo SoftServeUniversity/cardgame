@@ -35,4 +35,3 @@ MyApp.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
         "INTERVAL": 5000,
         "DECK_CARDS_NUMBER": 36
     });
-

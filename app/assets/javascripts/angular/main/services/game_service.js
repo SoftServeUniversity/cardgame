@@ -10,7 +10,6 @@ MyApp.factory("GamesFactory", ["$resource", function($resource){
 MyApp.factory("GameFactory", ["$resource", function($resource){
 	return $resource("games/:id.json", {}, {
 		show: {method: "GET", params: {id: "@id"}},
-		join: {method: "GET", params: {id: "@id"}},
 		update: {method: "PUT", params: {id: "@id"}},
 		delete: {method: "DELETE", params: {id: "@id"}}
 	});
