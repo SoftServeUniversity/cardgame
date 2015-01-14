@@ -1,0 +1,38 @@
+<div class="text-center" ng-hide="currentUser.game">
+  <h2>
+    <a href="#new_game"> New Game </a>
+  </h2>
+</div>
+<div class="text-center"ng-show="currentUser.game">
+  <h2>
+    <a href="#"> My Game </a>
+  </h2>
+</div>
+<h2 class="text-center" ng-hide="games"> Nobody plays </h2>
+<h2 class="text-center" ng-show="games"> Games </h2>
+<table class="table gamestable" ng-if="games">
+  <thead>
+    <tr>
+      <th class="col-xs-4">Name</th>
+      <th class="col-xs-5">Description</th>
+      <th class="col-xs-1"></th>
+      <th class="col-xs-1"></th>
+      <th class="col-xs-1"></th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr ng-repeat="game in games">
+        <td class="col-xs-4">{{game.name}}</td>
+        <td class="col-xs-5">{{game.description}}</td>
+        <td class="col-xs-1" ng-if="user">
+          <button type="button" class="btn btn-info" ng-click="showGame(game)"> show </button>
+        </td>
+        <td class="col-xs-1" ng-if="user">
+          <button type="button" class="btn btn-info" ng-click="joinGame(game)"> JOIN </button>
+        </td>
+        <td class="col-xs-1" ng-if="user">
+          <button type="button" class="btn btn-danger" ng-click="deleteGame(game)"> DELETE </button>
+        </td>
+      </tr>
+  </tbody>
+</table>

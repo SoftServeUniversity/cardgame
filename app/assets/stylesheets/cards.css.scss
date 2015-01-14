@@ -1,0 +1,85 @@
+.wood {
+	background-image: url("woods5.jpg");
+	/*background-size: 1000px;*/
+	box-shadow: inset 0px 0px 30px 10px rgba(0, 0, 0, 0.6);
+	min-width: 660px;
+	padding: 0 0 0 0;
+	border-radius: 4px;
+}
+
+/*AJAX-divs with ul`s of cards inside*/
+#table_row_game, #table_row_player {
+	margin: 0 0 0 0;
+	padding-top: 15px;
+}
+#table_row_player {	
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#table_cards, #table_deck {
+	height: 265px;
+	margin: 50px 0 0 0;
+}
+#table_player_cards {
+	margin: 0 0 0 0;
+}
+
+#table_controls span {
+	color: white;
+	text-decoration: none;
+}
+#table_controls a {
+	text-decoration: none;
+}
+#table_controls a:hover {
+	text-decoration: none;
+}
+
+.table_button {
+	min-width: 110px;
+	margin: 15px;
+	margin-left: 0px;
+}
+.table_button:hover {
+	box-shadow: 0px 0px 3px 3px white;
+}
+
+
+/*Defence cards offset to cover hitcards*/
+.defenceCards {
+	margin: -70px 0 0 0;
+}
+.defenceCards li {
+	box-shadow: 0px -5px 3px -3px rgba(0, 0, 0, 0.6);
+}
+
+
+.playerCardsList, .tableCardsList {
+	min-width: 540px;
+	list-style-type: none;
+	padding: 0 0 0 0;
+}
+
+.playerCardsList li {
+	display: inline-block;
+}
+
+.tableCardsList li {
+	display: inline-block;
+}
+
+
+/*Cards itsels*/
+.tableCards, .deckCards {
+	width: 85px;
+}
+.playerCards {
+	width: 100px;
+	margin-bottom: 15px;
+}
+
+@media (max-width: 992px) {
+	 .playerCards {
+	  width: 85px;
+	}
+}
