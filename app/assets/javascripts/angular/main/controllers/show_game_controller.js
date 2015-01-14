@@ -7,7 +7,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
             GameFactory.show({
                 id: $routeParams.id
             }, function(data) {
-                $scope.checkAuth();
+                $scope.resolveUser();
                 $scope.currentGame = data;
             }, function(error) {
                 // console.log(error);

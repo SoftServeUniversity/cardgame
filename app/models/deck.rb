@@ -14,10 +14,6 @@ class Deck < ActiveRecord::Base
 
 		def init_card_iteration rang
 			%w{hearts aspades diamonds clubs}.each{|suite| deck_cards << Card.new(suite, rang)}
-				# deck_cards << Card.new('hearts', rang)
-				# deck_cards << Card.new('spades', rang)
-				# deck_cards << Card.new('diamonds', rang)
-				# deck_cards << Card.new('clubs', rang)
 		end
 
 		def shuffle_deck
