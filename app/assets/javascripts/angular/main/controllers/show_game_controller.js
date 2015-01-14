@@ -1,11 +1,11 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "PutService", "GamesFactory", "GameFactory", "$location", "Auth",
-    function($scope, $interval, EndService, PutService, GamesFactory, GameFactory, $location, Auth) {
+MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , "CustomActionService", "GamesFactory", "GameFactory", "$location", "Auth",
+    function($scope, $interval, $routeParams , CustomActionService , GamesFactory, GameFactory, $location, Auth) {
 
         $scope.updateGame = function() {
             GameFactory.show({
-                id: $location.path().split('/').pop()
+                id: $routeParams.id
             }, function(data) {
                 $scope.checkAuth();
                 $scope.currentGame = data;
@@ -14,14 +14,10 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
             });
         };
 
-        $scope.checkAuth = function() {
-            $scope.isAuthenticated = Auth.isAuthenticated();
-            $scope.currentUser = Auth.currentUser();
-        };
-
         $scope.putCard = function(card) {
-            PutService.put_card({
-                id: $location.path().split('/').pop(),
+            CustomActionService.put_card({
+                id: $routeParams.id,
+                action: "put_card",
                 suite: card.suite,
                 rang: card.rang
             }, function(data) {
@@ -36,7 +32,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
             setTimeout(function() {
                 $scope.$apply(function() {
                     GameFactory.show({
-                        id: $location.path().split('/').pop()
+                        id: $routeParams.id
                     }, function(data) {
                         $scope.currentGame = data;
                     }, function(error) {
@@ -47,8 +43,9 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
         };
 
         $scope.endTurn = function() {
-            EndService.end_turn({
-                id: $location.path().split('/').pop()
+            CustomActionService.end_turn({
+                id: $routeParams.id,
+                action: "end_turn"
             }, function(data) {
                 $scope.reloadCards();
             }, function(error) {
