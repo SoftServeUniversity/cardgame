@@ -32,4 +32,15 @@ MyApp.factory("EndService", ["$resource", function($resource){
 	return $resource(" /games/:id/end_turn.json", {}, {
 		end_turn: {method: "POST", params: {id: "@id"}}
 	});
+<<<<<<< HEAD
+=======
+}]);
+
+MyApp.service('userService',['$resource', function($resource){
+	return $resource(" users/:id.json", {}, {
+		get_user: {method: "GET", params: {id: "@id"}},
+		update_user: {method: "PUT", params: {id: "@id"}}
+	});
+	
+>>>>>>> e198c8aea3afbf62fe54d2314466a32df0ef4f2e
 }]);

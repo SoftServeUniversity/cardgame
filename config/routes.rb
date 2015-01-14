@@ -19,45 +19,8 @@ Rails.application.routes.draw do
 
   get 'games/:id', :controller => 'games', :action => 'refresh_show', :as => 'refresh_show'
 
-  get "/assets/0hearts"
-  get "/assets/1hearts"
-  get "/assets/2hearts"
-  get "/assets/3hearts"
-  get "/assets/4hearts"
-  get "/assets/5hearts"
-  get "/assets/6hearts"
-  get "/assets/7hearts"
-  get "/assets/8hearts"
 
-  get "/assets/0clubs"
-  get "/assets/1clubs"
-  get "/assets/2clubs"
-  get "/assets/3clubs"
-  get "/assets/4clubs"
-  get "/assets/5clubs"
-  get "/assets/6clubs"
-  get "/assets/7clubs"
-  get "/assets/8clubs"
-
-  get "/assets/0spades"
-  get "/assets/1spades"
-  get "/assets/2spades"
-  get "/assets/3spades"
-  get "/assets/4spades"
-  get "/assets/5spades"
-  get "/assets/6spades"
-  get "/assets/7spades"
-  get "/assets/8spades"
-
-  get "/assets/0diamonds"
-  get "/assets/1diamonds"
-  get "/assets/2diamonds"
-  get "/assets/3diamonds"
-  get "/assets/4diamonds"
-  get "/assets/5diamonds"
-  get "/assets/6diamonds"
-  get "/assets/7diamonds"
-  get "/assets/8diamonds"
+  # get "assets/:name" , :controller => 'assets', :action => 'get_img', :as => 'get_img'
 
   root 'main#index'
   # The priority is based upon order of creation: first created -> highest priority.

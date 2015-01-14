@@ -1,0 +1,26 @@
+<h1>Welcome, {{ user_stat.username }}!</h1>
+
+<h2>Picked theme {{user_stat.view_theme }}</h2>
+
+<br />
+<h3>Games played {{user_stat.games_played}}</h3>
+<h3> Wins {{user_stat.games_won}}</h3>
+<h3> Loses {{user_stat.games_lose}}</h3> 
+
+<button type="button" class="btn btn-danger" ng-click="toggleForm()" ng-show="!showingForm">Edit Profile</button>
+
+<form class="col-lg-6" id="updateForm" ng-submit="updateUser()" ng-show="showingForm">
+	<div class="">
+		<div class="">
+		New username: <input ng-model="updatedUser.username" type="text" placeholder="">
+		</div>
+		<div class="">
+			<select option="Classic" class="form-control" ng-model="updatedUser.view_theme">
+				<option>Classic</option>
+				<option>Modern</option>
+			</select>
+		</div>
+	</div>
+	<button class="button radius" ng-click="sendReply()">Update</button>
+	<button class="button radius" ng-click="toggleForm()">Cancel</button>
+</form>

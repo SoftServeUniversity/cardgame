@@ -1,10 +1,6 @@
 var MyApp = angular.module("MyApp");
 
 MyApp.controller("GameController", ["$scope", "$interval" , "Auth" , "JoinService" , "GamesFactory", "GameFactory", "$location", function($scope, $interval , Auth , JoinService , GamesFactory, GameFactory, $location){
-	Auth.currentUser().then(function(user){
- 	  $scope.signedIn = Auth.isAuthenticated();
-  	  $scope.currentUser = user;
- 	});
 
 	$scope.indexGames = function(){
 		GamesFactory.query({}, function(data) {
@@ -41,13 +37,14 @@ MyApp.controller("GameController", ["$scope", "$interval" , "Auth" , "JoinServic
 		$location.path("/games/"+game.id);
 	};
 
+	$scope.resolveUser();
 	$scope.indexGames();
 
 	$interval(function(){
 		setTimeout(function() {
-                $scope.$apply(function() {
-                    $scope.indexGames();
-                });
-            }, 2000);
-		},5000);
+            $scope.$apply(function() {
+                $scope.indexGames();
+            });
+        }, 2000);
+	},5000);
 }]);

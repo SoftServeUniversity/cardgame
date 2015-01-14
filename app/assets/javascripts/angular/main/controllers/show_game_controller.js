@@ -1,11 +1,11 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "PutService", "GamesFactory", "GameFactory", "$location", "Auth",
-    function($scope, $interval, EndService, PutService, GamesFactory, GameFactory, $location, Auth) {
+MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "PutService", "GamesFactory", "GameFactory", "$location", "Auth", "$routeParams",
+    function($scope, $interval, EndService, PutService, GamesFactory, GameFactory, $location, Auth, $routeParams) {
 
         $scope.updateGame = function() {
             GameFactory.show({
-                id: $location.path().split('/').pop()
+                id: $routeParams.id
             }, function(data) {
                 $scope.checkAuth();
                 $scope.currentGame = data;
@@ -21,7 +21,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
 
         $scope.putCard = function(card) {
             PutService.put_card({
-                id: $location.path().split('/').pop(),
+                id: $routeParams.id,
                 suite: card.suite,
                 rang: card.rang
             }, function(data) {
@@ -36,7 +36,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
             setTimeout(function() {
                 $scope.$apply(function() {
                     GameFactory.show({
-                        id: $location.path().split('/').pop()
+                        id: $routeParams.id
                     }, function(data) {
                         $scope.currentGame = data;
                     }, function(error) {
@@ -48,7 +48,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
 
         $scope.endTurn = function() {
             EndService.end_turn({
-                id: $location.path().split('/').pop()
+                id: $routeParams.id
             }, function(data) {
                 $scope.reloadCards();
             }, function(error) {
@@ -64,7 +64,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
 
         $interval(function() {
             $scope.reloadCards();
-        }, 2000);
+        }, 5000);
 
     }
 ]);
@@ -78,3 +78,4 @@ MyApp.filter("toArray", function(){
         return result;
     };
 });
+
