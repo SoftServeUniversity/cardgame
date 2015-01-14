@@ -1,0 +1,11 @@
+<div class="navbar navbar-top navbar-inverse" ng-controller="NavController">
+	<div class="container">
+		 <ul class="nav navbar-nav">
+    	<li><a href="#/home">Home</a></li>
+    	<li ng-hide="signedIn"><a href="#/login">Log In</a></li>
+    	<li ng-hide="signedIn"><a href="#/register">Registation</a></li>
+    	<li ng-show="signedIn"><a href="#/users_room">{{ user.username }}</a></li>
+    	<li ng-show="signedIn"><a ng-click="logout()">Log Out</a></li>
+  	</ul>
+	</div>
+</div>
