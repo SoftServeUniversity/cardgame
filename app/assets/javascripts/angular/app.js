@@ -31,8 +31,3 @@ MyApp.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
 			redirectTo: "/home"
 		});
 }]);
-
-MyApp.config([ "AuthInterceptProvider" ,function( AuthInterceptProvider) {
-        // Intercept 401 Unauthorized everywhere
-        AuthInterceptProvider.interceptAuth(true);
-    }]);

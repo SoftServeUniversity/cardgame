@@ -8,8 +8,13 @@ class GamesController < ApplicationController
     render json: @games
   end
 
-  def show 
-    render json: resp_to_json  
+  def show
+    if @game
+      render json: resp_to_json 
+    else
+      render json: { status: "ended"}
+    end
+
   end
 
   def my_game
@@ -126,7 +131,7 @@ class GamesController < ApplicationController
 
     @game.destroy
 
-    render json: @game
+    render json: {status: "ended"}
   end
 
   private

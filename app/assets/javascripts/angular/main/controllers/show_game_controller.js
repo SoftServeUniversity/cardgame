@@ -8,6 +8,8 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
                 id: $routeParams.id
             }, function(data) {
                 $scope.checkAuth();
+                $scope.response = data;
+                $scope.gameEnded(data)
                 $scope.currentGame = data;
             }, function(error) {
                 // console.log(error);
@@ -25,7 +27,9 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
                 suite: card.suite,
                 rang: card.rang
             }, function(data) {
-                $scope.reloadCards()
+                $scope.response = data;
+                $scope.gameEnded(data);
+                $scope.reloadCards();
             }, function(error) {
                 // console.log(error);
             });
@@ -57,7 +61,11 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
         };
 
         $scope.endGame = function() {
-            alert("endGame");
+            if(confirm("Are you sure?")){
+                GameFactory.delete({id: game.id}, function(){
+                    $location.path("users_room");
+                });
+            }
         };
 
         $scope.updateGame();
@@ -66,5 +74,10 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "EndService", "Pu
             $scope.reloadCards();
         }, 5000);
 
+        $scope.gameEnded = function(date){
+            if(date.status == "ended"){
+                $location.path("/users_room");
+            }
+        };
     }
 ]);

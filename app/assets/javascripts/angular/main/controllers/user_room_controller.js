@@ -1,6 +1,6 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("UserRoomController", ["$scope", "userService", "Auth" , function($scope , userService ,Auth){
+MyApp.controller("UserRoomController", ["$scope", "userService", "Auth" , function($scope, userService ,Auth){
 
 	$scope.showingForm = false;
 	$scope.updatedUser = {};
@@ -18,7 +18,7 @@ MyApp.controller("UserRoomController", ["$scope", "userService", "Auth" , functi
  			view_theme: $scope.updatedUser.view_theme
  		}, function(data){
             $scope.user_stat = data;
-            $scope.resolveUser();
+            $scope.user.username = data.username;
 			$scope.toggleForm();
 		});
  	};
