@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   get 'games/:id', :controller => 'games', :action => 'refresh_show', :as => 'refresh_show'
 
+
   # get "assets/:name" , :controller => 'assets', :action => 'get_img', :as => 'get_img'
 
   root 'main#index'
