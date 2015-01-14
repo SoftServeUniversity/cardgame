@@ -1,7 +1,7 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("NavController", ["$scope", "Auth", "$http",
-    function($scope, Auth, $http) {
+MyApp.controller("NavController", ["$scope", "Auth", "$http", "$location",
+    function($scope, Auth, $http, $location) {
 
         $scope.logout = function() {
             Auth.logout().then(function(oldUser) {
@@ -12,7 +12,7 @@ MyApp.controller("NavController", ["$scope", "Auth", "$http",
         };
 
         $scope.$on('devise:unauthorized', function(event, xhr, deferred) {
-            $location.path("/login");
+           $location.path("/login");
         });
         
         $scope.resolveUser = function(){
