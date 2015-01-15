@@ -64,8 +64,14 @@
 	display: inline-block;
 }
 
+.tableCardsList ul {
+	height: 123px;
+}
+
 .tableCardsList ul li {
+	float: left;
 	display: inline-block;
+	height: 123px;
 }
 
 

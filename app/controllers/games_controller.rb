@@ -161,8 +161,9 @@ class GamesController < ApplicationController
       current_user: self.current_user.id
     }
 
-    if @game.mover
-      start_game_params = { game_mover: @game.mover.user.id,
+    if @game.mover.user
+      start_game_params = {
+      game_mover: @game.mover.user.id,
       game_attacker: @game.attacker.user.id,
       game_defender: @game.defender.user.id,
       table_cards: @game.table.table_cards,

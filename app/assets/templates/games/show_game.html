@@ -1,24 +1,27 @@
 <h3 ng-if="currentGame.game_mover == currentGame.current_user">Your move</h3>
 <h3 ng-if="currentGame.game_mover != currentGame.current_user">Your opponents move</h3>
+<h5>State: {{currentGame.game_state}}</h5>
 <div class='col-md-11 yieldcontent'>
  <div class="row wood">
    <div style="height: 400px" id="table_row_game" class="row">
     <div id="table_cards" >
-     <ul>
-     	<div class="col-xs-9" style="display: inline-block">
-      	<div style="display: inherit" ng-repeat="card in currentGame.table_cards">
-      		<ul>
-      		<li class="tableCardsList hitCards" ng-if="$even">
-      			<img style="width: 100px;" ng-src="assets/{{card.rang+card.suite}}.png"/>
-      		</li>
-      		<li class="tableCardsList defenceCards" ng-if="$odd">
-      			<img style="width: 100px;" ng-src="assets/{{card.rang+card.suite}}.png"/>
-      		</li>
-      	</ul>
+      <div class="col-xs-9" style="display: inline-block">
+     	  <div class="tableCardsList ">        
+          <ul class="hitCards" >
+            <li style="display: inherit" ng-repeat="card in currentGame.table_cards" ng-if="$even">
+      			   <img style="width: 80px;" ng-src="assets/{{card.rang+card.suite}}.png"/>
+            </li>
+          </ul>
+        </div>
+        <div class="tableCardsList">
+          <ul class="defenceCards" >
+            <li style="display: inherit" ng-repeat="card in currentGame.table_cards" ng-if="$odd">
+                <img style="width: 80px;" ng-src="assets/{{card.rang+card.suite}}.png"/>
+            </li>
+          </ul>
+        </div>
       	</div>
-
-      	</div>
-      	<li class="col-xs-2">
+      	<div class="col-xs-2">
       		<div ng-if="deckCounter > 2" >
 				<ul >	
 					<li class="tableCardsList hitCards">
@@ -54,8 +57,7 @@
 					</li>
 				</ul>
 			</div>
-      	</li>
-      </ul>
+        </div>
     </div>
    </div>
    <div id="table_row_player" class="row" style="display: inline-block">

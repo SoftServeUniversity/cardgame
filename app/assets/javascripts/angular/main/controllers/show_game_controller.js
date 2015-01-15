@@ -58,7 +58,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
 
         $scope.endGame = function() {
             if(confirm("Are you sure?")){
-                GameFactory.delete({id: game.id}, function(){
+                GameFactory.delete({id: $routeParams.id}, function(){
                     $location.path(MY_CONST.USER_ROOM_PATH);
                 });
             }
