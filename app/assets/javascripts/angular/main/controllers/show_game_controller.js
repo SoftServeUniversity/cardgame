@@ -69,7 +69,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
         $interval(function() {
             $scope.reloadCards();
         }, MY_CONST.INTERVAL);
-
+        
         $scope.gameEnded = function(date){
             if(date.status == "ended"){
                 $location.path("/users_room");

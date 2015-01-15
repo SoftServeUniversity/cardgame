@@ -2,8 +2,6 @@ var MyApp = angular.module("MyApp");
 
 MyApp.controller("NavController", ["$scope", "Auth", "$http", "$location",
     function($scope, Auth, $http, $location) {
-        $scope.TIMEOUT = 2000;
-        $scope.INTERVAL = 5000;
 
         $scope.logout = function() {
             Auth.logout().then(function(oldUser) {
