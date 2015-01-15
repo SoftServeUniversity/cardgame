@@ -11,6 +11,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
                 $scope.gameEnded(data)
                 $scope.currentGame = data;
                 $scope.deckCounter = MY_CONST.DECK_CARDS_NUMBER - data.cursor;
+
             }, function(error) {
                 // console.log(error);
             });
@@ -87,4 +88,3 @@ MyApp.filter("toArray", function(){
         return result;
     };
 });
-

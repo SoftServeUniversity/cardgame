@@ -10,7 +10,7 @@ class Player < ActiveRecord::Base
     player_card = self.player_cards[0]
     if self.cards_count > 0
       self.player_cards.each do |card|
-        if ((card.rang.to_f == rang.to_f) && (card.suite.to_s == suite.to_s))
+        if cards_equality? card, rang, suite
           player_card = card
         end
       end
@@ -22,7 +22,7 @@ class Player < ActiveRecord::Base
 
 def delete_card player_card
     self.player_cards.each do |card|
-      if ((card.rang.to_i == player_card.rang.to_i) && (card.suite.to_s == player_card.suite.to_s))
+      if cards_equality?(card, player_card.rang, player_card.suite)
 
         puts self.player_cards.delete(card)
         self.cards_count -= 1
@@ -45,5 +45,9 @@ def delete_card player_card
     init
     self.player_cards.push new_card
     self.cards_count  += 1
+  end
+
+  def cards_equality? card, rang, suite
+    (card.rang.to_f == rang.to_f) && (card.suite.to_s == suite.to_s)
   end
 end

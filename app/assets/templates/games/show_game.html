@@ -5,9 +5,18 @@
    <div style="height: 400px" id="table_row_game" class="row">
     <div id="table_cards" >
      <ul>
-     	<div class="col-xs-9">
-      		<li  style = "display: inline"  ng-repeat="card in currentGame.table_cards"><img style="width: 100px;" ng-src="assets/{{card.rang+card.suite}}.png"/>
+     	<div class="col-xs-9" style="display: inline-block">
+      	<div style="display: inherit" ng-repeat="card in currentGame.table_cards">
+      		<ul>
+      		<li class="tableCardsList hitCards" ng-if="$even">
+      			<img style="width: 100px;" ng-src="assets/{{card.rang+card.suite}}.png"/>
       		</li>
+      		<li class="tableCardsList defenceCards" ng-if="$odd">
+      			<img style="width: 100px;" ng-src="assets/{{card.rang+card.suite}}.png"/>
+      		</li>
+      	</ul>
+      	</div>
+
       	</div>
       	<li class="col-xs-2">
       		<div ng-if="deckCounter > 2" >
