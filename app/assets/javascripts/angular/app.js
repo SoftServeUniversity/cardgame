@@ -31,7 +31,7 @@ MyApp.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
 			redirectTo: "/home"
 		});
 }]).constant("MY_CONST", {
-        "TIMEOUT": 2000,
+        "TIMEOUT": 0,
         "INTERVAL": 5000,
         "DECK_CARDS_NUMBER": 36,
         "ACTION_PUT_CARD": "put_card",
