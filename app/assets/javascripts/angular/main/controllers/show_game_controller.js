@@ -8,9 +8,10 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
                 id: $routeParams.id
             }, function(data) {
                 $scope.resolveUser();
-                $scope.gameEnded(data)
+                $scope.gameEnded(data);
                 $scope.currentGame = data;
                 $scope.deckCounter = MY_CONST.DECK_CARDS_NUMBER - data.cursor;
+
             }, function(error) {
                 // console.log(error);
             });
@@ -19,7 +20,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
         $scope.putCard = function(card) {
             CustomActionService.put_card({
                 id: $routeParams.id,
-                action: "put_card",
+                action: MY_CONST.ACTION_PUT_CARD,
                 suite: card.suite,
                 rang: card.rang
             }, function(data) {
@@ -48,7 +49,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
         $scope.endTurn = function() {
             CustomActionService.end_turn({
                 id: $routeParams.id,
-                action: "end_turn"
+                action: MY_CONST.ACTION_END_TURN
             }, function(data) {
                 $scope.reloadCards();
             }, function(error) {
@@ -59,7 +60,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
         $scope.endGame = function() {
             if(confirm("Are you sure?")){
                 GameFactory.delete({id: game.id}, function(){
-                    $location.path("users_room");
+                    $location.path(MY_CONST.USER_ROOM_PATH);
                 });
             }
         };
@@ -71,8 +72,8 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
         }, MY_CONST.INTERVAL);
         
         $scope.gameEnded = function(date){
-            if(date.status == "ended"){
-                $location.path("/users_room");
+            if(date.status == MY_CONST.ENDED_STATUS){
+                $location.path(MY_CONST.USER_ROOM_PATH);
             }
         };
     }
@@ -87,4 +88,3 @@ MyApp.filter("toArray", function(){
         return result;
     };
 });
-
