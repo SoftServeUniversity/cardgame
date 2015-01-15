@@ -22,20 +22,20 @@ MyApp.controller("GameController", ["$scope", "$interval" , "MY_CONST" , "Auth" 
 
 	$scope.createGame = function(){
 		GamesFactory.create({game: $scope.newGame}, function(data, $scope){
-			$location.path("/games/"+ data.id);
+			$location.path(MY_CONST.GAMES_PATH + data.id);
 		}, function(error){
 			console.log(error);
 		});
 	};
 
 	$scope.joinGame = function(game){
-		CustomActionService.join({id: game.id , action: "update"}, function(){
-			$location.path("/games/"+ game.id);
+		CustomActionService.join({id: game.id , action: MY_CONST.ACTION_UPDATE}, function(){
+			$location.path(MY_CONST.GAMES_PATH + game.id);
 		});
 	};
 
 	$scope.showGame = function(game) {
-		$location.path("/games/"+game.id);
+		$location.path(MY_CONST.GAMES_PATH + game.id);
 	};
 
 	$scope.resolveUser();

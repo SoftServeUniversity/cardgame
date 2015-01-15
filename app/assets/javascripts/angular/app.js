@@ -33,5 +33,13 @@ MyApp.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
 }]).constant("MY_CONST", {
         "TIMEOUT": 2000,
         "INTERVAL": 5000,
-        "DECK_CARDS_NUMBER": 36
+        "DECK_CARDS_NUMBER": 36,
+        "ACTION_PUT_CARD": "put_card",
+        "ACTION_END_TURN": "end_turn",
+        "ACTION_UPDATE": "update",
+        "USER_ROOM_PATH": "/users_room",
+        "GAMES_PATH": "/games/",
+        "HOME_PATH": "/home",
+        "ENDED_STATUS": "ended"
+
     });

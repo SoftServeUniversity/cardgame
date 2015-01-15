@@ -23,7 +23,6 @@ class Player < ActiveRecord::Base
 def delete_card player_card
     self.player_cards.each do |card|
       if cards_equality?(card, player_card.rang, player_card.suite)
-
         puts self.player_cards.delete(card)
         self.cards_count -= 1
         puts "____________________________DELETED"
