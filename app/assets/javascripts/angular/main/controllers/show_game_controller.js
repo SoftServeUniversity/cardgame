@@ -8,7 +8,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
                 id: $routeParams.id
             }, function(data) {
                 $scope.resolveUser();
-                $scope.gameEnded(data)
+                $scope.gameEnded(data);
                 $scope.currentGame = data;
                 $scope.deckCounter = MY_CONST.DECK_CARDS_NUMBER - data.cursor;
 

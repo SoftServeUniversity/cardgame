@@ -24,6 +24,7 @@ MyApp.controller("UserRoomController", ["$scope", "userService", "Auth" , functi
  	};
 
 	$scope.toggleForm = function(){
+		console.log("toggle");
 		$scope.showingForm = !$scope.showingForm;
 		$scope.updatedUser = {};
 		$scope.updatedUser.id = $scope.user.id;
