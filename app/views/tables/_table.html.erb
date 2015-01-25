@@ -1,5 +1,41 @@
-<% if current_user.view_theme %>
-	<%= render "theme_#{current_user.view_theme.to_s.downcase}/#{current_user.view_theme.to_s.downcase}_table" %>
-<% else %>
-	<%= render "theme_classic/classic_table" %>
-<% end %>
+<% if @game.table %>
+	<% hitCards = [] %>
+	<% @game.table.table_cards.each_index do |index| %>
+		<% if (index) % 2 == 0 %>
+			<% hitCards << @game.table.table_cards[index] %>
+		<% end %>
+	<% end %>
+	<% defenceCards = @game.table.table_cards - hitCards %>
+
+	<ul class="tableCardsList hitCards">
+		<% hitCards.each do |card| %>
+			<li>
+				<div class="t_playerCards">
+					<div class="<%= current_user.view_theme.to_s %>Rang">
+						<%= make_rank (card) %>						
+					</div>
+					<div class="<%= current_user.view_theme.to_s %>Suite">
+						<%= make_suite (card.suite) %>						
+					</div>
+					<div class="t_<%= current_user.view_theme.to_s + card.rang.to_s + card.suite.to_s %>"></div>				
+				</div>
+			</li>
+		<% end %>
+	</ul>
+
+	<ul class="tableCardsList defenceCards">
+		<% defenceCards.each do |card| %>
+			<li>
+				<div class="t_playerCards">
+					<div class="<%= current_user.view_theme.to_s %>Rang">							
+						<%= make_rank (card) %>						
+					</div>
+					<div class="<%= current_user.view_theme.to_s %>Suite">
+						<%= make_suite (card.suite) %>						
+					</div>
+					<div class="t_<%= current_user.view_theme.to_s + card.rang.to_s + card.suite.to_s %>"></div>				
+				</div>
+			</li>
+		<% end %>
+	</ul>
+<%end%>

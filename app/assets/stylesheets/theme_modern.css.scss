@@ -1,12 +1,14 @@
 .tableModern {
-	background-image: url("concrete3.jpg");
 	background-size: cover;
 	box-shadow: inset 0px 0px 30px 10px rgba(0, 0, 0, 0.6);
 	min-width: 660px;
 	padding: 0 0 0 0;
+	background-image: url("concrete3.jpg");
 }
 
-.playerModernCards {
+
+
+.playerCards {
 	width: 100px;
 	height: 145px;
 	background-color: white;
@@ -15,12 +17,13 @@
  	font-size: 22px;
 }
 
-.mRang {
+
+.ModernRang {
 	position:absolute;
  	top: 0;
  	left: 5px;
 }
-.mSuite {
+.ModernSuite {
 	position:absolute;
  	top: 1em;
  	left: 5px;
@@ -35,143 +38,143 @@
 
 
 
-.m0clubs, .m1clubs, .m2clubs, .m3clubs, .m4clubs,
-.m0spades, .m1spades, .m2spades, .m3spades, .m4spades {
+.Modern0clubs, .Modern1clubs, .Modern2clubs, .Modern3clubs, .Modern4clubs,
+.Modern0spades, .Modern1spades, .Modern2spades, .Modern3spades, .Modern4spades {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("black_fist3.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m0diamonds, .m1diamonds, .m2diamonds, .m3diamonds, .m4diamonds,
-.m0hearts, .m1hearts, .m2hearts, .m3hearts, .m4hearts {
+.Modern0diamonds, .Modern1diamonds, .Modern2diamonds, .Modern3diamonds, .Modern4diamonds,
+.Modern0hearts, .Modern1hearts, .Modern2hearts, .Modern3hearts, .Modern4hearts {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("red_fist3.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
 
 
-.m5clubs {
+.Modern5clubs {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m5clubs.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m5diamonds {
+.Modern5diamonds {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m5diamonds.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m5hearts {
+.Modern5hearts {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m5hearts.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m5spades {
+.Modern5spades {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m5spades.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m6clubs {
+.Modern6clubs {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m6clubs.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m6diamonds {
+.Modern6diamonds {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m6diamonds.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m6hearts {
+.Modern6hearts {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m6hearts.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m6spades {
+.Modern6spades {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m6spades.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m7clubs {
+.Modern7clubs {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m7clubs.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m7diamonds {
+.Modern7diamonds {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m7diamonds.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m7hearts {
+.Modern7hearts {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m7hearts.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m7spades {
+.Modern7spades {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m7spades.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m8clubs {
+.Modern8clubs {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m8clubs.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m8diamonds {
+.Modern8diamonds {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m8diamonds.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m8hearts {
+.Modern8hearts {
 	width: 100px;
 	height: 145px;
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 	background-image: url("m8hearts.png");
-	background-size: cover;
-	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.m8spades {
+.Modern8spades {
 	width: 100px;
 	height: 145px;
-	background-image: url("m8spades.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
+	background-image: url("m8spades.png");
 }
 
 
 
 
 /*------------------------------------------------------------------------TABLE CARDS*/
-.t_playerModernCards {
+.t_playerCards {
 	width: 85px;
 	height: 123px;  
 	background-color: white;
@@ -180,7 +183,7 @@
 	font-size: 22px;
 }
 
-.t_playerModernDeck {
+.t_playerDeck {
 	width: 85px;
 	height: 132px;  
 	background-color: white;
@@ -189,16 +192,16 @@
 }
 
 
-.t_m0clubs, .t_m1clubs, .t_m2clubs, .t_m3clubs, .t_m4clubs,
-.t_m0spades, .t_m1spades, .t_m2spades, .t_m3spades, .t_m4spades {
+.t_Modern0clubs, .t_Modern1clubs, .t_Modern2clubs, .t_Modern3clubs, .t_Modern4clubs,
+.t_Modern0spades, .t_Modern1spades, .t_Modern2spades, .t_Modern3spades, .t_Modern4spades {
 	width: 85px;
 	height: 123px;
 	background-image: url("black_fist3.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m0diamonds, .t_m1diamonds, .t_m2diamonds, .t_m3diamonds, .t_m4diamonds,
-.t_m0hearts, .t_m1hearts, .t_m2hearts, .t_m3hearts, .t_m4hearts {
+.t_Modern0diamonds, .t_Modern1diamonds, .t_Modern2diamonds, .t_Modern3diamonds, .t_Modern4diamonds,
+.t_Modern0hearts, .t_Modern1hearts, .t_Modern2hearts, .t_Modern3hearts, .t_Modern4hearts {
 	width: 85px;
 	height: 123px;
 	background-image: url("red_fist3.png");
@@ -207,112 +210,112 @@
 }
 
 
-.t_m5clubs {
+.t_Modern5clubs {
 	width: 85px;
 	height: 123px;
 	background-image: url("m5clubs.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m5diamonds {
+.t_Modern5diamonds {
 	width: 85px;
 	height: 123px;
 	background-image: url("m5diamonds.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m5hearts {
+.t_Modern5hearts {
 	width: 85px;
 	height: 123px;
 	background-image: url("m5hearts.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m5spades {
+.t_Modern5spades {
 	width: 85px;
 	height: 123px;
 	background-image: url("m5spades.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m6clubs {
+.t_Modern6clubs {
 	width: 85px;
 	height: 123px;
 	background-image: url("m6clubs.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m6diamonds {
+.t_Modern6diamonds {
 	width: 85px;
 	height: 123px;
 	background-image: url("m6diamonds.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m6hearts {
+.t_Modern6hearts {
 	width: 85px;
 	height: 123px;
 	background-image: url("m6hearts.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m6spades {
+.t_Modern6spades {
 	width: 85px;
 	height: 123px;
 	background-image: url("m6spades.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m7clubs {
+.t_Modern7clubs {
 	width: 85px;
 	height: 123px;
 	background-image: url("m7clubs.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m7diamonds {
+.t_Modern7diamonds {
 	width: 85px;
 	height: 123px;
 	background-image: url("m7diamonds.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m7hearts {
+.t_Modern7hearts {
 	width: 85px;
 	height: 123px;
 	background-image: url("m7hearts.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m7spades {
+.t_Modern7spades {
 	width: 85px;
 	height: 123px;
 	background-image: url("m7spades.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m8clubs {
+.t_Modern8clubs {
 	width: 85px;
 	height: 123px;
 	background-image: url("m8clubs.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m8diamonds {
+.t_Modern8diamonds {
 	width: 85px;
 	height: 123px;
 	background-image: url("m8diamonds.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m8hearts {
+.t_Modern8hearts {
 	width: 85px;
 	height: 123px;
 	background-image: url("m8hearts.png");
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
-.t_m8spades {
+.t_Modern8spades {
 	width: 85px;
 	height: 123px;
 	background-image: url("m8spades.png");
@@ -320,7 +323,7 @@
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
-.t_modernDeck {
+.t_ModernDeck {
 	width: 85px;
 	height: 132px;
 	background-image: url("modernDeck.png");
@@ -328,7 +331,7 @@
 	box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.4);
 }
 
-.t_modernBack {
+.t_ModernBack {
 	width: 85px;
 	height: 123px;
 	background-image: url("modernBack.png");
@@ -342,117 +345,117 @@
 /*---------------------------------------------------------------MEDIA RULES*/
 
 @media (max-width: 992px) {
-	 .playerModernCards {
+	 .playerCards {
 	  width: 85px;
 	  height: 123px;
 	}
 
-	.m0clubs, .m1clubs, .m2clubs, .m3clubs, .m4clubs,
-	.m0spades, .m1spades, .m2spades, .m3spades, .m4spades {
+	.Modern0clubs, .Modern1clubs, .Modern2clubs, .Modern3clubs, .Modern4clubs,
+	.Modern0spades, .Modern1spades, .Modern2spades, .Modern3spades, .Modern4spades {
 		width: 85px;
 		height: 123px;
 		background-image: url("black_fist3.png");
 		background-size: cover;
 	}
-	.m0diamonds, .m1diamonds, .m2diamonds, .m3diamonds, .m4diamonds,
-	.m0hearts, .m1hearts, .m2hearts, .m3hearts, .m4hearts {
+	.Modern0diamonds, .Modern1diamonds, .Modern2diamonds, .Modern3diamonds, .Modern4diamonds,
+	.Modern0hearts, .Modern1hearts, .Modern2hearts, .Modern3hearts, .Modern4hearts {
 		width: 85px;
 		height: 123px;
 		background-image: url("red_fist3.png");
 		background-size: cover;
 	}
 
-	.m5clubs {
+	.Modern5clubs {
 		width: 85px;
 		height: 123px;
 		background-image: url("m5clubs.png");
 		background-size: cover;
 	}
-	.m5diamonds {
+	.Modern5diamonds {
 		width: 85px;
 		height: 123px;
 		background-image: url("m5diamonds.png");
 		background-size: cover;
 	}
-	.m5hearts {
+	.Modern5hearts {
 		width: 85px;
 		height: 123px;
 		background-image: url("m5hearts.png");
 		background-size: cover;
 	}
-	.m5spades {
+	.Modern5spades {
 		width: 85px;
 		height: 123px;
 		background-image: url("m5spades.png");
 		background-size: cover;
 	}
-	.m6clubs {
+	.Modern6clubs {
 		width: 85px;
 		height: 123px;
 		background-image: url("m6clubs.png");
 		background-size: cover;
 	}
-	.m6diamonds {
+	.Modern6diamonds {
 		width: 85px;
 		height: 123px;
 		background-image: url("m6diamonds.png");
 		background-size: cover;
 	}
-	.m6hearts {
+	.Modern6hearts {
 		width: 85px;
 		height: 123px;
 		background-image: url("m6hearts.png");
 		background-size: cover;
 	}
-	.m6spades {
+	.Modern6spades {
 		width: 85px;
 		height: 123px;
 		background-image: url("m6spades.png");
 		background-size: cover;
 	}
-	.m7clubs {
+	.Modern7clubs {
 		width: 85px;
 		height: 123px;
 		background-image: url("m7clubs.png");
 		background-size: cover;
 	}
-	.m7diamonds {
+	.Modern7diamonds {
 		width: 85px;
 		height: 123px;
 		background-image: url("m7diamonds.png");
 		background-size: cover;
 	}
-	.m7hearts {
+	.Modern7hearts {
 		width: 85px;
 		height: 123px;
 		background-image: url("m7hearts.png");
 		background-size: cover;
 	}
-	.m7spades {
+	.Modern7spades {
 		width: 85px;
 		height: 123px;
 		background-image: url("m7spades.png");
 		background-size: cover;
 	}
-	.m8clubs {
+	.Modern8clubs {
 		width: 85px;
 		height: 123px;
 		background-image: url("m8clubs.png");
 		background-size: cover;
 	}
-	.m8diamonds {
+	.Modern8diamonds {
 		width: 85px;
 		height: 123px;
 		background-image: url("m8diamonds.png");
 		background-size: cover;
 	}
-	.m8hearts {
+	.Modern8hearts {
 		width: 85px;
 		height: 123px;
 		background-image: url("m8hearts.png");
 		background-size: cover;
 	}
-	.m8spades {
+	.Modern8spades {
 		width: 85px;
 		height: 123px;
 		background-image: url("m8spades.png");

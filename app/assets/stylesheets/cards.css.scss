@@ -1,4 +1,4 @@
-/*AJAX-divs with ul`s of cards inside*/
+
 #table_row_game, #table_row_player {
 	margin: 0 0 0 0;
 	padding-top: 15px;
@@ -18,7 +18,39 @@
 
 
 
+.defenceCards {
+	margin: -70px 0 0 0;
+}
+.defenceCards li, .defenceCards .playerCards, .defenceCards .t_playerCards, .defenceCards .t_Deck, .defenceCards .t_Back {
+	box-shadow: 0px -5px 3px -3px rgba(0, 0, 0, 0.6);
+}
 
+
+
+.playerCardsList, .tableCardsList {
+	/*min-width: 540px;*/
+	list-style-type: none;
+	padding: 0 0 0 0;
+}
+
+.playerCardsList li {
+	display: inline-block;
+}
+
+.tableCardsList li {
+	display: inline-block;
+}
+
+
+
+/*Cards itsels*/
+.tableCards, .deckCards {
+	width: 85px;
+}
+
+
+
+ /*Table Player Controls */
 #table_controls span {
 	text-decoration: none;
 }
@@ -44,42 +76,6 @@
 
 
 
-
-
-
-/*Defence cards offset to cover hitcards*/
-.defenceCards {
-	margin: -70px 0 0 0;
-}
-.defenceCards li, .defenceCards .playerModernCards, .defenceCards .t_playerModernCards, .defenceCards .t_modernDeck, .defenceCards .t_modernBack {
-	box-shadow: 0px -5px 3px -3px rgba(0, 0, 0, 0.6);
-}
-
-
-
-.playerCardsList, .tableCardsList {
-	/*min-width: 540px;*/
-	list-style-type: none;
-	padding: 0 0 0 0;
-}
-
-.playerCardsList li {
-	display: inline-block;
-}
-
-.tableCardsList li {
-	display: inline-block;
-}
-
-
-/*Cards itsels*/
-.tableCards, .deckCards {
-	width: 85px;
-}
-.playerCards {
-	width: 100px;
-	margin-bottom: 15px;
-}
 
 @media (max-width: 992px) {
 	 .playerCards {

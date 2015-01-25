@@ -53,9 +53,11 @@ $(function(){
 		}	
 	});
 
-	$(".playerCardsList li").on("mouseleave", function(){		
-		$(this).css({"position": "relative"});
-		$(this).animate({
+
+	$(".playerCardsList li").on("mouseleave", function(){
+		var card = $(this);		
+		card.css({"position": "relative"});
+		card.animate({
 			"top": "0px",
 		}, 400
 		);
