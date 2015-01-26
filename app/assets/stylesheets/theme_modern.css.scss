@@ -1,8 +1,7 @@
 .tableModern {
 	background-size: cover;
 	box-shadow: inset 0px 0px 30px 10px rgba(0, 0, 0, 0.6);
-	min-width: 660px;
-	padding: 0 0 0 0;
+	border-radius: 0 0 4px 4px !important;	
 	background-image: url("concrete3.jpg");
 }
 
@@ -322,6 +321,9 @@
 	background-size: cover;
 	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
 }
+
+
+/*---------------------------------------------------------------DECK AND BACK*/
 
 .t_ModernDeck {
 	width: 85px;

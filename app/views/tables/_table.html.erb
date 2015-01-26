@@ -17,7 +17,7 @@
 					<div class="<%= current_user.view_theme.to_s %>Suite">
 						<%= make_suite (card.suite) %>						
 					</div>
-					<div class="t_<%= current_user.view_theme.to_s + card.rang.to_s + card.suite.to_s %>"></div>				
+					<div class="t_playerCardsPad t_<%= current_user.view_theme.to_s + card.rang.to_s + card.suite.to_s %>"></div>				
 				</div>
 			</li>
 		<% end %>
@@ -33,7 +33,7 @@
 					<div class="<%= current_user.view_theme.to_s %>Suite">
 						<%= make_suite (card.suite) %>						
 					</div>
-					<div class="t_<%= current_user.view_theme.to_s + card.rang.to_s + card.suite.to_s %>"></div>				
+					<div class="t_playerCardsPad t_<%= current_user.view_theme.to_s + card.rang.to_s + card.suite.to_s %>"></div>				
 				</div>
 			</li>
 		<% end %>

@@ -10,7 +10,7 @@
 						<div class="<%= current_user.view_theme.to_s %>Suite">
 							<%= make_suite (card.suite) %>						
 						</div>
-						<div class="<%= current_user.view_theme.to_s + card.rang.to_s + card.suite.to_s %>"></div>				
+						<div class="playerCardsPad <%= current_user.view_theme.to_s + card.rang.to_s + card.suite.to_s %>"></div>			
 					</div>
 				<% end %>
 			</li>

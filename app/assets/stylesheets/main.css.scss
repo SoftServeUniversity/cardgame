@@ -9,35 +9,6 @@ html {
 
 }
 
-.infopanel {
-	/*background-color: black;*/
-}
-
-.turnInfo {
-	background-color: black !important;
-	color: #C4C4C4;
-	background-color: #222222 !important;
-	box-shadow: inset 0px 0px 20px 3px rgba(0, 0, 0, 0.6) !important;
-	border-color: #090909 !important;
-	border-radius: 4px 4px 0 0 !important;
-	margin: 0 0 0 0 !important;
-}
-
-#turnInfoButton{
-	transition: color 0.3s;
-}
-#turnInfoButton:hover {
-	color: #fc9200;	
-	text-shadow: 0 0 3px #fc9200 !important;	
-	transition: text-shadow 0.5s;
-}
-
-
-.panel-body .popover {
-	color: #222222 !important;
-}
-
-
 .fblinks {
 	/*float: left;*/
 	margin: 0 50px 0 0;
