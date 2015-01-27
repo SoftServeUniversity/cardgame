@@ -64,7 +64,6 @@
 
 
 .playerCardsList, .tableCardsList {
-	/*min-width: 540px;*/
 	list-style-type: none;
 	padding: 0 0 0 0;
 }
@@ -79,16 +78,55 @@
 
 
 
-/*Cards itsels*/
-.tableCards, .deckCards {
+/*-------------------TABLE CARDS BASE*/
+
+.t_playerCards {
 	width: 85px;
+	height: 123px;  
+	background-color: white;
+	position: relative;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
+	font-size: 22px;
+}
+
+.t_playerCardsPad{
+	width: 85px;
+	height: 123px;
+}
+
+.t_playerDeck {
+	width: 85px;
+	height: 132px;  
+	background-color: white;
+	position: relative;
+	box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.4);
 }
 
 
 
-/*-------------------TABLE PLAYER CONTROLS*/
 
+/*-------------------PLAYER CARDS BASE - media rules below*/
 
+.playerCards {
+	width: 100px;
+	height: 145px;
+	background-color: white;
+	position: relative;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);	
+ 	font-size: 22px;
+}
+
+.playerCardsPad {
+	width: 100px;
+	height: 145px;
+}
+
+.redSuite {
+	color: red;
+}
+.blackSuite {
+	color: black;
+}
 
 
 
@@ -119,9 +157,16 @@
 
 
 
+/*---------------------------------------------------------------MEDIA RULES*/
 
 @media (max-width: 992px) {
-	 .playerCards {
-	  width: 85px;
+	.playerCards {
+		width: 85px;
+		height: 123px;
+	}
+
+	.playerCardsPad {
+		width: 85px;
+		height: 123px;
 	}
 }

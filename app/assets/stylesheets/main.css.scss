@@ -1,6 +1,14 @@
 html {
 	background-color: #222222;
+	background-image: url("noise.png");	
 }
+
+body {
+	min-width: 680px !important;
+	background-color: #E7E7E7 !important;
+	background-image: url("noise.png") !important;
+}
+
 
 .maincontent {
 	/*border-radius: 4px;*/

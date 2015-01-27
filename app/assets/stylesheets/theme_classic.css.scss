@@ -4,3 +4,340 @@
 	border-radius: 0 0 4px 4px !important;
 	background-image: url("woods5.jpg");
 }
+
+
+.ClassicRang {
+	display: none;
+}
+.ClassicSuite {
+	display: none;
+}
+
+
+
+/*------------------------------------------------------------------------PLACEHOLDERS*/
+
+%cardsBG {
+	background-size: cover;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+
+
+/*------------------------------------------------------------------------PLAYER CARDS*/
+
+.Classic0clubs {
+	@extend %cardsBG;
+	background-image: url("0clubs.png");
+}
+.Classic1clubs {
+	@extend %cardsBG;
+	background-image: url("1clubs.png");
+}
+.Classic2clubs {
+	@extend %cardsBG;
+	background-image: url("2clubs.png");
+}
+.Classic3clubs {
+	@extend %cardsBG;
+	background-image: url("3clubs.png");
+}
+.Classic4clubs {
+	@extend %cardsBG;
+	background-image: url("4clubs.png");
+}
+.Classic0spades {
+	@extend %cardsBG;
+	background-image: url("0spades.png");
+}
+.Classic1spades {
+	@extend %cardsBG;
+	background-image: url("1spades.png");
+}
+.Classic2spades {
+	@extend %cardsBG;
+	background-image: url("2spades.png");
+}
+.Classic3spades {
+	@extend %cardsBG;
+	background-image: url("3spades.png");
+}
+.Classic4spades {
+	@extend %cardsBG;
+	background-image: url("4spades.png");
+}
+.Classic0diamonds {
+	@extend %cardsBG;
+	background-image: url("0diamonds.png");
+}
+.Classic1diamonds {
+	@extend %cardsBG;
+	background-image: url("1diamonds.png");
+}
+.Classic2diamonds {
+	@extend %cardsBG;
+	background-image: url("2diamonds.png");
+}
+.Classic3diamonds {
+	@extend %cardsBG;
+	background-image: url("3diamonds.png");
+}
+.Classic4diamonds {
+	@extend %cardsBG;
+	background-image: url("4diamonds.png");
+}
+.Classic0hearts {
+	@extend %cardsBG;
+	background-image: url("0hearts.png");
+}
+.Classic1hearts {
+	@extend %cardsBG;
+	background-image: url("1hearts.png");
+}
+.Classic2hearts {
+	@extend %cardsBG;
+	background-image: url("2hearts.png");
+}
+.Classic3hearts {
+	@extend %cardsBG;
+	background-image: url("3hearts.png");
+}
+.Classic4hearts {
+	@extend %cardsBG;
+	background-image: url("4hearts.png");
+}
+
+
+.Classic5clubs {
+	@extend %cardsBG;
+	background-image: url("5clubs.png");
+}
+.Classic5diamonds {
+	@extend %cardsBG;
+	background-image: url("5diamonds.png");
+}
+.Classic5hearts {
+	@extend %cardsBG;
+	background-image: url("5hearts.png");
+}
+.Classic5spades {
+	@extend %cardsBG;
+	background-image: url("5spades.png");
+}
+.Classic6clubs {
+	@extend %cardsBG;
+	background-image: url("6clubs.png");
+}
+.Classic6diamonds {
+	@extend %cardsBG;
+	background-image: url("6diamonds.png");
+}
+.Classic6hearts {
+	@extend %cardsBG;
+	background-image: url("6hearts.png");
+}
+.Classic6spades {
+	@extend %cardsBG;
+	background-image: url("6spades.png");
+}
+.Classic7clubs {
+	@extend %cardsBG;
+	background-image: url("7clubs.png");
+}
+.Classic7diamonds {
+	@extend %cardsBG;
+	background-image: url("7diamonds.png");
+}
+.Classic7hearts {
+	@extend %cardsBG;
+	background-image: url("7hearts.png");
+}
+.Classic7spades {
+	@extend %cardsBG;
+	background-image: url("7spades.png");
+}
+.Classic8clubs {
+	@extend %cardsBG;
+	background-image: url("8clubs.png");
+}
+.Classic8diamonds {
+	@extend %cardsBG;
+	background-image: url("8diamonds.png");
+}
+.Classic8hearts {
+	@extend %cardsBG;
+	background-image: url("8hearts.png");
+}
+.Classic8spades {
+	@extend %cardsBG;
+	background-image: url("8spades.png");
+}
+
+
+
+/*------------------------------------------------------------------------TABLE CARDS*/
+
+.t_Classic0clubs {
+	@extend %cardsBG;
+	background-image: url("0clubs.png");
+}
+.t_Classic1clubs {
+	@extend %cardsBG;
+	background-image: url("1clubs.png");
+}
+.t_Classic2clubs {
+	@extend %cardsBG;
+	background-image: url("2clubs.png");
+}
+.t_Classic3clubs {
+	@extend %cardsBG;
+	background-image: url("3clubs.png");
+}
+.t_Classic4clubs {
+	@extend %cardsBG;
+	background-image: url("4clubs.png");
+}
+.t_Classic0spades {
+	@extend %cardsBG;
+	background-image: url("0spades.png");
+}
+.t_Classic1spades {
+	@extend %cardsBG;
+	background-image: url("1spades.png");
+}
+.t_Classic2spades {
+	@extend %cardsBG;
+	background-image: url("2spades.png");
+}
+.t_Classic3spades {
+	@extend %cardsBG;
+	background-image: url("3spades.png");
+}
+.t_Classic4spades {
+	@extend %cardsBG;
+	background-image: url("4spades.png");
+}
+.t_Classic0diamonds {
+	@extend %cardsBG;
+	background-image: url("0diamonds.png");
+}
+.t_Classic1diamonds {
+	@extend %cardsBG;
+	background-image: url("1diamonds.png");
+}
+.t_Classic2diamonds {
+	@extend %cardsBG;
+	background-image: url("2diamonds.png");
+}
+.t_Classic3diamonds {
+	@extend %cardsBG;
+	background-image: url("3diamonds.png");
+}
+.t_Classic4diamonds {
+	@extend %cardsBG;
+	background-image: url("4diamonds.png");
+}
+.t_Classic0hearts {
+	@extend %cardsBG;
+	background-image: url("0hearts.png");
+}
+.t_Classic1hearts {
+	@extend %cardsBG;
+	background-image: url("1hearts.png");
+}
+.t_Classic2hearts {
+	@extend %cardsBG;
+	background-image: url("2hearts.png");
+}
+.t_Classic3hearts {
+	@extend %cardsBG;
+	background-image: url("3hearts.png");
+}
+.t_Classic4hearts {
+	@extend %cardsBG;
+	background-image: url("4hearts.png");
+}
+
+
+.t_Classic5clubs {
+	@extend %cardsBG;
+	background-image: url("5clubs.png");
+}
+.t_Classic5diamonds {
+	@extend %cardsBG;
+	background-image: url("5diamonds.png");
+}
+.t_Classic5hearts {
+	@extend %cardsBG;
+	background-image: url("5hearts.png");
+}
+.t_Classic5spades {
+	@extend %cardsBG;
+	background-image: url("5spades.png");
+}
+.t_Classic6clubs {
+	@extend %cardsBG;
+	background-image: url("6clubs.png");
+}
+.t_Classic6diamonds {
+	@extend %cardsBG;
+	background-image: url("6diamonds.png");
+}
+.t_Classic6hearts {
+	@extend %cardsBG;
+	background-image: url("6hearts.png");
+}
+.t_Classic6spades {
+	@extend %cardsBG;
+	background-image: url("6spades.png");
+}
+.t_Classic7clubs {
+	@extend %cardsBG;
+	background-image: url("7clubs.png");
+}
+.t_Classic7diamonds {
+	@extend %cardsBG;
+	background-image: url("7diamonds.png");
+}
+.t_Classic7hearts {
+	@extend %cardsBG;
+	background-image: url("7hearts.png");
+}
+.t_Classic7spades {
+	@extend %cardsBG;
+	background-image: url("7spades.png");
+}
+.t_Classic8clubs {
+	@extend %cardsBG;
+	background-image: url("8clubs.png");
+}
+.t_Classic8diamonds {
+	@extend %cardsBG;
+	background-image: url("8diamonds.png");
+}
+.t_Classic8hearts {
+	@extend %cardsBG;
+	background-image: url("8hearts.png");
+}
+.t_Classic8spades {
+	@extend %cardsBG;
+	background-image: url("8spades.png");
+}
+
+
+
+/*---------------------------------------------------------------DECK AND BACK*/
+
+.t_ClassicDeck {
+	background-size: cover;
+	box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.4);
+	width: 85px;
+	height: 132px;
+	background-image: url("deck.png");
+}
+
+.t_ClassicBack {
+	background-size: cover;
+	box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.4);
+	background-image: url("back.png");
+}
