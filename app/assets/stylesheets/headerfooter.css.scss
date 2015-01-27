@@ -82,3 +82,20 @@ li .popover {
 .navbar-bottom {
 	border-radius: 4px 4px 0 0 !important;
 }
+
+
+.fblinks {
+	margin: 0 50px 10px 0;
+	display: inline-block;
+}
+.fblinks a {
+	color: #C4C4C4;
+	text-decoration: none;
+	transition: color 0.3s;
+}
+.fblinks a:hover {
+	color: #fc9200;
+	text-decoration: none;
+	text-shadow: 0 0 3px #fc9200 !important;	
+	transition: text-shadow 0.5s;
+}
