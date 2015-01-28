@@ -8,6 +8,7 @@ describe :new_game do
 
   it "should initialize player" do
   	@game.do_init_first_player @user
+    
   	expect(@game.players[0]).to be_kind_of(Player)
   	expect(@game.players[0].user_id).to eq(@user.id)
 	  expect(@game.state).to eq("expactation_second_player")

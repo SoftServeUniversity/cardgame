@@ -9,6 +9,7 @@ describe Table do
   	@game.do_init_second_player @user2
   	@game.do_preparation_for_game
   end
+
   describe  "trump?" do
   	it "should compare for trump" do
   	  @game.players[0].player_cards.each do |card|
@@ -16,6 +17,7 @@ describe Table do
   	  		expect(@game.table.trump? card).to eq(true)
   	  	end
   	  end
+
   	  @game.players[1].player_cards.each do |card|
   	  	if card.suite == @game.deck.trump
   	  		expect(@game.table.trump? card).to eq(true)
@@ -57,9 +59,12 @@ describe Table do
       elsif @game.mover == @game.players[0] && @game.state == "move_of_first_player"
       	@game.get_card_from_player(@game.players[0].player_cards[1], @game.players[0], @game.attacker) 
       end
+
       expect(@game.table.table_cards).to_not eq([])
       expect(@game.table.cards_count).to eq(1)
+
       @game.table.clear
+
       expect(@game.table.table_cards).to eq([])
       expect(@game.table.cards_count).to eq(0)
   	end
@@ -84,10 +89,12 @@ describe Table do
   	  if @game.mover == @game.players[1] && @game.state == "move_of_second_player"
   	  	@card1 = @game.players[1].player_cards[1]
   	  	@game.get_card_from_player(@game.players[1].player_cards[1], @game.players[1], @game.attacker ) 
+
       	expect(@game.table.get_latest_card).to eq(@card1)
       elsif @game.mover == @game.players[0] && @game.state == "move_of_first_player"
       	@card2 = @game.players[0].player_cards[1]
       	@game.get_card_from_player(@game.players[0].player_cards[1], @game.players[0], @game.attacker) 
+
       	expect(@game.table.get_latest_card).to eq(@card2)
       end
   	end
@@ -146,10 +153,12 @@ describe Table do
   describe  "do_push_card" do
   	it "should push to the table" do
   		@cards = []
+
   		for i in 0..3
   			@game.table.do_push_card @game.players[1].player_cards[i] , @game.players[1], @game.attacker
   			@cards.push(@game.players[1].player_cards[i])
   		end
+
   		if @game.players[1] == @game.attacker
   			@game.table.table_cards.each do |card|
   				if card != nil 
@@ -174,14 +183,15 @@ describe Table do
   	it "should add_card check if possible and push to table" do
   		if @game.mover == @game.players[1] && @game.state == "move_of_second_player"
   			@card1 = @game.players[1].player_cards[4]
+
   			expect(@game.table.add_card(@game.players[1].player_cards[4], @game.players[1], @game.attacker )).to eq(true)
   			expect(@game.table.add_card(@game.players[0].player_cards[4], @game.players[0], @game.attacker )).to eq(false)
   			expect(@game.table.cards_count).to eq(1)
   			expect(@game.table.table_cards[0]).to eq(@card1)
   		elsif @game.mover == @game.players[0] && @game.state == "move_of_first_player"
   			@card2 = @game.players[0].player_cards[4]
+
   			expect(@game.table.add_card(@game.players[0].player_cards[4], @game.players[0], @game.attacker )).to eq(true)
-  			#expect(@game.table.add_card(@game.players[1].player_cards[4], @game.players[1], @game.attacker )).to eq(false)
   			expect(@game.table.cards_count).to eq(1)
   			expect(@game.table.table_cards[0]).to eq(@card2)
   		end
