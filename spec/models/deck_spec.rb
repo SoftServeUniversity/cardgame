@@ -67,7 +67,7 @@ describe Deck do
     end
   end
 
-  describe "#init_card_iteration"
+  describe "#init_card_iteration" do
     before(:each) do
       @deck.init_card_iteration(3)
     end
@@ -89,4 +89,5 @@ describe Deck do
     it "should be an Array" do
       expect(@deck.init_card_iteration(3)).to be_kind_of(Array)
     end 
+  end
 end
