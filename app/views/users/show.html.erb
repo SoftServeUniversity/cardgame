@@ -1,0 +1,14 @@
+<h1>Welcome, <%= current_user.username %>!</h1>
+
+<%= current_user.email %>
+<br />
+<%= current_user.games_count %>
+<%= current_user.win_count %>
+<%= current_user.lose_count %>
+<br />
+<%= current_user.view_theme %>
+
+
+<%= link_to 'Edit Profile', user_edit_path , :class => "btn btn-danger" %>
+
+<%= link_to 'Back', games_path , :class => "btn btn-danger" %>
