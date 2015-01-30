@@ -13,20 +13,27 @@ describe Deck do
     expect(g.macro).to eq(:belongs_to)
   end
 
+  it "should have assosiation belongs_to Game" do
+    g = Deck.reflect_on_association(:game)
+
+    expect(g.macro).to_not  eq(:has_one)
+  end
+
   it "should have Array deck_cards" do
     expect(@deck.deck_cards).to be_kind_of(Array)
   end
 
   describe "#init_cards" do
 
-    it "should initialize cursor and invoke
-        card_itaration 9 times" do
+    it "should initialize cursor to nil and invoke
+        card_itaration 9 times and shuffle_deck" do
       @deck.expects(:init_card_iteration).at_least(9)
       @deck.expects(:shuffle_deck)
-
       @deck.init_cards
+
       expect(@deck.cursor).to eq(0)
     end
+
   end
 
   describe "#find_trump" do
@@ -36,6 +43,10 @@ describe Deck do
       @deck.find_trump
 
       expect(@deck.trump).to eq(@deck.deck_cards[35].suite)
+    end
+
+    it "should raise error if deck is empty" do  
+      expect { @deck.find_trump }.to raise_error(NoMethodError)
     end
 
   end
@@ -78,7 +89,7 @@ describe Deck do
       end
     end
 
-    it "should have different suites" do
+    it "should have different suites for 4 cards" do
       i = 0
       %w{hearts spades diamonds clubs}.each do |suite|
         expect(@deck.deck_cards[i].suite).to eq(suite)
@@ -88,6 +99,7 @@ describe Deck do
 
     it "should be an Array" do
       expect(@deck.init_card_iteration(3)).to be_kind_of(Array)
-    end 
+    end
+
   end
 end
