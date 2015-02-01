@@ -21,6 +21,7 @@ $(function(){
 
 
 
+	// New Game Animation
 
 
 	$("#newGameLogo").on("mouseover", function(){
@@ -35,6 +36,16 @@ $(function(){
 			"height": "-=0.5em",
 		}, 400
 		);
+	});
+
+
+
+	$("#newGameLogo").on("click", function(){
+		$("#newGameFormPad").animate({
+			"height": "160px",
+		}, 80
+		);
+		$("#newGameForm").toggle(1000);
 	});
 
 

@@ -3,6 +3,7 @@ before_filter :authenticate_user!, except: [:index]
 before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :end_game, :edit, :update, :destroy]  
 
   def index
+    @new_game = Game.new    
     @games = Game.all
     respond_to do |format|
       format.html { render action: 'index' }

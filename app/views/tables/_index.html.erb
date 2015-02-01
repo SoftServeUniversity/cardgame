@@ -1,21 +1,24 @@
 <div class='col-md-12 yieldcontent'>
-    <div class="row">
-        <div class="jumbotron jumboart text-center">
-            <%= link_to new_game_path do%>
-                <%= image_tag("newgame.png", class: "textart", id: "newGameLogo") %>
-            <% end %>
-        </div>
-        <% if @games.count > 0 %>
-            <div id = "card_games" class="tablePad">
-              <%= image_tag("games.png", class: "textart") %>
-              <%= render 'games' %>
-            </div>
-        <% else %>
-            <div id = "card_games" class="tablePad">
-              <h2 class="text-center">Nobody plays(</h2>
-              <%= render 'games' %>
-            </div>
-        <% end %>
+  <div class="row">
+    <div class="jumbotron jumboart text-center">
+      <%= image_tag("newgame.png", class: "textart", id: "newGameLogo") %>
     </div>
+
+    <div id="newGameFormPad" class="">
+      <%= render 'form' %>      
+    </div>
+
+    <% if @games.count > 0 %>
+        <div id = "card_games" class="tablePad">
+          <%= image_tag("games.png", class: "textart") %>
+          <%= render 'games' %>
+        </div>
+    <% else %>
+        <div id = "card_games" class="tablePad">
+          <h2 class="text-center">Nobody plays(</h2>
+          <%= render 'games' %>
+        </div>
+    <% end %>
+  </div>
 </div>
 
