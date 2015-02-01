@@ -1,6 +1,8 @@
 .jumboart {
 	height: 120px;
 	padding-top: 48px !important;
+	margin-bottom: 0 !important;
+	border-radius: 0 0 0 0 !important;
 }
 
 .jumboart h2, .jumboart div {
@@ -20,6 +22,7 @@
 	padding-right: 50px;
 	padding-bottom: 20px;
 	padding-top: 20px;
+	margin: 30px 0 0 0 !important;
 	background-color: #eeeeee;
 }
 
@@ -52,8 +55,37 @@
 /*NEW GAME FORM*/
 
 #newGameFormPad {
+
 	background-color: #eeeeee;	
 }
+
+#newGameForm {
+	color: #960004;
+	padding: 0 50px;
+}
+
+
+#newGameForm .input-group-addon {
+	color: #960004;
+	font-weight: bold;
+    min-width:150px;
+    text-align: left;
+}
+
+#newGameForm input[type=submit]{
+	width: 100%;
+	height: 83px;
+	padding: 0 0 0 0;
+	background-color: white;
+	color: #960004;
+	font-weight: bold;	
+	text-align: center;
+}
+
+#newGameForm input[type=submit]:focus {
+	outline-color: #fc9200;
+}
+
 
 .formHiden {
 	display: none;
@@ -61,3 +93,5 @@
 .formShow {
 	display: initial;
 }
+
+

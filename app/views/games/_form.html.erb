@@ -1,16 +1,24 @@
 <%= form_for(@new_game, :html => {:id => "newGameForm", :class => "formHiden"}) do |f| %>
+<div class="row">
+<div class="col-xs-10">
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">Game Name</div>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
 
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, class: "form-control" %>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">Game Description</div>
+      <%= f.text_field :description, class: "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description , class: "form-control" %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
+  
+<div class="col-xs-2 text-right">
+    <%= f.submit "CREATE", class: "btn btn-default" %>
+</div>
+</div>
 
 <% end %>

@@ -40,12 +40,22 @@ $(function(){
 
 
 
-	$("#newGameLogo").on("click", function(){
-		$("#newGameFormPad").animate({
-			"height": "160px",
-		}, 80
-		);
-		$("#newGameForm").toggle(1000);
+	$("#newGameLogo").on("click", function(){		
+		var formPad = $("#newGameFormPad");
+		if (formPad.height() === 0) {
+			$(formPad).animate({
+				"height": "121px",
+			}, 800);
+			setTimeout( function() {
+				$("#newGameForm").fadeToggle(800);
+			}, 400);
+
+		} else if (formPad.height() === 121) {
+			$("#newGameForm").fadeToggle(200);			
+			$(formPad).animate({
+				"height": "0px",
+			}, 400);
+		}
 	});
 
 
