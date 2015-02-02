@@ -2,22 +2,22 @@ require 'rails_helper'
 
 describe Game do
   before(:example) do
-  	@game = create(:game)
+    @game = create(:game)
     @user = create(:user)
     @user2 = create(:user)
   end
 
   describe  "init_state" do
-  	it "should switch to NewGame" do
+    it "should switch to NewGame" do
 
-  		expect(@game.state).to eq("new_game")
+      expect(@game.state).to eq("new_game")
 
-  		@game.do_init_first_player @user
-  		expect(@game.state).to eq("expactation_second_player")
+      @game.do_init_first_player @user
+      expect(@game.state).to eq("expactation_second_player")
 
-  		@game.do_init_second_player @user2
-  		expect(@game.state).to eq("game_prepare")
-  	end
+      @game.do_init_second_player @user2
+      expect(@game.state).to eq("game_prepare")
+    end
 
     it "should switch to ExpectationOfSecondPlayer" do
       @game.do_init_first_player @user
@@ -29,7 +29,7 @@ describe Game do
       @game.do_init_first_player @user
       @game.do_init_second_player @user2
 
-      expect(@game.state).to eq("game_prepare")    
+      expect(@game.state).to eq("game_prepare")
     end
 
     it "should switch to another player's move" do
@@ -46,81 +46,81 @@ describe Game do
   end
 
   describe  "do_init_first_player" do
-  	it "should init_first player" do
-  		@game.do_init_first_player @user
+    it "should init_first player" do
+      @game.do_init_first_player @user
 
-  		expect(@game.players[0].user_id).to eq(@user.id)
-  	end
+      expect(@game.players[0].user_id).to eq(@user.id)
+    end
   end
 end
 
 describe Game do
   before(:example) do
-  	@game = create(:game)
+    @game = create(:game)
     @user = create(:user)
     @user2 = create(:user)
     @game.do_init_first_player @user
-  	@game.do_init_second_player @user2
-  	@card = build(:card)
-  	@game.do_preparation_for_game
+    @game.do_init_second_player @user2
+    @card = build(:card)
+    @game.do_preparation_for_game
   end
 
   describe  "do_init_second_player" do
-  	it "should init_second player" do
-  		expect(@game.players[1].user_id).to eq(@user2.id)
-  	end
+    it "should init_second player" do
+      expect(@game.players[1].user_id).to eq(@user2.id)
+    end
   end
 
   describe "do_preparation_for_game" do
-  	it "should prepare game" do
-  		expect(@game.table).to_not eq(nil)
-  		expect(@game.deck).to_not eq(nil)
-  		expect(@game.deck.deck_cards.length).to eq(36)
-  	end
+    it "should prepare game" do
+      expect(@game.table).to_not eq(nil)
+      expect(@game.deck).to_not eq(nil)
+      expect(@game.deck.deck_cards.length).to eq(36)
+    end
   end
 
   describe "do_get_card_from_player" do
-  	it "should get card from player" do
-  		@game.table.add_card(@card, @game.players[0], @game.players[0])
+    it "should get card from player" do
+      @game.table.add_card(@card, @game.players[0], @game.players[0])
 
-  		expect(@game.table.table_cards[0]).to eq(@card)
-  	end
+      expect(@game.table.table_cards[0]).to eq(@card)
+    end
   end
 
   describe  "do_end_turn" do
-  	before(:example) do
-  	  @att = @game.attacker
+    before(:example) do
+      @att = @game.attacker
 
-  	  expect(@att).to eq(@game.mover)
+      expect(@att).to eq(@game.mover)
 
-  	  @game.do_end_turn
-  	  @att2 = @game.attacker 
-  	end
+      @game.do_end_turn
+      @att2 = @game.attacker
+    end
 
-  	it "should clear table" do
-  		expect(@game.table.table_cards).to eq([])
-  	end
+    it "should clear table" do
+      expect(@game.table.table_cards).to eq([])
+    end
 
-  	it "should change mover" do
-  		expect(@att).to_not eq(@att2)
-  	end
+    it "should change mover" do
+      expect(@att).to_not eq(@att2)
+    end
   end
 
   describe "do_break_turn" do
-  	before(:example) do
-  	  @card = @game.players[0].player_cards[2]
-  	  @game.table.add_card(@card, @game.players[0], @game.players[0])
-  	  @game.do_break_turn 1
-  	end
+    before(:example) do
+      @card = @game.players[0].player_cards[2]
+      @game.table.add_card(@card, @game.players[0], @game.players[0])
+      @game.do_break_turn 1
+    end
 
-  	it "should send card from table to one" do
-  	  expect(@game.players[0].player_cards.length).to eq(6)
-  	  expect(@game.players[1].player_cards.length).to eq(7)
-  	end
+    it "should send card from table to one" do
+      expect(@game.players[0].player_cards.length).to eq(6)
+      expect(@game.players[1].player_cards.length).to eq(7)
+    end
 
-  	it "should clear table" do
-  		expect(@game.table.table_cards).to eq([])
-  	end
+    it "should clear table" do
+      expect(@game.table.table_cards).to eq([])
+    end
   end
 end
 
@@ -150,7 +150,7 @@ describe Game do
 
       @game.players[0].player_cards.each do |card|
         expect(card).to be_kind_of(Card)
-      end  
+      end
 
       expect(@game.players[1].player_cards.length).to eq(6)
 
@@ -189,16 +189,20 @@ describe Game do
       @game2.do_init_first_player @user
       @game2.do_init_second_player @user2
       @game2.deck = create(:deck)
-      @game2.players[0].player_cards[0] = build(:card, suite:"#{@game2.deck.trump}", rang: 4)
-      @game2.players[0].player_cards[1] = build(:card, suite:"#{@game2.deck.trump}", rang: 1)
-      @game2.players[0].player_cards[2] = build(:card, suite:"#{@game2.deck.trump}", rang: 3)
-      @game2.players[0].player_cards[3] = build(:card, suite:"#{@game2.deck.trump}", rang: 5)
+      @game2.players[0].player_cards[0] = build(:card,
+                                                suite:"#{@game2.deck.trump}", rang: 4)
+      @game2.players[0].player_cards[1] = build(:card,
+                                                suite:"#{@game2.deck.trump}", rang: 1)
+      @game2.players[0].player_cards[2] = build(:card,
+                                                suite:"#{@game2.deck.trump}", rang: 3)
+      @game2.players[0].player_cards[3] = build(:card,
+                                                suite:"#{@game2.deck.trump}", rang: 5)
       @trump3 = @game2.find_smallest_trump @game2.players[0]
     end
 
     it "should find smallest trump" do
       expect(@trump3.rang).to eq(1)
-      if @trump1 
+      if @trump1
         expect(@trump1.suite).to eq(@game.deck.trump)
       end
       if @trump2

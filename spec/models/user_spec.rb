@@ -40,7 +40,7 @@ describe User do
     end
 
     it "should not find any user if name doesn't match" do
-      setup_user_for_database_auth("vill")
+      setup_user_for_database_auth("villy32")
       
       expect(User.find_for_database_authentication(@warden_condition)).to eq(nil)
     end
