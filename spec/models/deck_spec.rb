@@ -13,7 +13,7 @@ describe Deck do
     expect(g.macro).to eq(:belongs_to)
   end
 
-  it "should have assosiation belongs_to Game" do
+  it "shouldn't have assosiation belongs_to Game" do
     g = Deck.reflect_on_association(:game)
 
     expect(g.macro).to_not  eq(:has_one)
@@ -46,7 +46,7 @@ describe Deck do
     end
 
     it "should raise error if deck is empty" do  
-      expect { @deck.find_trump }.to raise_error(NoMethodError)
+      expect{ @deck.find_trump }.to raise_error(NoMethodError)
     end
 
   end

@@ -1,3 +1,4 @@
+require 'pry'
 class User < ActiveRecord::Base
   attr_accessor :login
   # Include default devise modules. Others available are:
