@@ -1,11 +1,11 @@
-<div class="text-center" ng-hide="currentUser.game">
+<div class="text-center" ng-hide="myGame">
   <h2>
     <a href="#new_game"> New Game </a>
   </h2>
 </div>
-<div class="text-center"ng-show="currentUser.game">
+<div class="text-center"ng-show="myGame">
   <h2>
-    <a href="#"> My Game </a>
+    <a href="#/games/{{myGame.id}}"> My Game </a>
   </h2>
 </div>
 <h2 class="text-center" ng-hide="games"> Nobody plays </h2>
@@ -25,13 +25,10 @@
         <td class="col-xs-4">{{game.name}}</td>
         <td class="col-xs-5">{{game.description}}</td>
         <td class="col-xs-1" ng-if="user">
-          <button type="button" class="btn btn-info" ng-click="showGame(game)"> show </button>
+          <button type="button" class="btn btn-info" ng-if="gameEmpty(game)" ng-click="joinGame(game)"> JOIN </button>
         </td>
         <td class="col-xs-1" ng-if="user">
-          <button type="button" class="btn btn-info" ng-click="joinGame(game)"> JOIN </button>
-        </td>
-        <td class="col-xs-1" ng-if="user">
-          <button type="button" class="btn btn-danger" ng-click="deleteGame(game)"> DELETE </button>
+          <button type="button" class="btn btn-danger" ng-if="gameOwner(game, user)" ng-click="deleteGame(game)"> DELETE </button>
         </td>
       </tr>
   </tbody>

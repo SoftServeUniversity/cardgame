@@ -5,7 +5,19 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.all
-    render json: @games
+    response = []
+    @games.each do |game|
+      res = {
+        id: game.id,
+        description: game.description,
+        name: game.name,
+        state: game.state,
+        owner: game.players[0].user,
+        player2: game.players[1]
+      };
+      response << res
+    end
+    render json: response
   end
 
   def show
@@ -51,7 +63,6 @@ class GamesController < ApplicationController
 
   def put_card
     card = self.current_user.player.put_card(params[:rang], params[:suite])
-    puts "____________________________--"
     puts card.rang
     puts card.suite
     @game.get_card_from_player card, self.current_user.player, @game.attacker
@@ -60,18 +71,14 @@ class GamesController < ApplicationController
     @game.table.save
     @game.save
     if @game.game_ended?
-      puts "_______________________________________Game Ended"
       if @game.players[0].cards_count == 0
-        puts "_______________________________________Winner player 0"
         @game.winner = @game.players[0]
         @game.loser = @game.players[1]
       else
-        puts "_______________________________________Winner player 1"
         @game.winner = @game.players[1]
         @game.loser = @game.players[0]
       end
       @game.save
-      puts "_______________________________________Game saved"
       end_game
     else
       render json: @game
@@ -79,7 +86,6 @@ class GamesController < ApplicationController
   end
 
   def end_turn
-    puts "Controller End Turn"
     @game.end_turn self.current_user.player
     save_game @game
     render json: @game
@@ -92,13 +98,11 @@ class GamesController < ApplicationController
   end
 
   def end_game 
+
     if !@game
         render json: @game
     end
-    puts"_______________________________________Controller Action End Game"
-    puts"_______________________________________outside"
     if @game.players[1]
-      puts"_______________________________________intside player exist"
       @user1 = User.find @game.players[0].user_id
       @user2 = User.find @game.players[1].user_id
 
@@ -106,7 +110,6 @@ class GamesController < ApplicationController
       @user2.games_count += 1
 
       if @game.winner
-        puts"_______________________________________inside is winner"
 
         if @user1 == @game.winner
           @user1.win_count += 1
@@ -116,7 +119,6 @@ class GamesController < ApplicationController
           @user1.lose_count += 1
         end
       else
-        puts"_______________________________________intside button pressed"
         if current_user == @user1
           @user2.win_count += 1
           @user1.lose_count += 1
@@ -128,7 +130,6 @@ class GamesController < ApplicationController
       @user1.save
       @user2.save
     end
-
     @game.destroy
 
     render json: {status: "ended"}
@@ -163,13 +164,14 @@ class GamesController < ApplicationController
 
     if @game.mover.user
       start_game_params = {
-      game_mover: @game.mover.user.id,
-      game_attacker: @game.attacker.user.id,
-      game_defender: @game.defender.user.id,
-      table_cards: @game.table.table_cards,
-      player_cards: self.current_user.player.player_cards,
-      deck_trump: @game.deck.deck_cards[35],
-      cursor: @game.deck.cursor }
+        game_mover: @game.mover.user.id,
+        game_attacker: @game.attacker.user.id,
+        game_defender: @game.defender.user.id,
+        table_cards: @game.table.table_cards,
+        player_cards: self.current_user.player.player_cards,
+        deck_trump: @game.deck.deck_cards[35],
+        cursor: @game.deck.cursor 
+      }
       resp.merge! (start_game_params)
     end
 

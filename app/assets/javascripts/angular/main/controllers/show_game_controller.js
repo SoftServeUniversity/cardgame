@@ -1,7 +1,7 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , "MY_CONST" , "CustomActionService", "GamesFactory", "GameFactory", "$location", "Auth",
-    function($scope, $interval, $routeParams , MY_CONST , CustomActionService , GamesFactory, GameFactory, $location, Auth) {
+MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , "CONST" , "CustomActionService", "GamesFactory", "GameFactory", "$location", "Auth",
+    function($scope, $interval, $routeParams , CONST , CustomActionService , GamesFactory, GameFactory, $location, Auth) {
 
         $scope.updateGame = function() {
             GameFactory.show({
@@ -10,7 +10,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
                 $scope.resolveUser();
                 $scope.gameEnded(data);
                 $scope.currentGame = data;
-                $scope.deckCounter = MY_CONST.DECK_CARDS_NUMBER - data.cursor;
+                $scope.deckCounter = CONST.DECK_CARDS_NUMBER - data.cursor;
 
             }, function(error) {
                 // console.log(error);
@@ -20,7 +20,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
         $scope.putCard = function(card) {
             CustomActionService.put_card({
                 id: $routeParams.id,
-                action: MY_CONST.ACTION_PUT_CARD,
+                action: CONST.ACTION_PUT_CARD,
                 suite: card.suite,
                 rang: card.rang
             }, function(data) {
@@ -43,13 +43,13 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
                         // console.log(error);
                     });
                 });
-            }, MY_CONST.TIMEOUT)
+            }, CONST.TIMEOUT)
         };
 
         $scope.endTurn = function() {
             CustomActionService.end_turn({
                 id: $routeParams.id,
-                action: MY_CONST.ACTION_END_TURN
+                action: CONST.ACTION_END_TURN
             }, function(data) {
                 $scope.reloadCards();
             }, function(error) {
@@ -59,8 +59,11 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
 
         $scope.endGame = function() {
             if(confirm("Are you sure?")){
-                GameFactory.delete({id: $routeParams.id}, function(){
-                    $location.path(MY_CONST.USER_ROOM_PATH);
+                CustomActionService.end_game({
+                    id: $routeParams.id,
+                    action: CONST.ACTION_END_GAME
+                }, function(){
+                    $location.path(CONST.USER_ROOM_PATH);
                 });
             }
         };
@@ -68,12 +71,12 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
         $scope.updateGame();
 
         $interval(function() {
-            $scope.reloadCards();
-        }, MY_CONST.INTERVAL);
+            $scope.updateGame();
+        }, CONST.INTERVAL);
         
         $scope.gameEnded = function(date){
-            if(date.status == MY_CONST.ENDED_STATUS){
-                $location.path(MY_CONST.USER_ROOM_PATH);
+            if(date.status === CONST.ENDED_STATUS){
+                $location.path(CONST.USER_ROOM_PATH);
             }
         };
     }

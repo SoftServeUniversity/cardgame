@@ -1,10 +1,9 @@
 var MyApp = angular.module("MyApp",['ngResource', 'ngRoute', 'Devise']);
 
 MyApp.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider){
-
-		$routeProvider.
+	$routeProvider.
 		when("/home", {
-			templateUrl: "assets/games/show.html",
+			templateUrl: "assets/games/home.html",
 			controller: "GameController"
 		}).
 		when("/login", {
@@ -30,16 +29,17 @@ MyApp.config(["$routeProvider", "$locationProvider", function($routeProvider, $l
 		otherwise({
 			redirectTo: "/home"
 		});
-}]).constant("MY_CONST", {
-        "TIMEOUT": 2000,
-        "INTERVAL": 5000,
-        "DECK_CARDS_NUMBER": 36,
-        "ACTION_PUT_CARD": "put_card",
-        "ACTION_END_TURN": "end_turn",
-        "ACTION_UPDATE": "update",
-        "USER_ROOM_PATH": "/users_room",
-        "GAMES_PATH": "/games/",
-        "HOME_PATH": "/home",
-        "ENDED_STATUS": "ended"
-
-    });
+}]);
+MyApp.constant("CONST", {
+	"TIMEOUT": 2000,
+  "INTERVAL": 5000,
+  "DECK_CARDS_NUMBER": 36,
+  "ACTION_PUT_CARD": "put_card",
+  "ACTION_END_TURN": "end_turn",
+  "ACTION_END_GAME": "end_game",
+  "ACTION_UPDATE": "update",
+  "USER_ROOM_PATH": "/users_room",
+  "GAMES_PATH": "/games/",
+  "HOME_PATH": "/home",
+  "ENDED_STATUS": "ended"
+});

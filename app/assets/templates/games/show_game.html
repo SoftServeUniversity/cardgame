@@ -1,3 +1,4 @@
+<h3>{{deckCounter}}</h3>
 <h3 ng-if="currentGame.game_mover == currentGame.current_user">Your move</h3>
 <h3 ng-if="currentGame.game_mover != currentGame.current_user">Your opponents move</h3>
 <h5>State: {{currentGame.game_state}}</h5>
@@ -7,7 +8,7 @@
     <div id="table_cards" >
       <div class="col-xs-9" style="display: inline-block">
      	  <div class="tableCardsList ">        
-          <ul class="hitCards" >
+          <ul class="hitCards">
             <li style="display: inherit" ng-repeat="card in currentGame.table_cards" ng-if="$even">
       			   <img style="width: 80px;" ng-src="assets/{{card.rang+card.suite}}.png"/>
             </li>
@@ -22,44 +23,44 @@
         </div>
       	</div>
       	<div class="col-xs-2">
-      		<div ng-if="deckCounter > 2" >
-				<ul >	
-					<li class="tableCardsList hitCards">
-						<img ng-src="assets/{{currentGame.deck_trump.rang+currentGame.deck_trump.suite}}.png" class="deckCards" />
-					</li>
-					<li class="tableCardsList defenceCards">
-						<img ng-src="assets/deck.png"  class="deckCards" />
-					</li>
-				</ul>
-	  		</div>
-			<div ng-if="deckCounter == 2" >
-				<ul class="tableCardsList hitCards">
-					<li>
-						<img ng-src="assets/{{currentGame.deck_trump.rang + currentGame.deck_trump.suite}}.png"  class="deckCards"/>
-					</li>
-				</ul>
-				<ul class="tableCardsList defenceCards">
-					<li>
-						<img ng-src="back.png"  class="deckCards" />
-					</li>
-				</ul>
-			</div>
-			<div ng-if="deckCounter == 1" >
-				<ul class="tableCardsList hitCards">
-					<li>
-						<img ng-src="assets/{{currentGame.deck_trump.rang + currentGame.deck_trump.suite}}.png"  class="deckCards"/>
-					</li>
-				</ul>
-			</div>
-			<div ng-if="deckCounter == 0">
-				<ul class="tableCardsList hitCards">
-					<li>
-					</li>
-				</ul>
-			</div>
+      		<div ng-if="deckCounter > 2">
+				    <ul>
+              <li class="tableCardsList hitCards">
+                <img ng-src="assets/{{currentGame.deck_trump.rang+currentGame.deck_trump.suite}}.png" class="deckCards" />
+              </li>
+              <li class="tableCardsList defenceCards">
+						    <img ng-src="assets/deck.png" class="deckCards" />
+				      </li>
+				    </ul>
+	  	    </div>
+          <div ng-if="deckCounter == 2">
+				    <ul class="tableCardsList hitCards">
+              <li>
+                <img ng-src="assets/{{currentGame.deck_trump.rang + currentGame.deck_trump.suite}}.png"  class="deckCards"/>
+              </li>
+            </ul>
+            <ul class="tableCardsList defenceCards">
+              <li>
+                <img ng-src="assets/back.png" class="deckCards" />
+              </li>
+            </ul>
+          </div>
+          <div ng-if="deckCounter == 1">
+            <ul class="tableCardsList hitCards">
+              <li>
+                <img ng-src="assets/{{currentGame.deck_trump.rang + currentGame.deck_trump.suite}}.png"  class="deckCards"/>
+              </li>
+            </ul>
+          </div>
+          <div ng-if="deckCounter == 0">
+            <ul class="tableCardsList hitCards">
+              <li>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-   </div>
    <div id="table_row_player" class="row" style="display: inline-block">
     <div id="table_player_cards" class="col-xs-10">
      <ul>
