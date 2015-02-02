@@ -1,7 +1,7 @@
 <div class='col-md-12 yieldcontent'>
   <div class="row">
     <div class="jumbotron jumboart text-center">
-      <%= image_tag("newgame.png", class: "textart", id: "newGameLogo") %>
+        <h2 id="newGameLogo">NEW GAME</h2>
     </div>
 
     <div id="newGameFormPad" class="">
@@ -10,7 +10,7 @@
 
     <% if @games.count > 0 %>
         <div id = "card_games" class="tablePad">
-          <%= image_tag("games.png", class: "textart") %>
+          <h2>GAMES</h2>
           <%= render 'games' %>
         </div>
     <% else %>
@@ -21,4 +21,3 @@
     <% end %>
   </div>
 </div>
-

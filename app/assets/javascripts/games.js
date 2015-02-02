@@ -26,14 +26,14 @@ $(function(){
 
 	$("#newGameLogo").on("mouseover", function(){
 		$(this).animate({
-			"height": "+=0.5em",
+			"font-size": "+=5px",
 		}, 80
 		);
 	});
 
 	$("#newGameLogo").on("mouseleave", function(){
 		$(this).animate({
-			"height": "-=0.5em",
+			"font-size": "-=5px",
 		}, 400
 		);
 	});

@@ -1,34 +1,31 @@
 <div class='col-md-12 yieldcontent'>
     <div class="row">
     	<div class="jumbotron jumboart text-center">
-    		<%= link_to user_edit_path do %>
-    			<% if current_user.username %>
-					<h2> <%= current_user.username %> </h2>
-				<% else %>
-					<h2> <%= current_user.email %> </h2>
-				<% end %>
+    		<% if current_user.username %>
+				<h2> <%= current_user.username %> </h2>
+			<% else %>
+				<h2> <%= current_user.email %> </h2>
 			<% end %>
-
-			<%= link_to user_edit_path do %>
+			<%= link_to "" do %>
     			<div>User Settings</div>
 			<% end %>
 		</div>
 		
 		<div class="tablePad">	
-			<h2 class="text-center">Your Statistics</h2>
+			<h2>YOUR STATISTICS</h2>
 			<table class="table gamestable">
    				<thead>
    				    <tr>
-   				    	<th class="col-xs-4">Games Played</th>
-   				    	<th class="col-xs-4">Wins</th>
-   				    	<th class="col-xs-4">Loses</th>
+   				    	<th class="col-xs-4 text-center">Games Played</th>
+   				    	<th class="col-xs-4 text-center">Wins</th>
+   				    	<th class="col-xs-4 text-center">Loses</th>
 					</tr>
    				</thead>
    				<tbody>
    					<tr>
-						<td class="col-xs-4"><%= current_user.games_count %></td>
-						<td class="col-xs-4"><%= current_user.win_count %></td>
-						<td class="col-xs-4"><%= current_user.lose_count %></td>
+						<td class="col-xs-4 text-center"><%= current_user.games_count %></td>
+						<td class="col-xs-4 text-center"><%= current_user.win_count %></td>
+						<td class="col-xs-4 text-center"><%= current_user.lose_count %></td>
    					</tr>
    				</tbody>
    			</table>
