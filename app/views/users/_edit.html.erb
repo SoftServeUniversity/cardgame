@@ -1,16 +1,23 @@
-<%= form_for(resource, as: resource_name, url: user_update_url(current_user), method: :post) do |f| %>
-  
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, value: @user.username, autofocus: true %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :view_theme %><br />
-    <%= f.select :view_theme, ['Classic', 'Modern'] %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+<%= form_for(resource, as: resource_name, url: user_update_url(current_user), :html => {:id => "editUserForm", :class => "formHiden"}, method: :post) do |f| %>
+    <div class="row">
+        <div class="col-xs-10">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">Username</div>
+                    <%= f.text_field :username, value: @user.username, class: "form-control", autofocus: true %>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">View Theme</div>
+                    <%= f.select :view_theme, ['Classic', 'Modern'], {}, { :class => "form-control"}  %>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xs-2 text-right">
+            <%= f.submit "UPDATE", class: "btn btn-default" %>
+        </div>
+    </div>
 <% end %>

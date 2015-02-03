@@ -6,7 +6,7 @@
 }
 
 
-.jumboart h2, .jumboart a {
+.jumboart h2, .jumboart h5 {
 	text-decoration: none;
 	margin: 0 0 0 0;
 }
@@ -17,8 +17,9 @@
 	font-weight: bold;
 	transition: color 0.3s;	
 }
-.jumboart a {
+.jumboart h5 {
 	color: #fc9200;
+	margin: 5px 0 0 0;
 }
 
 
@@ -29,59 +30,14 @@
 	color: #fc9200;	
 }
 
-.jumboart a:hover {
+.jumboart h5:hover {
 	color: #fc9200 !important;
 	text-shadow: 0 0 1px #fc9200 !important;
 	text-decoration: none;	
 	transition: text-shadow 0.5s;	
 }
 
-#newGameLogo {
+#newGameLogo, #userSettings {
 	cursor: pointer;
 }
-
-
-
-/*NEW GAME FORM*/
-
-#newGameFormPad {
-
-	background-color: #eeeeee;	
-}
-
-#newGameForm {
-	color: #960004;
-	padding: 0 50px;
-}
-
-
-#newGameForm .input-group-addon {
-	color: #960004;
-	font-weight: bold;
-    min-width:150px;
-    text-align: left;
-}
-
-#newGameForm input[type=submit]{
-	width: 100%;
-	height: 83px;
-	padding: 0 0 0 0;
-	background-color: white;
-	color: #960004;
-	font-weight: bold;	
-	text-align: center;
-}
-
-#newGameForm input[type=submit]:focus {
-	outline-color: #fc9200;
-}
-
-
-.formHiden {
-	display: none;
-}
-.formShow {
-	display: initial;
-}
-
 

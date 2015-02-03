@@ -1,19 +1,17 @@
 <div class='col-md-12 yieldcontent'>
     <div class="row">
     	<div class="jumbotron jumboart text-center">
-    		<% if current_user.username %>
-				<h2> <%= current_user.username %> </h2>
-			<% else %>
-				<h2> <%= current_user.email %> </h2>
-			<% end %>
-			<%= link_to "" do %>
-    			<div>User Settings</div>
-			<% end %>
+        <% if (current_user.username == "") || (current_user.username == nil) %>
+				  <h2> <%= current_user.email %> </h2>
+			  <% else %>
+				  <h2> <%= current_user.username %> </h2>
+			  <% end %>
+    		<h5 id="userSettings">User Settings</h5>
 		</div>
 
-		<div id="newGameFormPad">
-    	  <%= render 'users/edit' %>      
-    	</div>
+		<div id="userEditFormPad">
+      <%= render 'users/edit' %>      
+    </div>
 		
 		<div class="tablePad">	
 			<h2>YOUR STATISTICS</h2>

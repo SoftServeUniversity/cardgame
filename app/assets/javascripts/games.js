@@ -23,7 +23,6 @@ $(function(){
 
 	// New Game Animation
 
-
 	$("#newGameLogo").on("mouseover", function(){
 		$(this).animate({
 			"font-size": "+=5px",
@@ -57,6 +56,29 @@ $(function(){
 			}, 400);
 		}
 	});
+
+
+
+	// User Edit Animation
+
+	$("#userSettings").on("click", function(){		
+		var formPad = $("#userEditFormPad");
+		if (formPad.height() === 0) {
+			$(formPad).animate({
+				"height": "121px",
+			}, 800);
+			setTimeout( function() {
+				$("#editUserForm").fadeToggle(800);
+			}, 400);
+
+		} else if (formPad.height() === 121) {
+			$("#editUserForm").fadeToggle(200);			
+			$(formPad).animate({
+				"height": "0px",
+			}, 400);
+		}
+	});
+
 
 
 

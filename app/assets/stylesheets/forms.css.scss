@@ -1,0 +1,60 @@
+/*NEW GAME FORM*/
+
+#newGameFormPad, #userEditFormPad, .userEditFormPad {
+
+	background-color: #eeeeee;	
+}
+
+#newGameForm, #editUserForm, #editUserFormDevise, #registerFormDevise {
+	color: #960004;
+	padding: 0 50px;
+}
+
+
+#newGameForm .input-group-addon, #editUserForm .input-group-addon, #editUserFormDevise .input-group-addon, #registerFormDevise .input-group-addon {
+	color: #960004;
+	font-weight: bold;
+    min-width:150px;
+    text-align: left;
+}
+
+#newGameForm input[type=submit], #editUserForm input[type=submit] {
+	width: 100%;
+	height: 83px;
+	padding: 0 0 0 0;
+	background-color: white;
+	color: #960004;
+	font-weight: bold;	
+	text-align: center;
+}
+
+#editUserFormDevise input[type=submit], #registerFormDevise input[type=submit] {
+	width: 150px;
+	background-color: white;
+	color: #960004;
+	font-weight: bold;
+	text-align: center;
+}
+
+.resetButton {
+	margin: 0 0 20px 50px !important;
+	width: 150px;
+	background-color: #960004 !important;
+	color: white !important;
+	font-weight: bold !important;
+	text-align: center !important;
+}
+
+#newGameForm input[type=submit]:focus, #editUserForm input[type=submit]:focus, #editUserFormDevise input[type=submit]:focus, .resetButton:focus, #registerFormDevise input[type=submit]:focus {
+	outline-color: #fc9200 !important;
+}
+
+
+.formHiden {
+	display: none;
+}
+.formShow {
+	display: initial;
+}
+
+
