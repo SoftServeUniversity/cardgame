@@ -3,15 +3,15 @@ require 'rails_helper'
 describe Card do
   context "card had been initialized with params" do
     before(:each) do
-      @card = build(:card, suite: "hearts")
+      @card = build(:card, suite: SUITE_HARTS)
     end
 
     it "should initialize given suite" do
-      expect(@card.suite).to eq("hearts")
+      expect(@card.suite).to eq(SUITE_HARTS)
     end
 
     it "should initialize given rank" do
-      expect(@card.rang).to eq(4)
+      expect(@card.rang).to eq(NUMBER_FOUR)
     end
   end
 
@@ -20,7 +20,7 @@ describe Card do
 
     it "should initialize rank to nil when
       not specified other" do
-      expect(card.rang).to eq(nil)
+      expect(card.rang).to be_nil
     end
 
     it "should initialize suite to nil when

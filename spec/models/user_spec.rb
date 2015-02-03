@@ -17,32 +17,32 @@ describe User do
   describe "#after_initialize :init" do
     context "calling User.new triggers method init" do
 
-      it {expect(user.games_count).to eq(0)}
-      it {expect(user.lose_count).to eq(0)}
-      it {expect(user.win_count).to eq(0)}
-      it {expect(user.view_theme).to eq("Classic")}
+      it {expect(user.games_count).to eq(NUMBER_ZERO)}
+      it {expect(user.lose_count).to eq(NUMBER_ZERO)}
+      it {expect(user.win_count).to eq(NUMBER_ZERO)}
+      it {expect(user.view_theme).to eq(THEME_CLASSIC)}
     end
   end
 
   describe "#self.find_for_database_authentication" do
     it "should invoke #dup and #delete 
         on given param and find user with given name" do
-      setup_user_for_database_auth("villy")
+      setup_user_for_database_auth(NAME_SAMPLE)
 
       expect(User.find_for_database_authentication(@warden_condition)).to eq(@user)
     end
 
     it "should invoke #dup and #delete 
         on given param and find user with given email" do
-      setup_user_for_database_auth(nil,"villy@gmail.com")
+      setup_user_for_database_auth(NIL, EMAIL_SAMPLE)
 
       expect(User.find_for_database_authentication(@warden_condition)).to eq(@user)
     end
 
     it "should not find any user if name doesn't match" do
-      setup_user_for_database_auth("villy32")
+      setup_user_for_database_auth(WRONG_NAME_SAMPLE)
       
-      expect(User.find_for_database_authentication(@warden_condition)).to eq(nil)
+      expect(User.find_for_database_authentication(@warden_condition)).to be_nil
     end
   end
 
