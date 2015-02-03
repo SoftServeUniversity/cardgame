@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Game do
-  before(:example) do
+  before(:each) do
     @game = create(:game)
     @user = create(:user)
     @user2 = create(:user)

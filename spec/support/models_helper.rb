@@ -67,6 +67,78 @@ module ModelHelpers
     end
   end
 
+  def create_and_put_card(num)
+    @card1 = @game.players[num].player_cards[1]
+    @game.get_card_from_player(@game.players[num].player_cards[1],
+                               @game.players[num], @game.attacker )
+  end
+
+  def loop_to_find_trump(num)
+    for i in 1..5
+      if @game.players[num].player_cards[i].rang == @game.players[num].player_cards[0].rang
+        expect(@game.table.allow_attack? @game.players[num].player_cards[i]).to eq(true)
+      end
+    end
+  end
+
+  def defend_card_rang_higher?(i, player)
+    (@game.players[player].player_cards[i].rang > @card1.rang)
+  end
+
+  def defend_card_suite_same?(i, player)
+    (@game.players[player].player_cards[i].suite == @card1.suite)
+  end
+
+  def defender_card_trump(i, player)
+    (@game.players[player].player_cards[i].suite == @game.deck.trump)
+  end
+
+  def attacker_card_not_trump(i)
+    (@card1.suite != @game.deck.trump)
+  end
+
+  def allow_defence_rules(i, player)
+    defend_card_rang_higher?(i, player) && defend_card_suite_same?(i, player)
+  end
+
+
+  def allow_defence_rules_trump(i, player)
+    defender_card_trump(i, player) && attacker_card_not_trump(i)
+  end
+
+  def loop_and_check_allow_defence(player)
+    @cards = []
+    for i in 0..5
+      if allow_defence_rules(i, player)
+        expect(@game.table.allow_defend? @game.players[player].player_cards[i]).to eq(true)
+      elsif allow_defence_rules_trump(i, player)
+        expect(@game.table.allow_defend? @game.players[player].player_cards[i]).to eq(true)
+      else
+        expect(@game.table.allow_defend? @game.players[player].player_cards[i]).to eq(false)
+      end
+    end
+  end
+
+  def loop_over_table_cards_check_presence
+    @game.table.table_cards.each do |card|
+      if card
+        expect(@cards.include?(card)).to eq(true)
+      end
+    end
+  end
+
+  def init_card_add_to_table_check_expectations(player, &block)
+    @card1 = @game.players[player].player_cards[4]
+    expect(@game.table.add_card(@game.players[player].player_cards[4],
+                                @game.players[player], @game.attacker )).to eq(true)
+    expect(@game.table.cards_count).to eq(1)
+    expect(@game.table.table_cards[0]).to eq(@card1)
+    if block_given?
+      yield
+    end
+  end
+
+
   def go_to_expectation_of_second
     @game = create(:game)
     @user = create(:user)
@@ -79,6 +151,15 @@ module ModelHelpers
     @game.do_init_second_player @user2
     if block_given?
       yield @game
+    end
+  end
+
+  def iterate_and_push_cards
+    @cards = []
+    for i in 0..3
+      @game.table.do_push_card( @game.players[1].player_cards[i],
+                                @game.players[1], @game.attacker)
+      @cards.push(@game.players[1].player_cards[i])
     end
   end
 
