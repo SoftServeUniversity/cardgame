@@ -18,15 +18,8 @@ MyApp.factory("GameFactory", ["$resource", function($resource){
 MyApp.factory("CustomActionService", ["$resource", function($resource){
 	return $resource("games/:id/:action.json", {}, {
 		join: {method: "POST", params: {id: "@id", action:"@action"}},
-		put_card: {method: "POST", params: {id: "@id", action:"@action"}},
-		end_turn: {method: "POST", params: {id: "@id", action:"@action"}}
+		put_card: {method: "POST", params: {id: "@id", action: "@action"}},
+		end_turn: {method: "POST", params: {id: "@id", action: "@action"}},
+		end_game: {method: "POST", params: {id: "@id", action: "@action"}}
 	});
-}]);
-
-MyApp.service('userService',['$resource', function($resource){
-	return $resource(" users/:id.json", {}, {
-		get_user: {method: "GET", params: {id: "@id"}},
-		update_user: {method: "PUT", params: {id: "@id"}}
-	});
-	
 }]);

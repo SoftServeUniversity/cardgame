@@ -23,13 +23,20 @@ class UsersController < ApplicationController
 	end
 
   def respond_to_json
-    stat = {
+    resp = {
       games_played: self.current_user.games_count,
       games_won: self.current_user.win_count,
       games_lose: self.current_user.lose_count,
       username: self.current_user.username,
       view_theme: self.current_user.view_theme
     }
+    if self.current_user.player
+      player_game = {
+        my_game: self.current_user.player.game
+      }
+      resp.merge! (player_game)
+    end
+    resp
   end
 
 end

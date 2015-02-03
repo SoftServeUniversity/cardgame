@@ -31,6 +31,8 @@ gem 'angularjs-rails'
 
 gem 'angular_rails_csrf'
 
+gem 'pry'
+
 gem 'state_machine'
 
 gem 'will_paginate'
