@@ -1,7 +1,7 @@
 var MyApp = angular.module("MyApp");
 
-MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , "MY_CONST" , "CustomActionService", "GamesFactory", "GameFactory", "$location", "Auth",
-    function($scope, $interval, $routeParams , MY_CONST , CustomActionService , GamesFactory, GameFactory, $location, Auth) {
+MyApp.controller("ShowGameController", ["$scope", "$timeout" ,  "$interval", "$routeParams" , "MY_CONST" , "CustomActionService", "GamesFactory", "GameFactory", "$location", "Auth",
+    function($scope, $timeout , $interval, $routeParams , MY_CONST , CustomActionService , GamesFactory, GameFactory, $location, Auth) {
 
         $scope.updateGame = function() {
             GameFactory.show({
@@ -31,8 +31,7 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
 
         $scope.reloadCards = function() {
 
-            setTimeout(function() {
-                $scope.$apply(function() {
+            $timeout(function() {
                     GameFactory.show({
                         id: $routeParams.id
                     }, function(data) {
@@ -41,9 +40,23 @@ MyApp.controller("ShowGameController", ["$scope", "$interval", "$routeParams" , 
                     }, function(error) {
                         // console.log(error);
                     });
-                });
             }, MY_CONST.TIMEOUT)
         };
+
+        // $scope.reloadCards = function() {
+
+        //     setTimeout(function() {
+        //         $scope.$apply(function() {
+        //             GameFactory.show({
+        //                 id: $routeParams.id
+        //             }, function(data) {
+        //                 $scope.currentGame = data;
+        //             }, function(error) {
+        //                 // console.log(error);
+        //             });
+        //         });
+        //     }, MY_CONST.TIMEOUT)
+        // };
 
         $scope.endTurn = function() {
             CustomActionService.end_turn({
