@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pry'
 
 describe Game do
   before(:each) do
@@ -55,14 +56,11 @@ describe Game do
 end
 
 describe Game do
-  before(:example) do
-    @game = create(:game)
-    @user = create(:user)
-    @user2 = create(:user)
-    @game.do_init_first_player @user
-    @game.do_init_second_player @user2
-    @card = build(:card)
-    @game.do_preparation_for_game
+  before(:each) do
+    go_to_game_prepare_state do
+      @card = build(:card)
+      @game.do_preparation_for_game
+    end
   end
 
   describe  "do_init_second_player" do
@@ -81,7 +79,8 @@ describe Game do
 
   describe "do_get_card_from_player" do
     it "should get card from player" do
-      @game.table.add_card(@card, @game.players[0], @game.players[0])
+      @game.table.add_card(@card, @game.players[0],
+                           @game.players[0])
 
       expect(@game.table.table_cards[0]).to eq(@card)
     end
@@ -109,7 +108,8 @@ describe Game do
   describe "do_break_turn" do
     before(:example) do
       @card = @game.players[0].player_cards[2]
-      @game.table.add_card(@card, @game.players[0], @game.players[0])
+      @game.table.add_card(@card, @game.players[0],
+                           @game.players[0])
       @game.do_break_turn 1
     end
 
@@ -126,15 +126,9 @@ end
 
 describe Game do
   before(:example) do
-    @game = create(:game)
-    @user = create(:user)
-    @user2 = create(:user)
-    @game.do_init_first_player @user
-    @game.do_init_second_player @user2
-    @card = build(:card)
-    @game.table = create(:table)
-    @game.deck = create(:deck)
-    @game.deck.init_cards
+    go_to_game_prepare_state do
+      init_card_deck_table
+    end
   end
 
   describe "init_players_cards" do
@@ -143,15 +137,17 @@ describe Game do
       expect(@game.players[1].player_cards).to eq([])
     end
 
-    it "should give 6 cards to each player" do
+    it "should give 6 cards to first player" do
       @game.init_players_cards
-
       expect(@game.players[0].player_cards.length).to eq(6)
 
       @game.players[0].player_cards.each do |card|
         expect(card).to be_kind_of(Card)
       end
+    end
 
+    it "should give 6 cards to each player" do
+      @game.init_players_cards
       expect(@game.players[1].player_cards.length).to eq(6)
 
       @game.players[1].player_cards.each do |card|
@@ -163,8 +159,7 @@ describe Game do
   describe "set_attacker" do
     before(:example) do
       @game.set_attacker
-      @first_min = @game.find_smallest_trump @game.players[0]
-      @second_min = @game.find_smallest_trump @game.players[1]
+      find_trump_for_both
     end
 
     it "should set attacker" do
@@ -183,30 +178,20 @@ describe Game do
   describe "find_smallest_trump" do
     before(:example) do
       @game.init_players_cards
-      @trump1 = @game.find_smallest_trump(@game.players[0])
-      @trump2 = @game.find_smallest_trump(@game.players[1])
-      @game2 = create(:game)
-      @game2.do_init_first_player @user
-      @game2.do_init_second_player @user2
-      @game2.deck = create(:deck)
-      @game2.players[0].player_cards[0] = build(:card,
-                                                suite:"#{@game2.deck.trump}", rang: 4)
-      @game2.players[0].player_cards[1] = build(:card,
-                                                suite:"#{@game2.deck.trump}", rang: 1)
-      @game2.players[0].player_cards[2] = build(:card,
-                                                suite:"#{@game2.deck.trump}", rang: 3)
-      @game2.players[0].player_cards[3] = build(:card,
-                                                suite:"#{@game2.deck.trump}", rang: 5)
-      @trump3 = @game2.find_smallest_trump @game2.players[0]
+      find_trump_for_both
+
+      create_second_game
+      creating_some_trumps
+      @third_min = @game2.find_smallest_trump @game2.players[0]
     end
 
     it "should find smallest trump" do
-      expect(@trump3.rang).to eq(1)
+      expect(@third_min.rang).to eq(1)
       if @trump1
-        expect(@trump1.suite).to eq(@game.deck.trump)
+        expect(@first_min.suite).to eq(@game.deck.trump)
       end
       if @trump2
-        expect(@trump2.suite).to eq(@game.deck.trump)
+        expect(@second_min.suite).to eq(@game.deck.trump)
       end
     end
   end

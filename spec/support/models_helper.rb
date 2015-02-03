@@ -154,6 +154,18 @@ module ModelHelpers
     end
   end
 
+  def find_trump_for_both
+    @first_min = @game.find_smallest_trump @game.players[0]
+    @second_min = @game.find_smallest_trump @game.players[1]
+  end
+
+  def init_card_deck_table
+    @card = build(:card)
+    @game.table = create(:table)
+    @game.deck = create(:deck)
+    @game.deck.init_cards
+  end
+
   def iterate_and_push_cards
     @cards = []
     for i in 0..3
@@ -163,12 +175,27 @@ module ModelHelpers
     end
   end
 
+  def creating_some_trumps
+    for i in 0..3
+      @game2.players[0].player_cards[i] = build(:card,
+                                                suite:"#{@game2.deck.trump}",
+                                                rang: i+1)
+    end
+  end
+
   def iterate_cards_for_trump(player)
     @game.players[player].player_cards.each do |card|
       if card.suite == @game.deck.trump
         expect(@game.table.trump? card).to eq(true)
       end
     end
+  end
+
+  def create_second_game
+    @game2 = create(:game)
+    @game2.do_init_first_player @user
+    @game2.do_init_second_player @user2
+    @game2.deck = create(:deck)
   end
 
   def expect_defend_or_attack(status)
