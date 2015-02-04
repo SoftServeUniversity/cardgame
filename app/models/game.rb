@@ -51,16 +51,18 @@ class Game < ActiveRecord::Base
     state :game_prepare do
       def do_preparation_for_game
         puts "Doing preparation for game..."
-        table = Table.create({:game => self, :cards_count => 0, :defender_cursor => 1, :attacker_cursor => 0})
+        table = Table.create({:game => self, :cards_count => NUMBER_ZERO,
+                              :defender_cursor => NUMBER_ONE,
+                              :attacker_cursor => NUMBER_ZERO})
         deck = Deck.create({:game => self})
 
         deck.init_cards
 
         set_attacker
 
-        if self.mover == self.players[0]
+        if self.mover == self.players[NUMBER_ZERO]
           self.first_player_move
-        elsif self.mover == self.players[1]
+        elsif self.mover == self.players[NUMBER_ONE]
           self.second_player_move
         end
       end
@@ -72,10 +74,10 @@ class Game < ActiveRecord::Base
         puts _player
         if self.mover == _player
 
-          if self.players[0] == _player
-            current_player = self.players[0]
+          if self.players[NUMBER_ZERO] == _player
+            current_player = self.players[NUMBER_ZERO]
           else
-            current_player = self.players[1]
+            current_player = self.players[NUMBER_ONE]
           end
 
           if self.do_get_card_from_player _card, _player, _attacker
@@ -83,10 +85,10 @@ class Game < ActiveRecord::Base
 
             if self.move_of_first_player?
               self.second_player_move
-              self.mover = self.players[1]
+              self.mover = self.players[NUMBER_ONE]
             else
               self.first_player_move
-              self.mover = self.players[0]
+              self.mover = self.players[NUMBER_ZERO]
             end
           end
         else
@@ -97,7 +99,7 @@ class Game < ActiveRecord::Base
       def end_turn _player
         puts "////////////////////END OF TURN in state"
         if self.mover == _player
-          if(_player == self.attacker && self.table.cards_count > 0) #END from attacker
+          if(_player == self.attacker && self.table.cards_count > NUMBER_ZERO) #END from attacker
             puts "////////////////////ATTACKER END OF TURN in state"
             if self.move_of_first_player?
               self.second_player_move
@@ -120,10 +122,10 @@ class Game < ActiveRecord::Base
       def get_card_from_player _card, _player, _attacker
         if self.mover == _player
 
-          if self.players[0] == _player
-            current_player = self.players[0]
+          if self.players[NUMBER_ZERO] == _player
+            current_player = self.players[NUMBER_ZERO]
           else
-            current_player = self.players[1]
+            current_player = self.players[NUMBER_ONE]
           end
 
           if self.do_get_card_from_player _card, _player, _attacker
@@ -136,17 +138,17 @@ class Game < ActiveRecord::Base
 
       def end_turn _player
         if self.mover == _player
-          if(self.players[0] == self.mover)
-            player = 1
+          if(self.players[NUMBER_ZERO] == self.mover)
+            player = NUMBER_ONE
           else
-            player = 0
+            player = NUMBER_ZERO
           end
           self.do_break_turn player
         end
 
-        if self.mover == self.players[0]
+        if self.mover == self.players[NUMBER_ZERO]
           self.first_player_move
-        elsif self.mover == self.players[1]
+        elsif self.mover == self.players[NUMBER_ONE]
           self.second_player_move
         end
       end
@@ -181,8 +183,8 @@ class Game < ActiveRecord::Base
   def set_attacker
     init_players_cards
 
-    first_min = find_smallest_trump self.players[0]
-    second_min = find_smallest_trump self.players[1]
+    first_min = find_smallest_trump self.players[NUMBER_ZERO]
+    second_min = find_smallest_trump self.players[NUMBER_ONE]
     puts "---------------------------------------------------"
 
     if(!first_min && !second_min)
@@ -192,32 +194,32 @@ class Game < ActiveRecord::Base
     else
       if (!first_min)
         puts "----------------- first_min = nil"
-        self.attacker = self.players[1]
-        self.defender = self.players[0]
-        self.mover = self.players[1]
+        self.attacker = self.players[NUMBER_ONE]
+        self.defender = self.players[NUMBER_ZERO]
+        self.mover = self.players[NUMBER_ONE]
       elsif (!second_min)
         puts "----------------- second_min = nil"
-        self.attacker = self.players[0]
-        self.defender = self.players[1]
-        self.mover = self.players[0]
+        self.attacker = self.players[NUMBER_ZERO]
+        self.defender = self.players[NUMBER_ONE]
+        self.mover = self.players[NUMBER_ZERO]
       elsif first_min.rang < second_min.rang
         puts "----------------- first_min <  second_min"
-        self.attacker = self.players[0]
-        self.defender = self.players[1]
-        self.mover = self.players[0]
+        self.attacker = self.players[NUMBER_ZERO]
+        self.defender = self.players[NUMBER_ONE]
+        self.mover = self.players[NUMBER_ZERO]
       else
         puts "----------------- first_min >  second_min"
-        self.attacker = self.players[1]
-        self.defender = self.players[0]
-        self.mover = self.players[1]
+        self.attacker = self.players[NUMBER_ONE]
+        self.defender = self.players[NUMBER_ZERO]
+        self.mover = self.players[NUMBER_ONE]
       end
     end
   end
 
   def init_players_cards
-    6.times do
-      self.players[0].add_card (deck.get_one)
-      self.players[1].add_card (deck.get_one)
+    NUMBER_SIX.times do
+      self.players[NUMBER_ZERO].add_card (deck.get_one)
+      self.players[NUMBER_ONE].add_card (deck.get_one)
     end
   end
 
@@ -238,25 +240,25 @@ class Game < ActiveRecord::Base
   end
 
   def init_new_turn
-    (6-self.players[0].cards_count).times do
+    (NUMBER_SIX-self.players[NUMBER_ZERO].cards_count).times do
       puts"//////////////////////////// get one card to player 0"
       if (self.deck.cursor < 36)
-        self.players[0].add_card self.deck.get_one
+        self.players[NUMBER_ZERO].add_card self.deck.get_one
       end
     end
 
-    (6-self.players[1].cards_count).times do
+    (NUMBER_SIX-self.players[NUMBER_ONE].cards_count).times do
       puts"//////////////////////////// get one card to player 1"
-      if (self.deck.cursor < 36)
-        self.players[1].add_card self.deck.get_one
+      if (self.deck.cursor < NUMBER_36)
+        self.players[NUMBER_ONE].add_card self.deck.get_one
       end
     end
   end
 
   def game_ended?
-    game_end = false
-    if (self.deck.cursor == 36 && (self.players[0].cards_count == 0 || self.players[1].cards_count == 0))
-      game_end = true
+    game_end = FALSE
+    if (self.deck.cursor == NUMBER_36 && (self.players[NUMBER_ZERO].cards_count == NUMBER_ZERO || self.players[NUMBER_ONE].cards_count == NUMBER_ZERO))
+      game_end = TRUE
     end
     game_end
   end

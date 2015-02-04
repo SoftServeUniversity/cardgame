@@ -35,6 +35,7 @@ describe User do
     end
 
   end
+  
   describe "#after_initialize :init" do
     context "calling User.new triggers method init" do
 
