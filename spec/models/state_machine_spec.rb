@@ -8,24 +8,24 @@ describe :state do
 
     it "should initialize player" do
 
-      expect(@game.players[0]).to be_kind_of(Player)
-      expect(@game.players[0].user_id).to eq(@user.id)
-      expect(@game.state).to eq("expactation_second_player")
+      expect(@game.players[NUMBER_ZERO]).to be_kind_of(Player)
+      expect(@game.players[NUMBER_ZERO].user_id).to eq(@user.id)
+      expect(@game.state).to eq(EXPECTATION_SECOND_PLAYER)
     end
   end
 
   describe :expactation_second_player do
-    before(:example) do
+    before(:each) do
       @user2 = create(:user)
       @game.do_init_second_player @user2
     end
 
     it "should initialize second player" do
-      expect(@game.players[1].user_id).to eq(@user2.id)
+      expect(@game.players[NUMBER_ONE].user_id).to eq(@user2.id)
     end
 
     it "should trigger the state" do
-      expect(@game.state).to eq("game_prepare")
+      expect(@game.state).to eq(GAME_PREPARE_STATE)
     end
   end
 
@@ -36,7 +36,7 @@ describe :state do
     end
 
     it "should initialize table" do
-      expect(@game.table).to_not eq(nil)
+      expect(@game.table).to_not be_nil
     end
 
     it "should create table with class Table" do
@@ -44,7 +44,7 @@ describe :state do
     end
 
     it "should init deck" do
-      expect(@game.deck).to_not eq(nil)
+      expect(@game.deck).to_not be_nil
     end
 
     it "should create table with class Deck" do
@@ -52,10 +52,10 @@ describe :state do
     end
 
     it "should do preparations" do
-      if @game.mover == @game.players[0]
-        expect(@game.state).to eq("move_of_first_player")
+      if @game.mover == @game.players[NUMBER_ZERO]
+        expect(@game.state).to eq(MOVE_OF_FIRST_PLAYER)
       else
-        expect(@game.state).to eq("move_of_second_player")
+        expect(@game.state).to eq(MOVE_OF_SECOND_PLAYER)
       end
     end
   end
@@ -79,10 +79,10 @@ describe :state do
     describe 'end_turn' do
 
       it "should change state of game " do
-        2.times {make_a_move}
-        @game.end_turn @game.players[1]
+        NUMBER_TWO.times {make_a_move}
+        @game.end_turn @game.players[NUMBER_ONE]
 
-        expect_end_turn("first", 1)
+        expect_end_turn(FIRST_PLAYER, NUMBER_ONE)
       end
     end
 
@@ -90,7 +90,7 @@ describe :state do
 
   describe :move_of_second_player do
 
-    before(:example) do
+    before(:each) do
       go_to_game_prepare_state{|game| game.do_preparation_for_game}
     end
 
@@ -105,10 +105,10 @@ describe :state do
 
     describe 'end_turn' do
       it "should change state of game " do
-        2.times {make_a_move}
-        @game.end_turn @game.players[0]
+        NUMBER_TWO.times {make_a_move}
+        @game.end_turn @game.players[NUMBER_ZERO]
 
-        expect_end_turn("second", 0)
+        expect_end_turn(SECOND_PLAYER, NUMBER_ZERO)
 
       end
     end

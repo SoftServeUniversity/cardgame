@@ -3,7 +3,7 @@ require 'pry'
 
 describe Deck do
 
-  before(:example) do
+  before(:each) do
     @deck = create(:deck)
   end
 
