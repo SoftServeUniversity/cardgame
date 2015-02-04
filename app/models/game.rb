@@ -48,7 +48,7 @@ class Game < ActiveRecord::Base
     state :game_prepare do
       def do_preparation_for_game
         table = Table.create({:game => self, :cards_count => 0, :defender_cursor => ONE,
-                              :attacker_cursor => ZERO})
+         :attacker_cursor => ZERO})
         deck = Deck.create({:game => self})
 
         deck.init_cards
