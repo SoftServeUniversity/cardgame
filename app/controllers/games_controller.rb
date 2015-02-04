@@ -1,8 +1,9 @@
 class GamesController < ApplicationController
+  include GamesHelper
 
   before_filter :authenticate_user!, except: [:show, :index]
   before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :end_game, :edit, :update, :destroy]  
-
+  before_action :set_user, only: [:end_game]
   def index
     @games = Game.all
     response = []
@@ -26,14 +27,6 @@ class GamesController < ApplicationController
     else
       render json: { status: "ended"}
     end
-
-  end
-
-  def my_game
-    redirect_to games_path
-  end
-
-  def reload
   end
 
   def new
@@ -43,7 +36,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new game_params
-    @game.do_init_first_player self.current_user
+    @game.do_init_first_player current_user
     @game.players[0].save
     @game.save
       if @game.save
@@ -54,7 +47,7 @@ class GamesController < ApplicationController
   end
 
   def update
-    @game.do_init_second_player self.current_user
+    @game.do_init_second_player current_user
     @game.players[1].save
     @game.do_preparation_for_game
     save_game @game
@@ -62,21 +55,18 @@ class GamesController < ApplicationController
   end
 
   def put_card
-    card = self.current_user.player.put_card(params[:rang], params[:suite])
-    puts card.rang
-    puts card.suite
-    @game.get_card_from_player card, self.current_user.player, @game.attacker
-    @game.players[0].save
-    @game.players[1].save
-    @game.table.save
+    card = current_user.player.put_card(params[:rang], params[:suite])
+
+    @game.get_card_from_player card, current_user.player, @game.attacker
+
+    save_game @game
+
     @game.save
     if @game.game_ended?
       if @game.players[0].cards_count == 0
-        @game.winner = @game.players[0]
-        @game.loser = @game.players[1]
+        @game.winner, @game.loser = @game.players[0], @game.players[1]
       else
-        @game.winner = @game.players[1]
-        @game.loser = @game.players[0]
+        @game.winner, @game.loser = @game.players[1], @game.players[0]
       end
       @game.save
       end_game
@@ -86,7 +76,7 @@ class GamesController < ApplicationController
   end
 
   def end_turn
-    @game.end_turn self.current_user.player
+    @game.end_turn current_user.player
     save_game @game
     render json: @game
   end
@@ -102,49 +92,37 @@ class GamesController < ApplicationController
     if !@game
         render json: @game
     end
-    if @game.players[1]
-      @user1 = User.find @game.players[0].user_id
-      @user2 = User.find @game.players[1].user_id
+    @user1, @user2 = set_statistic
 
-      @user1.games_count += 1
-      @user2.games_count += 1
+    puts "#########"
+    puts @user1.games_count
+    puts @user2.games_count
 
-      if @game.winner
+    @user1.save
+    @user2.save
 
-        if @user1 == @game.winner
-          @user1.win_count += 1
-          @user2.lose_count += 1
-        else
-          @user2.win_count += 1
-          @user1.lose_count += 1
-        end
-      else
-        if current_user == @user1
-          @user2.win_count += 1
-          @user1.lose_count += 1
-        else
-          @user1.win_count += 1
-          @user2.lose_count += 1
-        end
-      end
-      @user1.save
-      @user2.save
-    end
     @game.destroy
 
     render json: {status: "ended"}
   end
 
   private
+
   def set_game
     @game = Game.find(params[:id])
   rescue
     @game = nil
   end
 
+  def set_user
+    @user1 = User.find @game.players[0].user_id
+    @user2 = User.find @game.players[1].user_id
+  end
+
   def game_params
     params.require(:game).permit(:name, :description)
   end
+
   def save_game game
     game.players[0].save
     game.players[1].save

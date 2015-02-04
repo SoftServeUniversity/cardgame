@@ -2,6 +2,7 @@
 <h3 ng-if="currentGame.game_mover == currentGame.current_user">Your move</h3>
 <h3 ng-if="currentGame.game_mover != currentGame.current_user">Your opponents move</h3>
 <h5>State: {{currentGame.game_state}}</h5>
+<h5 ng-show="error">Error: {{error}}</h5>
 <div class='col-md-11 yieldcontent'>
  <div class="row wood">
    <div style="height: 400px" id="table_row_game" class="row">

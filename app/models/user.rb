@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
   has_one :player
 
   after_initialize do
-    self.games_count ||= 0
-    self.lose_count ||= 0
-    self.win_count ||= 0
-    self.view_theme ||= "Classic"
+    self.games_count = 0
+    self.lose_count = 0
+    self.win_count = 0
+    self.view_theme = "Classic"
   end
 
   validates :username, :uniqueness => { :case_sensitive => false}

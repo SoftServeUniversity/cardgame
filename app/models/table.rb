@@ -13,22 +13,19 @@ class Table < ActiveRecord::Base
   def clear
     self.table_cards = []
     self.cards_count = 0
-    self.defender_cursor = 1
-    self.attacker_cursor = 0
+    self.defender_cursor = ONE
+    self.attacker_cursor = ZERO
   end
 
   def get_latest_card
-    puts "_________________________________LATEST CARD"
     self.table_cards[self.cards_count-1]
   end
 
   def attack?
-    puts "*************************table atack?"
     self.game.attacker == self.game.mover
   end
 
   def defend?
-    puts "*************************table defend?"
     self.game.defender == self.game.mover
   end
 
@@ -41,7 +38,6 @@ class Table < ActiveRecord::Base
   end
 
   def allow_attack? player_card
-    puts "*************************table allow_atack?"
     allow_put = false
     if table_empty?
       allow_put = true
@@ -54,7 +50,6 @@ class Table < ActiveRecord::Base
         end
       end
     end
-    puts "*************************table allow_atack?" + @allow_put.to_s
     allow_put
   end
 
@@ -63,19 +58,16 @@ class Table < ActiveRecord::Base
   end
 
   def allow_defend? card
-    puts "*************************table allow_defend?"
     allow_put = false
     if trump?(card) && !trump?(get_latest_card)
       allow_put = true
     elsif (card.suite.to_s == get_latest_card.suite.to_s) && (card.rang.to_i > get_latest_card.rang.to_i)
-      puts "************trump?(_card) && !trump?(get_latest_card)*************"
       allow_put = true
     end
     allow_put
   end
 
   def add_card _card, _player, _attacker
-    puts "table add_card************************"
     allow = false
     if attack? && allow_attack?(_card)
       do_push_card _card, _player, _attacker
