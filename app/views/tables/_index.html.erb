@@ -1,7 +1,17 @@
 <div class='col-md-12 yieldcontent'>
   <div class="row">
     <div class="jumbotron jumboart text-center">
+      <% if current_user %>
+        <% if current_user.player %>
+          <%= link_to my_game_url(:id => current_user.player.game.id) do%>
+            <h2>RETURN TO MY GAME</h2>
+          <% end %>
+        <% else %>
+          <h2 id="newGameLogo">NEW GAME</h2>
+        <% end %>
+      <% else %>
         <h2 id="newGameLogo">NEW GAME</h2>
+      <% end %>
     </div>
 
     <div id="newGameFormPad">
