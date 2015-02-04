@@ -5,8 +5,8 @@ class Deck < ActiveRecord::Base
   belongs_to :game
 
   def init_cards
-    self.cursor = 0        #ask expert!!!
-    (0..MAX_RANG).each do |rang|
+    self.cursor = NUMBER_ZERO     
+    (NUMBER_ZERO..NUMBER_EIGHT).each do |rang|
       init_card_iteration rang
     end
     shuffle_deck
@@ -22,13 +22,13 @@ class Deck < ActiveRecord::Base
   end
 
   def find_trump
-    self.trump = deck_cards[ALL_DECK_CARDS - 1].suite
+    self.trump = deck_cards[NUMBER_36 - NUMBER_ONE].suite
   end
 
   def get_one
-    if cursor < ALL_DECK_CARDS
-      self.cursor += 1
-      deck_cards[cursor - 1]
+    if cursor < NUMBER_36
+      self.cursor += NUMBER_ONE
+      deck_cards[cursor - NUMBER_ONE]
     else
       puts 'Deck is empty'
     end

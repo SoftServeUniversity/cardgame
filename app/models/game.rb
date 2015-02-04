@@ -47,17 +47,18 @@ class Game < ActiveRecord::Base
 
     state :game_prepare do
       def do_preparation_for_game
-        table = Table.create({:game => self, :cards_count => 0, :defender_cursor => ONE,
-         :attacker_cursor => ZERO})
+        table = Table.create({:game => self, :cards_count => NUMBER_ZERO,
+                              :defender_cursor => NUMBER_ONE,
+                              :attacker_cursor => NUMBER_ZERO})
         deck = Deck.create({:game => self})
 
         deck.init_cards
 
         set_attacker
 
-        if mover == players[0]
+        if mover == players[NUMBER_ZERO]
           first_player_move
-        elsif mover == players[1]
+        elsif mover == players[NUMBER_ONE]
           second_player_move
         end
       end
@@ -68,17 +69,17 @@ class Game < ActiveRecord::Base
         players_get_card(_card, _player, _attacker) do
           if move_of_first_player?
             second_player_move
-            self.mover = players[1]
+            self.mover = players[NUMBER_ONE]
           else
             first_player_move
-            self.mover = players[0]
+            self.mover = players[NUMBER_ZERO]
           end
         end
       end
 
       def end_turn _player
         if mover == _player
-          if(_player == attacker && table.cards_count > 0) #END from attacker
+          if(_player == attacker && table.cards_count > NUMBER_ZERO) #END from attacker
             if move_of_first_player?
               second_player_move
             else
@@ -100,17 +101,16 @@ class Game < ActiveRecord::Base
 
       def end_turn _player
         if mover == _player
-          if(players[0] == mover)
-            breaker = players[1]
+          if(players[NUMBER_ZERO] == mover)
+            breaker = players[NUMBER_ONE]
           else
-            breaker = players[0]
+            breaker = players[NUMBER_ZERO]
           end
           do_break_turn breaker
         end
-
-        if mover == players[0]
+        if mover == players[NUMBER_ZERO]
           first_player_move
-        elsif mover == players[1]
+        elsif mover == players[NUMBER_ONE]
           second_player_move
         end
       end
@@ -143,8 +143,8 @@ class Game < ActiveRecord::Base
   def set_attacker
     init_players_cards
 
-    first_min = find_smallest_trump players[0]
-    second_min = find_smallest_trump players[1]
+    first_min = find_smallest_trump players[NUMBER_ZERO]
+    second_min = find_smallest_trump players[NUMBER_ONE]
 
     if(!first_min && !second_min)
       deck.shuffle_deck
@@ -156,24 +156,24 @@ class Game < ActiveRecord::Base
 
   def init_actors first, second
     if (!first)
-      self.attacker, self.defender = players[1], players[0]
-      self.mover = players[1]
+      self.attacker, self.defender = players[NUMBER_ONE], players[NUMBER_ZERO]
+      self.mover = players[NUMBER_ONE]
     elsif (!second)
-      self.attacker, self.defender = players[0], players[1]
-      self.mover = players[0]
+      self.attacker, self.defender = players[NUMBER_ZERO], players[NUMBER_ONE]
+      self.mover = players[NUMBER_ZERO]
     elsif first.rang < second.rang
-      self.attacker, self.defender = players[0], players[1]
-      self.mover = players[0]
+      self.attacker, self.defender = players[NUMBER_ZERO], players[NUMBER_ONE]
+      self.mover = players[NUMBER_ZERO]
     else
-      self.attacker, self.defender = players[1], players[0]
-      self.mover = players[1]
+      self.attacker, self.defender = players[NUMBER_ONE], players[NUMBER_ZERO]
+      self.mover = players[NUMBER_ONE]
     end
   end
 
   def init_players_cards
-    6.times do
-      players[0].add_card (deck.get_one)
-      players[1].add_card (deck.get_one)
+    NUMBER_SIX.times do
+      players[NUMBER_ZERO].add_card (deck.get_one)
+      players[NUMBER_ONE].add_card (deck.get_one)
     end
   end
 
@@ -194,23 +194,23 @@ class Game < ActiveRecord::Base
   end
 
   def init_new_turn
-    (STARTING_QUANTITY-players[0].cards_count).times do
-      if (deck.cursor < ALL_DECK_CARDS)
-        players[0].add_card deck.get_one
+    (NUMBER_SIX-players[NUMBER_ZERO].cards_count).times do
+      if (deck.cursor < NUMBER_36)
+        players[NUMBER_ZERO].add_card deck.get_one
       end
     end
 
-    (STARTING_QUANTITY-players[1].cards_count).times do
-      if (deck.cursor < ALL_DECK_CARDS)
-        players[1].add_card deck.get_one
+    (NUMBER_SIX-players[NUMBER_ONE].cards_count).times do
+      if (deck.cursor < NUMBER_36)
+        players[NUMBER_ONE].add_card deck.get_one
       end
     end
   end
 
   def game_ended?
-    game_end = false
-    if (deck.cursor == ALL_DECK_CARDS && (players[0].cards_count == 0 || players[1].cards_count == 0))
-      game_end = true
+    game_end = FALSE
+    if (deck.cursor == NUMBER_36 && (players[NUMBER_ZERO].cards_count == NUMBER_ZERO || players[NUMBER_ONE].cards_count == NUMBER_ZERO))
+      game_end = TRUE
     end
     game_end
   end
@@ -220,10 +220,10 @@ class Game < ActiveRecord::Base
   def players_get_card (_card, _player, _attacker, &block)
 
     if mover == _player
-      if players[0] == _player
-        current_player = players[0]
+      if players[NUMBER_ZERO] == _player
+        current_player = players[NUMBER_ZERO]
       else
-        current_player = players[1]
+        current_player = players[NUMBER_ONE]
       end
       if do_get_card_from_player _card, _player, _attacker
         current_player.delete_card _card

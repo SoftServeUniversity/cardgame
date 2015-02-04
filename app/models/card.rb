@@ -2,7 +2,7 @@ class Card
 
 	attr_accessor :rang, :suite
 
-	def initialize(suite = nil, rang = nil)
+	def initialize(suite = NIL, rang = NIL)
 		@rang = rang
 		@suite = suite
 	end
