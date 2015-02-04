@@ -85,3 +85,19 @@
 	</div>
 
 
+<% content_for :show do %>
+   <script type="text/javascript">
+     $(document).ready(function () {
+    		setInterval(function(){
+ 		refreshPartial();
+ 		}, 10000); 
+ 	});
+     
+ 	function refreshPartial() {
+   		$.ajax({
+           	url: "<%= @game %>",
+           	dataType: "script" 
+  		})
+ 	};
+   </script>
+<% end %>

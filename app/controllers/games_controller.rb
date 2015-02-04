@@ -86,8 +86,6 @@ before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :en
     else
       redirect_to game_path
     end
-
-    redirect_to game_path
   end
 
   def end_turn

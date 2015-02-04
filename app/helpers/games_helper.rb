@@ -1,19 +1,37 @@
 module GamesHelper
 
+  CARD_SUITES = {
+    'diamonds' => '&diams',
+    'spades' => '&spades',
+    'hearts' => '&hearts',
+    'clubs' => '&clubs',
+  }
+  
+  SUITES_COLORS = {
+    'diamonds' => 'red',
+    'spades' => 'black',
+    'hearts' => 'red',
+    'clubs' => 'black',
+  }
+
+  def make_suite cardSuite
+    raw()
+  end
+
   def mover_check
     (@game.mover.user && @game.attacker.user && @game.defender.user)    
   end
 
   def make_suite cardSuite
     case cardSuite
-      when 'diamonds'
-        raw("<span class='redSuite'>&diams;</span>")
-      when 'spades'
-        raw("<span class='blackSuite'>&spades;</span>")
-      when 'hearts'
-        raw("<span class='redSuite'>&hearts;</span>")
-      else
-        raw("<span class='blackSuite'>&clubs;</span>")
+    when 'diamonds'
+      raw("<span class='redSuite'>&diams;</span>")
+    when 'spades'
+      raw("<span class='blackSuite'>&spades;</span>")
+    when 'hearts'
+      raw("<span class='redSuite'>&hearts;</span>")
+    else
+      raw("<span class='blackSuite'>&clubs;</span>")
     end
   end
 
