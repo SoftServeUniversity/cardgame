@@ -1,9 +1,28 @@
-ALL_DECK_CARDS = 36
-
-MAX_RANG = 8
-
-ONE = 1
-
-ZERO = 0
-
-STARTING_QUANTITY = 6
+SUITE_HARTS = "hearts"
+SUITE_CLUBS = "clubs"
+NUMBER_ZERO = 0
+NUMBER_ONE = 1
+NUMBER_TWO = 2
+NUMBER_THREE = 3
+NUMBER_FOUR = 4
+NUMBER_FIVE = 5
+NUMBER_SIX = 6
+NUMBER_SEVEN = 7
+NUMBER_EIGHT = 8
+NUMBER_NINE = 9
+NUMBER_35 = 35
+NUMBER_36 = 36
+THEME_CLASSIC = "Classic"
+EMAIL_SAMPLE = "villy@gmail.com"
+NAME_SAMPLE = "villy"
+WRONG_NAME_SAMPLE = "villy32"
+DEFEND = "defend"
+ATTACK = "attack"
+FIRST_PLAYER = "first"
+SECOND_PLAYER = "second"
+NEW_GAME_STATE = "new_game"
+EXPECTATION_SECOND_PLAYER = "expactation_second_player"
+GAME_PREPARE_STATE = "game_prepare"
+MOVE_OF_FIRST_PLAYER = "move_of_first_player"
+MOVE_OF_SECOND_PLAYER = "move_of_second_player"
+BREAK_TURN_STATE = "break_turn"

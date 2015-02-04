@@ -87,10 +87,8 @@ MyApp.controller("GameController", [
 
         $interval(function() {
             $timeout(function() {
-                $scope.$apply(function() {
-                    $scope.indexGames();
-                    $scope.updateUser();
-                });
+                $scope.indexGames();
+                $scope.updateUser();
             }, CONST.TIMEOUT);
         }, CONST.INTERVAL);
     }

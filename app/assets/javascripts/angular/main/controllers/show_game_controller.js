@@ -20,10 +20,8 @@ MyApp.controller("ShowGameController", [
             }, function(data) {
                 $scope.error = null;
                 $scope.resolveUser();
-                $scope.gameEnded(data);
                 $scope.currentGame = data;
                 $scope.deckCounter = CONST.DECK_CARDS_NUMBER - data.cursor;
-
             }, function(error) {
                 $scope.error = "updateGame ERROR";
                 console.log(error);
