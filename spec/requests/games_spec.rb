@@ -6,8 +6,8 @@ RSpec.describe "Games", :type => :request do
       Game.create!(:name => "game", :description => "for pro players")
       get games_path
       expect(response).to render_template("index")
-      response.body.should include("Games")
-      response.body.should include("for pro players")
+      expect(response.body).to include("Games")
+      expect(response.body).to include("for pro players")
     end
   end
 

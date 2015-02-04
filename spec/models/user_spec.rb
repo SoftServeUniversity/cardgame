@@ -14,6 +14,29 @@ describe User do
     expect(associate.macro).to_not  eq(:belongs_to)
   end
 
+  describe "validation uniqueness" do
+    before(:each) do
+      user = create(:user)
+      @username = user.username
+    end
+
+    it "should be valid if given right params" do
+      expect(user.valid?).to be(TRUE)
+    end
+
+    let(:user2){build(:user, username: @username)}
+
+    it "should not be valid if username taken" do
+      expect(user2.valid?).to be(FALSE)
+    end
+
+    it "should be valid if taken username upcase" do
+      user2.username.upcase!
+      expect(user2.valid?).to be(FALSE)
+    end
+
+  end
+
   describe "#after_initialize :init" do
     context "calling User.new triggers method init" do
 

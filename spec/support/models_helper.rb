@@ -5,9 +5,8 @@ module ModelHelpers
   end
 
   def user_setup(name = NIL, email = NIL, &block)
-    if block_given?
-      yield
-    end
+    yield if block_given?
+
     @warden_condition = {login: name||email}
     @warden_condition.expects(:dup).returns({login: name||email})
     @warden_condition.expects(:delete).with(:login).returns(name||email)
@@ -133,9 +132,7 @@ module ModelHelpers
                                 @game.players[player], @game.attacker )).to eq(TRUE)
     expect(@game.table.cards_count).to eq(NUMBER_ONE)
     expect(@game.table.table_cards[NUMBER_ZERO]).to eq(@card1)
-    if block_given?
-      yield
-    end
+    yield if block_given?
   end
 
 
@@ -149,9 +146,7 @@ module ModelHelpers
     go_to_expectation_of_second
     @user2 = create(:user)
     @game.do_init_second_player @user2
-    if block_given?
-      yield @game
-    end
+    yield @game if block_given?
   end
 
   def find_trump_for_both
