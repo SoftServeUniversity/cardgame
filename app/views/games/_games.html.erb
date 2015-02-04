@@ -4,31 +4,47 @@
             <th class="col-xs-3">Game Name</th>
             <th class="col-xs-3">Description</th>
             <th class="col-xs-3">Game Owner</th>
-            <th class="col-xs-1"></th>
-            <th class="col-xs-1"></th>
-            <th class="col-xs-1"></th>
+            <% if current_user %>
+                <th class="col-xs-1"></th>
+                <th class="col-xs-1">Options</th>
+                <th class="col-xs-1"></th>
+            <% end %>
         </tr>
     </thead>
     <tbody>
         <% @games.each do |game| %>
         <tr>
-            <td class="col-xs-3"><%= game.name %></td>
-            <td class="col-xs-3"><%= game.description %> | <%= game.state_name %></p></td>
-            <td class="col-xs-3"><%= game.players[0].user.username %></p></td>
-            <td class="col-xs-1">
-                <% if current_user %>
-                    <%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => '' %>
-                <% end %>
-            </td>
-            <td class="col-xs-1"><%= link_to 'Join' , update_url(:id => game.id), :method => :post, :class => '' %></td>
-            <td class="col-xs-1"><%= link_to 'Show', game, :class => '' %></td>
+            <td class="col-xs-3">"<%= game.name %>"</td>
+            <td class="col-xs-3">"<%= game.description %>"</td>
+            <td class="col-xs-3"><%= game.players[0].user.username %></td>
+            <% if current_user %>
+                <td class="col-xs-1">
+                    <% if current_user.player == game.players[0] %>
+                        <%= link_to 'Delete', game, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-red' %>
+                    <% end %>
+                </td>
+                <td class="col-xs-1">
+                    <% if (current_user.player != game.players[0]) && (game.state_name.to_s == "expactation_second_player") %>
+                        <%= link_to 'Join' , update_url(:id => game.id), :method => :post, :class => 'btn btn-sm btn-orange' %>
+                    <% end %>
+                </td>
+                <td class="col-xs-1">
+                    <% if game.players[0] && game.players[1] %>
+                        <% if (current_user.player == game.players[0]) || (current_user.player == game.players[1]) %>
+                            <%= link_to 'Return', game, :class => 'btn btn-sm btn-orange' %>
+                        <% else %>    
+                            <%= link_to 'Show', game, :class => 'btn btn-sm btn-orange' %>
+                        <% end %>
+                    <% else %>
+                        <% if current_user.player == game.players[0] %>
+                            <%= link_to 'Return', game, :class => 'btn btn-sm btn-orange' %>
+                        <% else %>    
+                            <%= link_to 'Show', game, :class => 'btn btn-sm btn-orange' %>
+                        <% end %>
+                    <% end %>
+                </td>                
+            <% end %>
         </tr>
         <% end %>
     </tbody>
 </table>
-
-
-
-
-
-

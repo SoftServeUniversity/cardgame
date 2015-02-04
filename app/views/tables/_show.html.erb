@@ -62,7 +62,7 @@
 					<% end %>
 				</div>
 				<div id="table_row_player" class="row">
-					<% if mover_check %>
+					<% if (current_user.player == @game.players[0]) || (current_user.player == @game.players[1]) %>
 						<div id="table_player_cards" class="col-xs-10">
 							<%= render partial: 'tables/table_player_cards'%>
 						</div>

@@ -28,5 +28,28 @@
 	max-width: 130px;
 	overflow: auto;
 	word-wrap: break-word;
-	vertical-align:middle;
+	vertical-align: middle;
 }
+
+.gamestable a.btn-sm {
+	width: 65px !important;
+	border-radius: 0 !important;
+	background-color: #eeeeee;
+	transition: text-shadow 0.3s;
+}
+
+.gamestable a.btn-red {
+	color: #960004;
+}
+.gamestable a.btn-orange {
+	color: #fc9200;
+}
+
+.gamestable a.btn-sm:active {
+	box-shadow: inset 0px 0px 18px rgba(0, 0, 0, 0.125);
+}
+.gamestable a.btn-sm:hover {
+	font-weight: bold;
+	border: 1px solid rgb(204, 204, 204);	
+}
+
