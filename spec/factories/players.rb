@@ -1,5 +1,6 @@
 FactoryGirl.define do
-  factory :table do
+  factory :player do
   	association(:game)
+  	association(:user)
   end
 end
