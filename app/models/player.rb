@@ -7,9 +7,9 @@ class Player < ActiveRecord::Base
   belongs_to :user
 
   def put_card rang, suite
-    player_card = self.player_cards[0]
-    if self.cards_count > 0
-      self.player_cards.each do |card|
+    player_card = self.player_cards[NUMBER_ZERO]
+    if cards_count > NUMBER_ZERO
+      player_cards.each do |card|
         if cards_equality? card, rang, suite
           player_card = card
         end
@@ -21,29 +21,25 @@ class Player < ActiveRecord::Base
   end
 
 def delete_card player_card
-    self.player_cards.each do |card|
+    player_cards.each do |card|
       if cards_equality?(card, player_card.rang, player_card.suite)
-        puts self.player_cards.delete(card)
-        self.cards_count -= 1
-        puts "____________________________DELETED"
+        player_cards.delete(card)
+        self.cards_count -= NUMBER_ONE
         break
       end
     end
   end
 
   def init
-    if !self.cards_count
-      self.cards_count = 0
+    if !cards_count
+      self.cards_count = NUMBER_ZERO
     end
   end
 
   def add_card new_card
-    puts "??????????????????? add_card"
-    puts new_card.rang
-    puts new_card.suite
     init
-    self.player_cards.push new_card
-    self.cards_count  += 1
+    player_cards.push new_card
+    self.cards_count  += NUMBER_ONE
   end
 
   def cards_equality? card, rang, suite
