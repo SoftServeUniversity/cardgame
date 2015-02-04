@@ -48,7 +48,7 @@ class Game < ActiveRecord::Base
     state :game_prepare do
       def do_preparation_for_game
         table = Table.create({:game => self, :cards_count => 0, :defender_cursor => ONE,
-         :attacker_cursor => ZERO})
+                              :attacker_cursor => ZERO})
         deck = Deck.create({:game => self})
 
         deck.init_cards
@@ -209,8 +209,7 @@ class Game < ActiveRecord::Base
 
   def game_ended?
     game_end = false
-    if (deck.cursor == ALL_DECK_CARDS &&
-        (players[0].cards_count == 0 || players[1].cards_count == 0))
+    if (deck.cursor == ALL_DECK_CARDS && (players[0].cards_count == 0 || players[1].cards_count == 0))
       game_end = true
     end
     game_end
