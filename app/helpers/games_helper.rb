@@ -1,10 +1,10 @@
 module GamesHelper
 
   CARD_SUITES = {
-    'diamonds' => '&diams',
-    'spades' => '&spades',
-    'hearts' => '&hearts',
-    'clubs' => '&clubs',
+    'diamonds' => '&diams;',
+    'spades' => '&spades;',
+    'hearts' => '&hearts;',
+    'clubs' => '&clubs;',
   }
   
   SUITES_COLORS = {
@@ -14,71 +14,81 @@ module GamesHelper
     'clubs' => 'black',
   }
 
-  def make_suite cardSuite
-    raw()
-  end
+  CARD_RANKS = {
+    0 => '6',
+    1 => '7',
+    2 => '8',
+    3 => '9',
+    4 => '10',
+    5 => 'J',
+    6 => 'Q',
+    7 => 'K',
+    8 => 'A',
+  }
 
-  def mover_check
-    (@game.mover.user && @game.attacker.user && @game.defender.user)    
-  end
+
 
   def make_suite cardSuite
-    case cardSuite
-    when 'diamonds'
-      raw("<span class='redSuite'>&diams;</span>")
-    when 'spades'
-      raw("<span class='blackSuite'>&spades;</span>")
-    when 'hearts'
-      raw("<span class='redSuite'>&hearts;</span>")
-    else
-      raw("<span class='blackSuite'>&clubs;</span>")
-    end
+    raw("<span class='#{SUITES_COLORS[cardSuite]}Suite'>#{CARD_SUITES[cardSuite]}</span>")
   end
 
   def make_rank card
-  	if (card.suite == 'diamonds') || (card.suite == 'hearts')
-      case card.rang
-        when 0
-          raw("<span class='redSuite'>6</span>")
-        when 1
-          raw("<span class='redSuite'>7</span>")
-        when 2
-          raw("<span class='redSuite'>8</span>")
-        when 3
-          raw("<span class='redSuite'>9</span>")
-        when 4
-          raw("<span class='redSuite'>10</span>")
-        when 5
-          raw("<span class='redSuite'>J</span>")
-        when 6
-          raw("<span class='redSuite'>Q</span>")
-        when 7
-          raw("<span class='redSuite'>K</span>")
-        else
-          raw("<span class='redSuite'>A</span>")
+    raw("<span class='#{SUITES_COLORS[card.suite]}Suite'>#{CARD_RANKS[card.rang]}</span>")   
+  end
+
+
+  def define_table_style
+    if current_user
+      if current_user.view_theme == nil
+        "tableClassic"
+      elsif current_user.view_theme
+        "table#{current_user.view_theme.to_s}"
+      else
+        "tableClassic"
       end
-    elsif (card.suite == 'spades') || (card.suite == 'clubs')
-    	case card.rang
-        when 0
-          raw("<span class='blackSuite'>6</span>")
-        when 1
-          raw("<span class='blackSuite'>7</span>")
-        when 2
-          raw("<span class='blackSuite'>8</span>")
-        when 3
-          raw("<span class='blackSuite'>9</span>")
-        when 4
-          raw("<span class='blackSuite'>10</span>")
-        when 5
-          raw("<span class='blackSuite'>J</span>")
-        when 6
-          raw("<span class='blackSuite'>Q</span>")
-        when 7
-          raw("<span class='blackSuite'>K</span>")
-        else
-          raw("<span class='blackSuite'>A</span>")
-      end
+    else
+      "tableClassic"
     end
+  end
+
+
+  def player_check
+    (current_user.player == @game.players[0]) || (current_user.player == @game.players[1])
+  end  
+
+  def mover_check
+    ( @game.mover.user && @game.attacker.user && @game.defender.user )    
+  end
+
+
+  def game_turn_message
+    your_attack = "Your attack!"
+    your_defence = "Your defence!"
+    opponent_attack = "Opponent`s attack!"
+    opponent_defence = "Opponent`s defence!"
+    waiting = "Waiting of an Opponent!"
+
+    if mover_check
+      if current_user.id == @game.mover.user.id
+        if current_user.id == @game.attacker.user.id
+          raw("<span> #{your_attack} </span>")
+        elsif current_user.id == @game.defender.user.id
+          raw("<span> #{your_defence} </span>")
+        end
+      else
+        if current_user.id == @game.attacker.user.id
+          raw("<span> #{opponent_defence} </span>")
+        elsif current_user.id == @game.defender.user.id
+          raw("<span> #{opponent_attack} </span>")
+        end
+      end
+    else
+      raw("<span> #{waiting} </span>")
+    end
+  end
+
+  def split_array_
+    
   end
 
 end
