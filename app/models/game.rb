@@ -236,5 +236,4 @@ class Game < ActiveRecord::Base
       puts "Access denied"
     end
   end
-
 end

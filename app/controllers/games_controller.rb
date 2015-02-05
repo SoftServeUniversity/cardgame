@@ -2,8 +2,8 @@ class GamesController < ApplicationController
   include GamesHelper
 
   before_filter :authenticate_user!, except: [:show, :index]
-  before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :end_game, :edit, :update, :destroy]  
-  before_action :set_user, only: [:end_game]
+  before_action :set_game, only: [:show, :join, :put_card, :reload, :end_turn, :end_game, :edit, :update, :destroy] 
+
   def index
     @games = Game.all
     response = []
@@ -51,33 +51,7 @@ class GamesController < ApplicationController
     @game.players[1].save
     @game.do_preparation_for_game
     save_game @game
-    render json: @game
-  end
 
-  def put_card
-    card = current_user.player.put_card(params[:rang], params[:suite])
-
-    @game.get_card_from_player card, current_user.player, @game.attacker
-
-    save_game @game
-
-    @game.save
-    if @game.game_ended?
-      if @game.players[0].cards_count == 0
-        @game.winner, @game.loser = @game.players[0], @game.players[1]
-      else
-        @game.winner, @game.loser = @game.players[1], @game.players[0]
-      end
-      @game.save
-      end_game
-    else
-      render json: @game
-    end
-  end
-
-  def end_turn
-    @game.end_turn current_user.player
-    save_game @game
     render json: @game
   end
 
@@ -87,19 +61,27 @@ class GamesController < ApplicationController
     render json: @game
   end
 
+  def put_card
+    card = current_user.player.put_card(params[:rang], params[:suite])
+
+    @game.get_card_from_player card, current_user.player, @game.attacker
+    save_game @game
+
+    render json: @game unless check_game_end
+  end
+
+  def end_turn
+    @game.end_turn current_user.player
+    save_game @game
+    render json: @game
+  end
+
   def end_game 
 
     if !@game
         render json: @game
     end
-    @user1, @user2 = set_statistic
-
-    puts "#########"
-    puts @user1.games_count
-    puts @user2.games_count
-
-    @user1.save
-    @user2.save
+    set_statistic
 
     @game.destroy
 
@@ -112,11 +94,6 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   rescue
     @game = nil
-  end
-
-  def set_user
-    @user1 = User.find @game.players[0].user_id
-    @user2 = User.find @game.players[1].user_id
   end
 
   def game_params

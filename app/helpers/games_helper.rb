@@ -2,8 +2,8 @@ module GamesHelper
 
   def set_statistic
     if @game.players[1]
-      @user1 = @game.players[0].user
-      @user2 = @game.players[1].user
+      @user1 = User.find @game.players[0].user_id
+      @user2 = User.find @game.players[1].user_id
 
       @user1.games_count += 1
       @user2.games_count += 1
@@ -26,13 +26,8 @@ module GamesHelper
           @user2.lose_count += 1
         end
       end
-      puts"()()()()()()()()"
       @user1.save
       @user2.save
-      puts @user1.games_count
-      puts @user2.games_count
-
-      return @user1, @user2
     end
   end
 
