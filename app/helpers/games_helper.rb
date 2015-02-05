@@ -87,8 +87,17 @@ module GamesHelper
     end
   end
 
-  def split_array_
-    
+  def split_array ( array )
+    hit_cards = []
+    array.each_index do |index|
+      if (index) % 2 == 0
+        hit_cards << array[index]
+      end
+    end
+    defence_cards = array - hit_cards
+    table_cards = [ hit_cards, defence_cards ]
+    return table_cards
   end
+
 
 end

@@ -1,14 +1,7 @@
 <% if @game.table %>
-	<% hitCards = [] %>
-	<% @game.table.table_cards.each_index do |index| %>
-		<% if (index) % 2 == 0 %>
-			<% hitCards << @game.table.table_cards[index] %>
-		<% end %>
-	<% end %>
-	<% defenceCards = @game.table.table_cards - hitCards %>
-
+	<%= table_cards = split_array ( @game.table.table_cards ) %>
 	<ul class="tableCardsList hitCards">
-		<% hitCards.each do |card| %>
+		<% table_cards[0].each do |card| %>
 			<li>
 				<div class="t_playerCards">
 					<div class="<%= current_user.view_theme.to_s %>Rang">
@@ -24,7 +17,7 @@
 	</ul>
 
 	<ul class="tableCardsList defenceCards">
-		<% defenceCards.each do |card| %>
+		<% table_cards[1].each do |card| %>
 			<li>
 				<div class="t_playerCards">
 					<div class="<%= current_user.view_theme.to_s %>Rang">							
